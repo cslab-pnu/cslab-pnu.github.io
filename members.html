@@ -33,7 +33,11 @@
 :root[data-theme="dark"] .mcard:hover{box-shadow:0 12px 28px -18px rgba(123,160,255,.4)}
 .mcard:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 12px 28px -18px rgba(20,60,172,.4)}
 .mcard .ph{aspect-ratio:1/1.18;background:var(--panel);overflow:hidden;position:relative}
-.mcard .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.1)}
+.mcard .ph img{width:100%;height:100%;display:block;object-fit:cover;object-position:var(--x,50%) var(--y,50%);transform:scale(var(--zoom,1));transform-origin:var(--x,50%) var(--y,50%);filter:grayscale(.1)}
+.mcard .ph img.crop-suhyeon{--zoom:1.8;--x:74%;--y:69%}
+.mcard .ph img.crop-jaeyeol{--zoom:1.65;--x:52%;--y:58%}
+.mcard .ph img.crop-yunju{--zoom:2.45;--x:72%;--y:54%}
+.mcard .ph img.crop-kyunghwan{--zoom:1.22;--x:52%;--y:38%}
 .mcard .num{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:9px;color:#fff;mix-blend-mode:difference;letter-spacing:.14em}
 .mcard .info{padding:11px 11px 14px;display:flex;flex-direction:column;gap:4px}
 .mcard .nm{font-family:var(--serif);font-size:16px;line-height:1;letter-spacing:-.01em}
@@ -99,19 +103,19 @@
   <div class="member-grid">
     <a class="mcard" href="#"><div class="ph"><span class="num">M / 01</span><img src="assets/researchers/박성환.jpg" alt="박성환"/></div><div class="info"><div class="nm">박성환<span class="en">SUNGHWAN &nbsp;PARK</span></div><div class="focus">RISC-V · 메모리 격리 · ISA 확장 설계</div></div></a>
     <a class="mcard" href="#"><div class="ph"><span class="num">M / 02</span><img src="assets/researchers/강정환.jpg" alt="강정환"/></div><div class="info"><div class="nm">강정환<span class="en">JEONGHWAN &nbsp;KANG</span></div><div class="focus">임베디드 메모리 보안 · 컴파일러</div></div></a>
-    <a class="mcard" href="#"><div class="ph"><span class="num">M / 03</span><img src="assets/researchers/송수현.jpg" alt="송수현"/></div><div class="info"><div class="nm">송수현<span class="en">SUHYEON &nbsp;SONG</span></div><div class="focus">TrustZone · WebAssembly 보안</div></div></a>
-    <a class="mcard" href="#"><div class="ph"><span class="num">M / 04</span><img src="assets/researchers/박재열.jpg" alt="박재열"/></div><div class="info"><div class="nm">박재열<span class="en">JAEYEOL &nbsp;PARK</span></div><div class="focus">임베디드 메모리 보안</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 03</span><img class="crop-suhyeon" src="assets/researchers/송수현.jpg" alt="송수현"/></div><div class="info"><div class="nm">송수현<span class="en">SUHYEON &nbsp;SONG</span></div><div class="focus">TrustZone · WebAssembly 보안</div></div></a>
+    <a class="mcard" href="https://www.linkedin.com/in/jaeyeol-park-381170270/" target="_blank"><div class="ph"><span class="num">M / 04</span><img class="crop-jaeyeol" src="assets/researchers/박재열.jpg" alt="박재열"/></div><div class="info"><div class="nm">박재열<span class="en">JAEYEOL &nbsp;PARK</span></div><div class="focus">임베디드 메모리 보안</div></div></a>
   </div>
 
   <div class="role-band"><span class="lbl">M.S. Students</span><span class="cnt">— 02 RESEARCHERS</span></div>
   <div class="member-grid">
     <a class="mcard" href="#"><div class="ph"><span class="num">M / 05</span><img src="assets/researchers/신채원.jpg" alt="신채원"/></div><div class="info"><div class="nm">신채원<span class="en">CHAEWON &nbsp;SHIN</span></div><div class="focus">TrustZone · WebAssembly 보안</div></div></a>
-    <a class="mcard" href="#"><div class="ph"><span class="num">M / 06</span><img src="assets/researchers/구윤주.jpg" alt="구윤주"/></div><div class="info"><div class="nm">구윤주<span class="en">YUNJU &nbsp;KOO</span></div><div class="focus">임베디드 메모리 보안</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 06</span><img class="crop-yunju" src="assets/researchers/구윤주.jpg" alt="구윤주"/></div><div class="info"><div class="nm">구윤주<span class="en">YUNJU &nbsp;KOO</span></div><div class="focus">임베디드 메모리 보안</div></div></a>
   </div>
 
   <div class="role-band"><span class="lbl">Undergraduate Researchers</span><span class="cnt">— 05 RESEARCHERS</span></div>
   <div class="member-grid">
-    <a class="mcard" href="#"><div class="ph"><span class="num">M / 07</span><img src="assets/researchers/김경환.jpg" alt="김경환"/></div><div class="info"><div class="nm">김경환<span class="en">KYUNGHWAN &nbsp;KIM</span></div><div class="focus">임베디드 메모리 보안 · 컴파일러</div></div></a>
+    <a class="mcard" href="#"><div class="ph"><span class="num">M / 07</span><img class="crop-kyunghwan" src="assets/researchers/김경환.jpg" alt="김경환"/></div><div class="info"><div class="nm">김경환<span class="en">KYUNGHWAN &nbsp;KIM</span></div><div class="focus">임베디드 메모리 보안 · 컴파일러</div></div></a>
     <a class="mcard" href="#"><div class="ph"><span class="num">M / 10</span><img src="assets/researchers/홍지연.jpg" alt="홍지연"/></div><div class="info"><div class="nm">홍지연<span class="en">JIYEON &nbsp;HONG</span></div><div class="focus">학부 인턴</div></div></a>
     <a class="mcard" href="#"><div class="ph"><span class="num">M / 11</span><img src="assets/researchers/김지민.jpg" alt="김지민"/></div><div class="info"><div class="nm">김지민<span class="en">JIMIN &nbsp;KIM</span></div><div class="focus">학부 인턴</div></div></a>
     <a class="mcard" href="#"><div class="ph"><span class="num">M / 12</span><img src="assets/researchers/김강건.jpg" alt="김강건"/></div><div class="info"><div class="nm">김강건<span class="en">GANGKEON &nbsp;KIM</span></div><div class="focus">학부 인턴</div></div></a>
