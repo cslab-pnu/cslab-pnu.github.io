@@ -37,7 +37,17 @@
 .tally .titem{display:inline-flex;align-items:center;gap:8px}
 .tally .titem .c{font-family:var(--serif);font-size:22px;line-height:1;color:var(--ink);letter-spacing:-.01em}
 .tally .titem .c.zero{color:var(--ink-3);opacity:.45}
-@media(max-width:760px){.tally{display:flex;flex-direction:column;gap:14px}.tally .tgroup{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}.tally .glabel{flex-basis:100%}}
+@media(max-width:760px){
+  .legend{gap:11px 16px;margin:14px 0 24px}
+  .legend .lg{flex-wrap:wrap;row-gap:6px;align-items:center}
+  .legend .lg>span:last-child,.legend .lg>a:last-child{flex-basis:100%;margin-top:1px}
+  .tally{display:block;margin-top:24px;padding:16px 0 20px}
+  .tally .tgroup{display:grid;grid-template-columns:1fr 1fr;column-gap:18px;row-gap:8px;margin-bottom:16px}
+  .tally .tgroup:last-child{margin-bottom:0}
+  .tally .glabel{grid-column:1/-1;margin-bottom:2px}
+  .tally .titem{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .tally .titem .c{font-size:17px}
+}
 
 .maintab{display:flex;gap:8px;margin:30px 0 24px;flex-wrap:wrap}
 .maintab button{font-family:var(--mono);font-size:12px;letter-spacing:.16em;padding:12px 20px;border:1px solid var(--line-strong);background:var(--bg-2);color:var(--ink-2);cursor:pointer;text-transform:uppercase;font-weight:600;transition:all .15s ease;display:inline-flex;align-items:center;gap:10px}
