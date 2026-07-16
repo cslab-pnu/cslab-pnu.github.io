@@ -15,7 +15,7 @@
 .prof .portrait img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.02)}
 .prof .portrait .badge{position:absolute;top:14px;left:14px;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.18em;padding:6px 10px;border-radius:4px}
 :root[data-theme="dark"] .prof .portrait .badge{background:var(--panel);color:var(--ink)}
-.prof h2{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1;margin:0 0 8px;letter-spacing:-.02em}
+.prof h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,7vw,64px);line-height:1;margin:0 0 8px;letter-spacing:-.02em}
 .prof h2 em{font-style:italic;color:var(--accent)}
 .prof .title-en{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase;margin-bottom:24px}
 .prof .bio p{font-size:15px;line-height:1.7;color:var(--ink-2);margin:0 0 16px;text-wrap:pretty}
@@ -24,6 +24,15 @@
 .prof .kv dt{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 .prof .kv dd{margin:0;color:var(--ink-2)}
 .prof .kv dd a{color:var(--accent);text-decoration:none}
+.prof .cv-group{margin-bottom:34px}
+.prof .cv-h{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);padding-bottom:12px;border-bottom:1px solid var(--ink);margin:0}
+.prof .cv-row{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.prof .cv-row .yr{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em;padding-top:3px;white-space:nowrap}
+.prof .cv-row .role{font-size:15px;font-weight:600;color:var(--ink)}
+.prof .cv-row .org{font-size:13px;color:var(--ink-2);margin-top:4px}
+.prof .cv-row .sub{font-size:12px;color:var(--ink-3);margin-top:8px;line-height:1.55}
+.prof .cv-open{display:inline-flex;align-items:center;gap:10px;margin-top:6px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--line-strong);border-radius:4px;padding:12px 18px;transition:border-color .2s,background .2s}
+.prof .cv-open:hover{border-color:var(--accent);background:var(--accent-tint)}
 .role-band{display:flex;align-items:baseline;gap:24px;margin:80px 0 28px;padding-bottom:18px;border-bottom:1px solid var(--ink)}
 .role-band .lbl{font-family:var(--serif);font-style:italic;font-size:32px}
 .role-band .cnt{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.16em}
@@ -51,6 +60,14 @@
 .alumni-list .deg{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
 .alumni-list .now{color:var(--ink-2);font-size:13px}
 @media(max-width:1024px){.prof{grid-template-columns:1fr}.member-grid{grid-template-columns:repeat(4,1fr)}.alumni-list{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .prof{gap:28px;padding:24px 0 40px}
+  .prof-left{width:100% !important}
+  .prof>div{min-width:0}
+  .prof .portrait{max-width:66%}
+  .prof .cv-row{grid-template-columns:92px 1fr;gap:14px}
+  .member-grid{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 <body id="top">
@@ -71,7 +88,7 @@
   </div>
 
   <div class="prof">
-    <div class="prof-left" style="width: 500px">
+    <div class="prof-left" style="width:500px;max-width:100%">
       <div class="title-en">Associate Professor</div>
       <h2><em>DONGHYUN &nbsp;KWON</em></h2>
       <div class="portrait">
@@ -84,10 +101,51 @@
       </dl>
     </div>
     <div>
-      <div class="bio-embed" style="position:relative;width:100%;aspect-ratio:4/5;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--panel)">
-        <iframe src="https://drive.google.com/file/d/1CzSE3oryV3hOGU8YftdGiev7iD39sBpU/preview" allow="autoplay" style="position:absolute;inset:0;width:100%;height:100%;border:0" title="권동현 교수 CV"></iframe>
+      <div class="cv-group">
+        <div class="cv-h">Education</div>
+        <div class="cv-row">
+          <span class="yr">2012 — 2019</span>
+          <div>
+            <div class="role">Ph.D. in Electrical and Computer Engineering</div>
+            <div class="org">서울대학교 · Seoul National University</div>
+            <div class="sub">지도교수: 백윤흥 (Yunheung Paek) · <b>Distinguished Ph.D. Dissertation Award</b><br/>학위논문: “Hardware-assisted Isolation for System Framework to Ensure Kernel Integrity”</div>
+          </div>
+        </div>
+        <div class="cv-row">
+          <span class="yr">2008 — 2012</span>
+          <div>
+            <div class="role">B.S. in Electrical and Computer Engineering</div>
+            <div class="org">서울대학교 · Seoul National University</div>
+          </div>
+        </div>
       </div>
-      <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-3);margin-top:10px"><a href="https://drive.google.com/file/d/1CzSE3oryV3hOGU8YftdGiev7iD39sBpU/view" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">OPEN FULL CV ↗</a></p>
+
+      <div class="cv-group">
+        <div class="cv-h">Professional Experience</div>
+        <div class="cv-row">
+          <span class="yr">2023 — 현재</span>
+          <div>
+            <div class="role">Associate Professor</div>
+            <div class="org">부산대학교 정보컴퓨터공학부 · School of Computer Science and Engineering, PNU</div>
+          </div>
+        </div>
+        <div class="cv-row">
+          <span class="yr">2020 — 2023</span>
+          <div>
+            <div class="role">Assistant Professor</div>
+            <div class="org">부산대학교 정보컴퓨터공학부 · School of Computer Science and Engineering, PNU</div>
+          </div>
+        </div>
+        <div class="cv-row">
+          <span class="yr">2019 — 2020</span>
+          <div>
+            <div class="role">Senior Researcher</div>
+            <div class="org">한국전자통신연구원 · Electronics and Telecommunications Research Institute (ETRI)</div>
+          </div>
+        </div>
+      </div>
+
+      <a class="cv-open" href="https://drive.google.com/file/d/1CzSE3oryV3hOGU8YftdGiev7iD39sBpU/view" target="_blank" rel="noopener">Open Full CV — Google Drive ↗</a>
     </div>
   </div>
 </section>
