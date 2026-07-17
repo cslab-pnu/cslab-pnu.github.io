@@ -81,7 +81,7 @@
 /* ranking/quality badges (replaces the venue-type badge column for intl pubs) */
 .pub .pvenue-abbr{font-family:var(--sans);font-weight:500;font-size:13px;color:var(--ink-3);letter-spacing:0;white-space:nowrap}
 .pub .pbadges{display:flex;flex-direction:column;gap:5px;align-items:flex-start;padding-top:3px}
-.pb{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;padding:3px 7px;border-radius:3px;white-space:nowrap;line-height:1.25;border:1px solid transparent}
+.pb{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;padding:3px 7px;border-radius:3px;white-space:nowrap;line-height:1.25;border:1px solid transparent;text-align:center}
 .pb.tier1{background:#1e7e3a;color:#fff}
 .pb.tier2{background:#1f4ea8;color:#fff}
 .pb.tier3{background:#b7791f;color:#fff}
@@ -666,11 +666,28 @@
       return '<div class="tgroup"><span class="glabel">'+g[0]+'</span>'+tiles+'</div>';
     }).join('');
   }
+  var current='intl';
+  // 탭별로 뱃지 폭을 그 탭에서 가장 긴 뱃지 폭으로 통일 (논문 목록 + 범례 + 통계표, 활성 탭만 측정 가능)
+  function equalizeBadges(tab){
+    var sec=document.querySelector('.tabsec[data-tab="'+tab+'"]');
+    var badges=[].concat(
+      [].slice.call(sec?sec.querySelectorAll('.pbadges .pb'):[]),
+      [].slice.call(document.querySelectorAll('.legend .lg-'+tab+' .pb')),
+      [].slice.call(tally?tally.querySelectorAll('.titem .pb'):[])
+    );
+    if(!badges.length) return;
+    badges.forEach(function(b){b.style.width='';});
+    var max=0;
+    badges.forEach(function(b){var w=b.getBoundingClientRect().width; if(w>max) max=w;});
+    if(max>0){var px=Math.ceil(max)+'px'; badges.forEach(function(b){b.style.width=px;});}
+  }
   function setTab(tab){
+    current=tab;
     document.querySelectorAll('.maintab button').forEach(function(b){b.classList.toggle('on',b.dataset.tab===tab);});
     document.querySelectorAll('.tabsec').forEach(function(sec){sec.classList.toggle('hidden',sec.dataset.tab!==tab);});
     if(legend) legend.setAttribute('data-tab',tab);
     renderTally(tab);
+    equalizeBadges(tab);
   }
   document.querySelectorAll('.maintab button').forEach(function(btn){
     btn.addEventListener('click',function(){setTab(btn.dataset.tab);window.scrollTo({top:0,behavior:'smooth'});});
@@ -678,6 +695,8 @@
     if(ct) ct.textContent=document.querySelectorAll('.pub[data-cat="'+btn.dataset.tab+'"]').length;
   });
   setTab('intl');
+  // 웹폰트 로드 이후 실제 폰트 기준으로 뱃지 폭 재측정
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){equalizeBadges(current);});}
 })();
 </script>
 </body>
