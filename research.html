@@ -59,16 +59,18 @@
   <div class="num">R / 01<small>Hardware-assisted<br/>System Security</small></div>
   <div class="body">
     <h2>Hardware-assisted<br/><em>System Security</em>.</h2>
-    <p class="lede">상용 프로세서에 탑재된 하드웨어 보안 기능을 효과적으로 활용하여, 다양한 컴퓨팅 시스템에서 동작하는 하드웨어 기반 시스템 보안 기술을 연구합니다.</p>
-    <p>오늘날 컴퓨팅 시스템에 대한 다양한 보안 위협이 보고되고 있으며, 위협의 대상이 되는 컴퓨팅 시스템 역시 안전이 매우 중요한 자율주행자동차나 임베디드 의료기기로까지 확장되고 있습니다. 본 연구실은 이러한 보안 위협에 대응하기 위해 다양한 컴퓨팅 시스템에서 활용 가능한 하드웨어 기반 시스템 보안 기술을 연구합니다. 특히 컴파일러 기술 및 운영체제 기술 등을 활용하여, ARM TrustZone, Intel SGX, ARM Pointer Authentication 등 상용 프로세서에 탑재된 하드웨어 보안 기능을 효과적으로 활용하는 것을 목표로 합니다.</p>
-    <div class="tags"><span class="tag">컴파일러</span><span class="tag">운영체제</span><span class="tag">임베디드 시스템</span><span class="tag">어셈블리 프로그래밍</span></div>
+    <p class="lede">상용 ARM 프로세서에 내장된 하드웨어 보안 기능(TrustZone-M · Memory Tagging Extension · 메모리 도메인 · Pointer Authentication 등)을 컴파일러·운영체제 기술과 결합하여, 자원이 제한된 임베디드·IoT 기기에 메모리 안전성과 제어흐름 무결성을 낮은 오버헤드로 이식하는 기술을 연구합니다.</p>
+    <p>오늘날 컴퓨팅 시스템에 대한 보안 위협은 안전이 매우 중요한 자율주행자동차나 임베디드 의료기기로까지 확장되고 있습니다. 이러한 기기 대부분은 성능·전력 제약이 크기 때문에, 소프트웨어만으로 강력한 보안을 구현하기는 어렵습니다. 본 연구실은 상용 프로세서가 이미 제공하는 하드웨어 보안 기능을 최대한 활용하여, 낮은 오버헤드로 메모리 오류(공간적·시간적 메모리 안전성)와 제어흐름 변조를 막는 기술을 연구합니다. 특히 컴파일러 계측과 운영체제 지원을 통해 ARM Cortex-M · ARMv8-M 기반 임베디드 환경에서 실용적으로 동작하는 보안 솔루션을 설계하는 것을 목표로 합니다.</p>
+    <div class="tags"><span class="tag">컴파일러</span><span class="tag">운영체제</span><span class="tag">임베디드 시스템</span><span class="tag">ARM MTE</span><span class="tag">제어흐름 무결성</span></div>
     <div class="pubs">
       <h4>— Representative Publications</h4>
       <ul>
-        <li><span class="venue">Security '19</span><a href="https://www.usenix.org/conference/usenixsecurity19/presentation/kwon" target="_blank" rel="noopener"><b>uXOM</b><span class="arr">↗</span></a></li>
-        <li><span class="venue">DAC '24</span><a href="https://dl.acm.org/doi/10.1145/3649329.3655949" target="_blank" rel="noopener"><b>Micro-Fat Pointer</b><span class="arr">↗</span></a></li>
-        <li><span class="venue">ACSAC '25</span><a href="https://doi.org/10.1109/ACSAC67867.2025.00030" target="_blank" rel="noopener"><b>ELK</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">Security '26</span><span><b>XCFI</b></span></li>
         <li><span class="venue">ACSAC '25</span><a href="https://doi.org/10.1109/ACSAC67867.2025.00029" target="_blank" rel="noopener"><b>SMORE</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">ACSAC '25</span><a href="https://doi.org/10.1109/ACSAC67867.2025.00030" target="_blank" rel="noopener"><b>ELK</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">DAC '24</span><a href="https://dl.acm.org/doi/10.1145/3649329.3655949" target="_blank" rel="noopener"><b>Look Before You Access</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">TIFS '23</span><a href="https://ieeexplore.ieee.org/document/10196334" target="_blank" rel="noopener"><b>ZOMETAG</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">Security '19</span><a href="https://www.usenix.org/conference/usenixsecurity19/presentation/kwon" target="_blank" rel="noopener"><b>uXOM</b><span class="arr">↗</span></a></li>
       </ul>
     </div>
   </div>
@@ -88,14 +90,17 @@
   <div class="num">R / 02<small>Architectural Supports<br/>for System Security</small></div>
   <div class="body">
     <h2>Architectural Supports<br/>for <em>System Security</em>.</h2>
-    <p class="lede">RISC-V Open ISA를 활용해 새로운 시스템 보안 기능을 직접 설계하고, 이를 기반으로 한 보안 솔루션 개발 연구를 수행합니다.</p>
-    <p>빠르게 변화하는 보안 위협들에 대응하기 위해서는 보안 기능들을 빠르게 컴퓨팅 시스템에 추가할 수 있어야 합니다. 하지만 상용 프로세서들의 경우 보안 기능 도입에 보수적인 입장을 취하고 있어, 새로운 보안 기능을 도입하는데 어려움이 있습니다. 이러한 한계를 극복하기 위해, 본 연구실은 누구나 보안 기능을 직접 설계할 수 있는 RISC-V Open ISA를 활용하여 새로운 시스템 보안 기능을 직접 설계하고, 이를 기반으로 한 보안 솔루션 개발 연구를 수행합니다.</p>
-    <div class="tags"><span class="tag">컴퓨터구조</span><span class="tag">컴파일러</span><span class="tag">하드웨어 설계</span><span class="tag">RISC-V</span></div>
+    <p class="lede">누구나 확장할 수 있는 RISC-V Open ISA를 활용해 새로운 하드웨어 보안 기능을 직접 설계하고, 이를 기반으로 프로세스 내 메모리 격리·제어흐름 무결성 등 시스템 보안 솔루션을 개발하는 연구를 수행합니다.</p>
+    <p>빠르게 변화하는 보안 위협에 대응하려면 새로운 보안 기능을 신속하게 컴퓨팅 시스템에 추가할 수 있어야 합니다. 하지만 상용 프로세서는 보안 기능 도입에 보수적인 입장을 취하고 있어, 원하는 기능을 직접 넣기가 어렵습니다. 이러한 한계를 극복하기 위해, 본 연구실은 누구나 명령어 집합을 확장할 수 있는 RISC-V Open ISA를 활용하여 메모리 격리, 태그드 메모리, 제어흐름 무결성 등 새로운 하드웨어 보안 기능을 직접 설계하고, FPGA 프로토타이핑과 컴파일러·운영체제 지원을 통해 실제 동작하는 보안 솔루션으로 구현합니다.</p>
+    <div class="tags"><span class="tag">컴퓨터구조</span><span class="tag">하드웨어 설계</span><span class="tag">RISC-V</span><span class="tag">태그드 메모리</span><span class="tag">In-process Isolation</span></div>
     <div class="pubs">
       <h4>— Representative Publications</h4>
       <ul>
-        <li><span class="venue">ICCAD '20</span><a href="https://ieeexplore.ieee.org/document/9256494" target="_blank" rel="noopener"><b>RIMI</b><span class="arr">↗</span></a></li>
-        <li><span class="venue">DATE '19</span><a href="https://past.date-conference.com/proceedings-archive/2019/pdf/0619.pdf" target="_blank" rel="noopener"><b>RISKIM</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">C&amp;S '26</span><a href="https://www.sciencedirect.com/science/article/abs/pii/S0167404825005012" target="_blank" rel="noopener"><b>Beyond Address Spaces</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">ICCAD '20</span><a href="https://dl.acm.org/doi/abs/10.1145/3400302.3415727" target="_blank" rel="noopener"><b>RIMI</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">Sensors '22</span><a href="https://www.mdpi.com/1424-8220/22/4/1392" target="_blank" rel="noopener"><b>Bratter</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">Sensors '21</span><a href="https://www.mdpi.com/1424-8220/21/22/7771" target="_blank" rel="noopener"><b>CoMeT</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">DATE '19</span><a href="https://ieeexplore.ieee.org/abstract/document/8715277" target="_blank" rel="noopener"><b>RISKiM</b><span class="arr">↗</span></a></li>
       </ul>
     </div>
   </div>
@@ -116,16 +121,18 @@
   <div class="num">R / 03<small>Security Solutions<br/>for Applications</small></div>
   <div class="body">
     <h2>Development of Security Solutions<br/>for <em>Applications</em>.</h2>
-    <p class="lede">웹 브라우저 · 로봇 · 블록체인 · 머신러닝 프레임워크와 같이 일상에서 사용되는 다양한 어플리케이션의 고유한 특성을 고려한 보안 솔루션을 설계하고 개발합니다.</p>
-    <p>사용자에게 다양한 편의를 제공하기 위해, 우리가 일상적으로 사용하는 컴퓨팅 시스템에는 점차 다양한 어플리케이션들이 활용되고 있습니다. 예를 들어, 웹 브라우저, 로봇 어플리케이션, 블록체인 어플리케이션, 머신러닝 프레임워크 등을 들 수 있습니다. 본 연구실은 이러한 다양한 어플리케이션들이 가지는 고유의 특성을 고려하여, 어플리케이션의 보안성을 효과적으로 향상시킬 수 있는 보안 솔루션을 설계하고 개발하는 연구를 수행합니다.</p>
-    <div class="tags"><span class="tag">프로그래밍 방법론</span><span class="tag">코드 분석</span><span class="tag">ROS 2</span><span class="tag">Blockchain</span><span class="tag">ML</span></div>
+    <p class="lede">WebAssembly 런타임, ROS 2 기반 로봇, 블록체인 스마트컨트랙트, 머신러닝 프레임워크 등 널리 쓰이는 응용 플랫폼의 고유한 특성을 고려하여, 각 플랫폼에 특화된 보안 솔루션을 설계·개발합니다.</p>
+    <p>사용자에게 다양한 편의를 제공하기 위해, 우리가 사용하는 컴퓨팅 시스템에는 점점 다양한 응용이 올라가고 있습니다. 웹어셈블리(WebAssembly) 런타임, 로봇(ROS 2) 응용, 블록체인 스마트컨트랙트, 머신러닝 프레임워크 등이 대표적입니다. 본 연구실은 이러한 응용들이 가지는 고유의 특성과 위협 모델을 분석하여, 프로세스 내 격리, 원격 증명(remote attestation), 메모리 안전성, 이상 탐지 등 각 플랫폼에 최적화된 보안 기법을 설계하고 개발하는 연구를 수행합니다.</p>
+    <div class="tags"><span class="tag">WebAssembly</span><span class="tag">Rust</span><span class="tag">ROS 2</span><span class="tag">Blockchain</span><span class="tag">코드 분석</span></div>
     <div class="pubs">
       <h4>— Representative Publications</h4>
       <ul>
-        <li><span class="venue">JKIISC</span><a href="https://public.thinkonweb.com/journals/jkiisc/digital-library/38189" target="_blank" rel="noopener"><b>TPMP</b><span class="arr">↗</span></a></li>
-        <li><span class="venue">JKIISC</span><a href="https://public.thinkonweb.com/journals/jkiisc/digital-library/38190" target="_blank" rel="noopener"><b>TCSC</b><span class="arr">↗</span></a></li>
-        <li><span class="venue">JKIISC</span><a href="https://public.thinkonweb.com/journals/jkiisc/digital-library/38189" target="_blank" rel="noopener"><b>ROS2-Monitor</b><span class="arr">↗</span></a></li>
-        <li><span class="venue">T-ASE</span><a href="https://ieeexplore.ieee.org/document/10836890" target="_blank" rel="noopener"><b>ROSEC</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">ESORICS '26</span><span><b>Mind the Gap</b></span></li>
+        <li><span class="venue">T-ASE '25</span><a href="https://doi.org/10.1109/TASE.2024.3525050" target="_blank" rel="noopener"><b>ROSec</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">Access '26</span><a href="https://doi.org/10.1109/ACCESS.2026.3655366" target="_blank" rel="noopener"><b>SERA</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">Access '25</span><a href="https://doi.org/10.1109/ACCESS.2025.3556864" target="_blank" rel="noopener"><b>Watch Your Callback</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">Access '25</span><a href="https://ieeexplore.ieee.org/abstract/document/10869388" target="_blank" rel="noopener"><b>WasDom</b><span class="arr">↗</span></a></li>
+        <li><span class="venue">Access '24</span><a href="https://ieeexplore.ieee.org/document/10496091" target="_blank" rel="noopener"><b>MECAT</b><span class="arr">↗</span></a></li>
       </ul>
     </div>
   </div>

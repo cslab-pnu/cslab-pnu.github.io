@@ -15,6 +15,9 @@
 .legend u{text-decoration:underline;text-underline-offset:3px;color:var(--ink)}
 .legend .sel{color:var(--ink);font-weight:600}
 .legend .corr{color:var(--ink)}
+.legend a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(20,60,172,.3);transition:border-color .2s}
+.legend a:hover{border-bottom-color:var(--accent)}
+:root[data-theme="dark"] .legend a{border-bottom-color:rgba(123,160,255,.35)}
 .legend .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:middle}
 .legend .swatch.gn{background:#1e7e3a}
 .legend .swatch.rd{background:#c0392b}
@@ -27,6 +30,24 @@
 .stats .n{font-family:var(--serif);font-size:48px;line-height:1;letter-spacing:-.02em;color:var(--ink)}
 .stats .n em{font-style:italic;color:var(--accent)}
 .stats .l{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em;margin-top:8px}
+/* per-tab badge tally table */
+.tally{border-top:1px solid var(--ink);margin:30px 0 0;padding:20px 0 24px;display:grid;grid-template-columns:110px repeat(4,max-content);gap:14px 32px;align-items:center;justify-content:start}
+.tally .tgroup{display:contents}
+.tally .glabel{grid-column:1;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.tally .titem{display:inline-flex;align-items:center;gap:8px}
+.tally .titem .c{font-family:var(--serif);font-size:22px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+.tally .titem .c.zero{color:var(--ink-3);opacity:.45}
+@media(max-width:760px){
+  .legend{gap:11px 16px;margin:14px 0 24px}
+  .legend .lg{flex-wrap:wrap;row-gap:6px;align-items:center}
+  .legend .lg>span:last-child,.legend .lg>a:last-child{flex-basis:100%;margin-top:1px}
+  .tally{display:block;margin-top:24px;padding:16px 0 20px}
+  .tally .tgroup{display:grid;grid-template-columns:1fr 1fr;column-gap:18px;row-gap:8px;margin-bottom:16px}
+  .tally .tgroup:last-child{margin-bottom:0}
+  .tally .glabel{grid-column:1/-1;margin-bottom:2px}
+  .tally .titem{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .tally .titem .c{font-size:17px}
+}
 
 .maintab{display:flex;gap:8px;margin:30px 0 24px;flex-wrap:wrap}
 .maintab button{font-family:var(--mono);font-size:12px;letter-spacing:.16em;padding:12px 20px;border:1px solid var(--line-strong);background:var(--bg-2);color:var(--ink-2);cursor:pointer;text-transform:uppercase;font-weight:600;transition:all .15s ease;display:inline-flex;align-items:center;gap:10px}
@@ -57,6 +78,29 @@
 .pub .pvenue.dom{background:transparent;color:var(--ink-3);border:1px solid var(--line)}
 .pub .pvenue.patent{background:#2d3748;color:#fff}
 .pub .pvenue.granted{background:#1e7e3a;color:#fff}
+/* ranking/quality badges (replaces the venue-type badge column for intl pubs) */
+.pub .pvenue-abbr{font-family:var(--sans);font-weight:500;font-size:13px;color:var(--ink-3);letter-spacing:0;white-space:nowrap}
+.pub .pbadges{display:flex;flex-direction:column;gap:5px;align-items:flex-start;padding-top:3px}
+.pb{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;padding:3px 7px;border-radius:3px;white-space:nowrap;line-height:1.25;border:1px solid transparent;text-align:center}
+.pb.tier1{background:#1e7e3a;color:#fff}
+.pb.tier2{background:#1f4ea8;color:#fff}
+.pb.tier3{background:#b7791f;color:#fff}
+.pb.tier4{background:#6b7280;color:#fff}
+/* domestic venue-type badges (categorical) */
+.pb.d-conf{background:#475569;color:#fff}
+.pb.d-journal{background:#4338ca;color:#fff}
+.pb.d-mag{background:transparent;color:#4338ca;border-color:#4338ca}
+/* patent status badges — hue = scope (국내 slate / 국제 teal), fill = status (출원 outline / 등록 solid) */
+.pb.p-dfile{background:transparent;color:#475569;border-color:#94a3b8}
+.pb.p-dgrant{background:#475569;color:#fff}
+.pb.p-ifile{background:transparent;color:#0e7490;border-color:#0e7490}
+.pb.p-igrant{background:#0e7490;color:#fff}
+:root[data-theme="dark"] .pb.d-mag{color:#a5b4fc;border-color:#6366f1}
+:root[data-theme="dark"] .pb.p-dfile{color:#cbd5e1;border-color:#64748b}
+:root[data-theme="dark"] .pb.p-ifile{color:#67e8f9;border-color:#22a5be}
+/* per-tab legend groups */
+.legend .lg{display:none}
+.legend[data-tab="intl"] .lg-intl,.legend[data-tab="dom"] .lg-dom,.legend[data-tab="patent"] .lg-patent{display:flex}
 .pub .ptitle{font-family:"Source Serif Pro","Source Serif 4","Charter","Iowan Old Style","Georgia","Times New Roman",serif;font-size:19px;line-height:1.32;letter-spacing:-.005em;color:var(--ink);margin:0;text-wrap:pretty;transition:color .2s;font-weight:600}
 .pub .pauthors{font-size:12px;color:var(--ink-2);margin-top:8px;font-family:var(--sans);letter-spacing:0;line-height:1.55}
 .pub .pauthors u{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;color:var(--ink)}
@@ -75,6 +119,7 @@
 
 @media(max-width:900px){
   .pub{grid-template-columns:1fr;gap:8px}
+  .pub .pbadges{flex-direction:row;flex-wrap:wrap;padding-top:0}
   .pub .plinks{justify-content:flex-start}
   .year-head{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
@@ -94,25 +139,23 @@
 </header>
 
 <section class="section" data-screen-label="Stats" style="padding-top:10px;padding-bottom:0">
-  <div class="legend">
-    <div class="item"><span>(*)</span><span>corresponding author</span></div>
-    <div class="item"><u>underlined text</u><span>— our lab members</span></div>
-    <div class="item"><span class="swatch gn"></span><span>journal</span></div>
-    <div class="item"><span class="swatch rd"></span><span>security venue</span></div>
-    <div class="item"><span class="swatch bl"></span><span>system venue</span></div>
-  </div>
-  <div class="stats">
-    <div><div class="n">24</div><div class="l">국제 학술지 논문</div></div>
-    <div><div class="n">20</div><div class="l">국제 학술대회 논문</div></div>
-    <div><div class="n">55<em>+</em></div><div class="l">국내 학술대회 · 학술지</div></div>
-    <div><div class="n">24</div><div class="l">— Patents Filed / Granted</div></div>
-  </div>
-
   <div class="maintab" role="tablist">
     <button class="on" data-tab="intl">International<span class="ct">44</span></button>
     <button data-tab="dom">Domestic<span class="ct">64</span></button>
     <button data-tab="patent">Patents<span class="ct">24</span></button>
   </div>
+  <div class="legend" data-tab="intl">
+    <div class="item"><span>(*)</span><span>corresponding author</span></div>
+    <div class="item"><u>underlined text</u><span>— our lab members</span></div>
+    <div class="item lg lg-intl"><span class="pb tier1">JCR Q1</span><span class="pb tier2">JCR Q2</span><span class="pb tier3">JCR Q3</span><span class="pb tier4">JCR Q4</span><span>journal quartile (JCR, pub. year) — color = grade</span></div>
+    <div class="item lg lg-intl"><span class="pb tier1">BK21 IF4</span><span class="pb tier2">BK21 IF3</span><span class="pb tier3">BK21 IF2</span><span class="pb tier4">BK21 IF1</span><a href="https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206" target="_blank" rel="noopener">BK21+ recognized IF ↗</a></div>
+    <div class="item lg lg-intl"><span class="pb tier1">KIISE S</span><span class="pb tier2">KIISE A</span><a href="https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206" target="_blank" rel="noopener">KIISE 2024 rating ↗</a></div>
+    <div class="item lg lg-intl"><span class="pb tier1">CORE A*</span><span class="pb tier2">CORE A</span><span class="pb tier3">CORE B</span><span class="pb tier4">CORE C</span><a href="https://portal.core.edu.au/conf-ranks/" target="_blank" rel="noopener">CORE conference rank ↗</a></div>
+    <div class="item lg lg-intl"><span class="pb tier1">CSRankings</span><a href="https://csrankings.org/#/index?all&amp;us" target="_blank" rel="noopener">CSRankings-listed venue ↗</a></div>
+    <div class="item lg lg-dom"><span class="pb d-conf">학술대회</span><span class="pb d-journal">논문지</span><span class="pb d-mag">학회지</span><span>domestic venue type — 학회 약어는 학회명 뒤 괄호</span></div>
+    <div class="item lg lg-patent"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span><span class="pb p-ifile">국제출원 (국가)</span><span class="pb p-igrant">국제등록 (국가)</span><span>patent status</span></div>
+  </div>
+  <div class="tally" id="pubtally"></div>
 </section>
 
 <!-- ================= INTERNATIONAL ================= -->
@@ -121,314 +164,314 @@
   <div class="year-block">
     <div class="year-head"><div class="y">2026</div><div></div><div class="summary"><b>02</b> top-tier conf · <b>04</b> journal papers</div></div>
     
-    <article class="pub selected" data-cat="intl"><div class="pid">IC20</div><div class="pvenue tier sec">ESORICS '26</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC20</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
       <h3 class="ptitle">Mind the Gap: In-Process Isolation for Safe Rust in WebAssembly</h3>
       <div class="pauthors"><u>Suhyeon Song</u>, <u>Chaewon Shin</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>European Symposium on Research in Computer Security · Sep. 2026</span><span class="tag rank">BK21-IF:2, acceptance rate %</span></div>
+      <div class="pmeta"><span>European Symposium on Research in Computer Security (ESORICS) · Sep. 2026</span></div>
     </div><div class="plinks"></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IC19</div><div class="pvenue tier sec">Security '26</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC19</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">XCFI: Comprehensive Control-Flow Integrity for Arm TrustZone-M</h3>
       <div class="pauthors"><u>Yunju Gu</u>, <u>Jaeyeol Park</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Usenix Security · Aug. 2026</span><span class="tag rank">BK21-IF:3, acceptance rate %</span></div>
+      <div class="pmeta"><span>Usenix Security · Aug. 2026</span></div>
     </div><div class="plinks"></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ24</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ24</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">TzPy: Python Runtime for Edge Code Deployment on TrustZone</h3>
       <div class="pauthors"><u>Suhyeon Song</u>, <u>Jayeol Park</u>, <u>Chaewon Shin</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>ACM Transactions on Embedded Computing Systems</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>ACM Transactions on Embedded Computing Systems (TECS)</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1145/3817117" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IJ23</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="journal"><div class="pid">IJ23</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">SERA: Secure Micro XRCE-DDS Establishment with Remote Attestation for micro-ROS</h3>
       <div class="pauthors"><u>Jeonghwan Kang</u>, <u>Seungmin Kang</u>, Euijun Kim, Jaeseon Park, <u>Kyounghwan Kim</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>IEEE Access · Jan. 2026</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>IEEE Access · Jan. 2026</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1109/ACCESS.2026.3655366" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IJ22</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="journal"><div class="pid">IJ22</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">WARD: Efficient Memory Protection for WebAssembly on Tiny Embedded Systems</h3>
       <div class="pauthors"><u>Chaewon Shin</u>, <u>Gowon Han</u>, <u>Suhyeon Song</u>, Jinsun Park, Yoonho Choi, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>IEEE Access · Jan. 2026</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>IEEE Access · Jan. 2026</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1109/ACCESS.2025.3650447" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IJ21</div><div class="pvenue journal">SCIE · Q1</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="journal"><div class="pid">IJ21</div><div class="pbadges"><span class="pb tier1">JCR Q1</span></div><div>
       <h3 class="ptitle">Beyond Address Spaces: In-process Memory Isolation for RISC-V</h3>
       <div class="pauthors"><u>Seonghwan Park</u>, <u>Hayoung Kang</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Computers &amp; Security · Jan. 2026</span><span class="tag rank">IF 5.4 · Q1</span></div>
+      <div class="pmeta"><span>Computers &amp; Security · Jan. 2026</span></div>
     </div><div class="plinks"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0167404825005012" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2025</div><div></div><div class="summary"><b>02</b> top-tier conf · <b>02</b> journals</div></div>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IC18</div><div class="pvenue tier sec">ACSAC '25</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC18</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
       <h3 class="ptitle">SMORE: Practical Redzone-Based Stack Memory Error Detection Mechanism for Embedded Systems</h3>
       <div class="pauthors"><u>Jaeyeol Park</u>, <u>Yunju Gu</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Annual Computer Security Applications Conference · Dec. 2025</span><span class="tag rank">BK21-IF:2, acceptance rate 20.7%</span></div>
+      <div class="pmeta"><span>Annual Computer Security Applications Conference (ACSAC) · Dec. 2025</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1109/ACSAC67867.2025.00029" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IC17</div><div class="pvenue tier sec">ACSAC '25</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC17</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
       <h3 class="ptitle">ELK: Effective Lock-and-Key Technique for Temporal Memory Safety on Embedded Devices in ARMv8-M</h3>
       <div class="pauthors"><u>Jeonghwan Kang</u>, <u>Kyounghwan Kim</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Annual Computer Security Applications Conference · Dec. 2025</span><span class="tag rank">BK21-IF:2, acceptance rate 20.7%</span></div>
+      <div class="pmeta"><span>Annual Computer Security Applications Conference (ACSAC) · Dec. 2025</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1109/ACSAC67867.2025.00030" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ20</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ20</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">Watch Your Callback: Offline Anomaly Detection using Machine Learning in ROS 2</h3>
       <div class="pauthors"><u>Jeonghwan Kang</u>, <u>Kyounghwan Kim</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>IEEE Access · Apr. 2025</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>IEEE Access · Apr. 2025</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1109/ACCESS.2025.3556864" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ19</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ19</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">WasDom: An Efficient Write Protection for Wasm JITed Code With ARM Domain</h3>
       <div class="pauthors"><u>Suhyeon Song</u>, <u>Chaewon Shin</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>IEEE Access · Feb. 2025</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>IEEE Access · Feb. 2025</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/abstract/document/10869388" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IJ18</div><div class="pvenue journal">SCIE · Q1</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="journal"><div class="pid">IJ18</div><div class="pbadges"><span class="pb tier1">JCR Q1</span></div><div>
       <h3 class="ptitle">ROSec: Intra-Process Isolation for ROS Composition with Memory Protection Keys</h3>
       <div class="pauthors">Jiwon Seo, Kayondo Martin, <u>Jeonghwan Kang</u>, <u class="corr">Donghyun Kwon*</u>, and Yunheung Paek*</div>
-      <div class="pmeta"><span>IEEE Transactions on Automation Science and Engineering (T-ASE) · Jan. 2025</span><span class="tag rank">IF 5.9 · Q1</span></div>
+      <div class="pmeta"><span>IEEE Transactions on Automation Science and Engineering (T-ASE) · Jan. 2025</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1109/TASE.2024.3525050" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2024</div><div></div><div class="summary"><b>01</b> top-tier · <b>02</b> journals</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ17</div><div class="pvenue journal">ESCI</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ17</div><div class="pbadges"></div><div>
       <h3 class="ptitle">Non-volatile flip-flop with soft error tolerant capability using DICE and C-element</h3>
       <div class="pauthors">Shogo Takahashi, <u>Donghyun Kwon</u>, and Kazuteru Namba*</div>
-      <div class="pmeta"><span>IEICE Nonlinear Theory and Its Applications · Oct. 2024</span><span class="tag">ESCI</span></div>
+      <div class="pmeta"><span>IEICE Nonlinear Theory and Its Applications (NOLTA) · Oct. 2024</span></div>
     </div><div class="plinks"><a href="https://www.jstage.jst.go.jp/article/nolta/15/4/15_673/_article" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IC16</div><div class="pvenue tier sys">DAC '24</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC16</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">Look Before You Access: Efficient Heap Memory Safety for Embedded Systems on ARMv8-M</h3>
       <div class="pauthors"><u>Jeonghwan Kang</u>, <u>Jaeyeol Park</u>, Jiwon Seo, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Design Automation Conference · Jun. 2024</span><span class="tag rank">BK21-IF:3, acceptance rate 21.8%</span></div>
+      <div class="pmeta"><span>Design Automation Conference (DAC) · Jun. 2024</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1145/3649329.3655949" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ16</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ16</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">MECAT: Memory-Safe Smart Contracts in ARM TrustZone</h3>
       <div class="pauthors"><u>Seonghwan Park</u>, <u>Hayoung Kang</u>, <u>Sanghun Han</u>, Jonghee M. Youn*, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>IEEE Access · Apr. 2024</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>IEEE Access · Apr. 2024</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/document/10496091?source=authoralert" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2023</div><div></div><div class="summary"><b>01</b> top-tier · <b>04</b> journals</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ15</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ15</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">Enhancing a Lock-and-key Scheme with MTE to Mitigate Use-After-Frees</h3>
       <div class="pauthors">Inyoung Bang, Martin Kayondo, Junseung Yu, <u>Donghyun Kwon</u>, Yeongpil Cho*, and Yunheung Paek*</div>
-      <div class="pmeta"><span>IEEE Access · Dec. 2023</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>IEEE Access · Dec. 2023</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/document/10363125" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ14</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ14</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">metaSafer: A Technique to Detect Heap Metadata Corruption in WebAssembly</h3>
       <div class="pauthors"><u>Suhyeon Song</u>, <u>Seonghwan Park</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>IEEE Access · Oct. 2023</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>IEEE Access · Oct. 2023</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/document/10296897" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IJ13</div><div class="pvenue journal">SCIE · Q1</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="journal"><div class="pid">IJ13</div><div class="pbadges"><span class="pb tier1">JCR Q1</span></div><div>
       <h3 class="ptitle">ZOMETAG: Zone-based Memory Tagging for Fast, Deterministic Detection of Spatial Memory Violations on ARM</h3>
       <div class="pauthors">Jiwon Seo, Junseung You, <u>Donghyun Kwon</u>, Yeongpil Cho*, and Yunheung Paek*</div>
-      <div class="pmeta"><span>IEEE Transactions on Information Forensics and Security (TIFS) · Jul. 2023</span><span class="tag rank">IF 7.231 · Q1</span></div>
+      <div class="pmeta"><span>IEEE Transactions on Information Forensics and Security (TIFS) · Jul. 2023</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/document/10196334" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC15</div><div class="pvenue tier sec">AsiaCCS '23</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC15</div><div class="pbadges"><span class="pb tier4">BK21 IF1</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
       <h3 class="ptitle">SFITAG: Efficient Software Fault Isolation with Memory Tagging for ARM Kernel Extensions</h3>
       <div class="pauthors">Jiwon Seo, Junseung You, Yungi Cho, Yeongpil Cho, <u class="corr">Donghyun Kwon*</u>, and Yunheung Paek*</div>
-      <div class="pmeta"><span>ACM Asia Conf. on Computer and Communications Security · Jul. 2023</span><span class="tag rank">BK21-IF:1, acceptance rate 17.2%</span></div>
+      <div class="pmeta"><span>ACM Asia Conf. on Computer and Communications Security (AsiaCCS) · Jul. 2023</span></div>
     </div><div class="plinks"><a href="https://dl.acm.org/doi/10.1145/3579856.3590341" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ12</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ12</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">DEMIX: Domain-Enforced Memory Isolation for Embedded System</h3>
       <div class="pauthors">Haeyoung Kim, Harashta Tatimma Larasati, Jonguk Park, Howon Kim, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Sensors · Mar. 2023</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>Sensors · Mar. 2023</span></div>
     </div><div class="plinks"><a href="https://www.mdpi.com/1424-8220/23/7/3568" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2022</div><div></div><div class="summary"><b>01</b> conf · <b>03</b> journals</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ11</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ11</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">Efficient CFI Enforcement for Embedded Systems using ARM TrustZone-M</h3>
       <div class="pauthors"><u>Gisu Yeo</u>, <u>Yeryeong Kim</u>, <u>Suhyeon Song</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>IEEE Access · Dec. 2022</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>IEEE Access · Dec. 2022</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/abstract/document/9992195" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC14</div><div class="pvenue gen">MITA '22</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC14</div><div class="pbadges"></div><div>
       <h3 class="ptitle">A Study on Instruction Set Architecture (ISA) Extensions for Software Security on RISC-V</h3>
       <div class="pauthors"><u>Donghyun Kwon</u></div>
-      <div class="pmeta"><span>Intl. Conf. for Multimedia Information Technology and Applications · Jul. 2022</span><span class="tag">Conf</span></div>
+      <div class="pmeta"><span>Intl. Conf. for Multimedia Information Technology and Applications (MITA) · Jul. 2022</span></div>
     </div><div class="plinks"></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ10</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ10</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">Exploring effective uses of the tagged memory for reducing bounds checking overheads</h3>
       <div class="pauthors">Jiwon Seo, Inyoung Bang, Yungi Cho, Jangseop Shin, Dongil Hwang, <u>Donghyun Kwon</u>, Yeongpil Cho*, and Yunheung Paek*</div>
-      <div class="pmeta"><span>The Journal of Supercomputing · Jul. 2022</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>The Journal of Supercomputing · Jul. 2022</span></div>
     </div><div class="plinks"><a href="https://link.springer.com/article/10.1007/s11227-022-04694-y" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ09</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ09</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">Bratter: An Instruction Set Extension for Forward Control-Flow Integrity in RISC-V</h3>
       <div class="pauthors"><u>Seonghwan Park</u>, <u>Dongwook Kang</u>, <u>Jeonghwan Kang</u>, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Sensors · Feb. 2022</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>Sensors · Feb. 2022</span></div>
     </div><div class="plinks"><a href="https://www.mdpi.com/1424-8220/22/4/1392" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2021</div><div></div><div class="summary"><b>01</b> conf · <b>02</b> journals</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ08</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ08</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">CoMeT: Configurable Tagged Memory Extension</h3>
       <div class="pauthors"><u>Jinjae Lee</u>, Derry Pratama, <u>Minjae Kim</u>, Howon Kim*, and <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Sensors · Nov. 2021</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>Sensors · Nov. 2021</span></div>
     </div><div class="plinks"><a href="https://www.mdpi.com/1424-8220/21/22/7771" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC13</div><div class="pvenue gen">ICCE-Asia</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC13</div><div class="pbadges"></div><div>
       <h3 class="ptitle">Introduction to ARM TrustZone and its Use Cases</h3>
       <div class="pauthors"><u>Donghyun Kwon</u></div>
-      <div class="pmeta"><span>Intl. Conf. on Consumer Electronics Asia · Oct. 2021</span><span class="tag">Conf</span></div>
+      <div class="pmeta"><span>Intl. Conf. on Consumer Electronics Asia (ICCE-Asia) · Oct. 2021</span></div>
     </div><div class="plinks"></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ07</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ07</div><div class="pbadges"><span class="pb tier3">JCR Q3</span></div><div>
       <h3 class="ptitle">A Hardware Platform for Ensuring OS Kernel Integrity on RISC-V</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Dongil Hwang*, and Yunheung Paek*</div>
-      <div class="pmeta"><span>Electronics · Aug. 2021</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>Electronics · Aug. 2021</span></div>
     </div><div class="plinks"><a href="https://www.mdpi.com/2079-9292/10/17/2068" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2020</div><div></div><div class="summary"><b>01</b> top-tier · <b>01</b> journal</div></div>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IC12</div><div class="pvenue tier sys">ICCAD '20</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC12</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">RIMI: Instruction-level Memory Isolation for Embedded Systems on RISC-V</h3>
       <div class="pauthors">Haeyoung Kim, <u>Jinjae Lee</u>, Derry Pratama, Asep Muhamad Awaludin, Howon Kim, <u class="corr">Donghyun Kwon*</u></div>
-      <div class="pmeta"><span>Intl. Conf. On Computer Aided Design · Dec. 2020</span><span class="tag rank">BK21-IF:3, acceptance rate 24%</span></div>
+      <div class="pmeta"><span>Intl. Conf. On Computer Aided Design (ICCAD) · Dec. 2020</span></div>
     </div><div class="plinks"><a href="https://dl.acm.org/doi/abs/10.1145/3400302.3415727" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IJ06</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="journal"><div class="pid">IJ06</div><div class="pbadges"><span class="pb tier1">JCR Q1</span></div><div>
       <h3 class="ptitle">PrOS: Light-weight Privatized Secure OSes in ARM TrustZone</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Jiwon Seo, Yeongpil Cho, Byoungyoung Lee, Yunheung Paek</div>
-      <div class="pmeta"><span>IEEE Transactions on Mobile Computing (TMC) · Apr. 2020</span><span class="tag rank">IF 3.822</span></div>
+      <div class="pmeta"><span>IEEE Transactions on Mobile Computing (TMC) · Apr. 2020</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/abstract/document/8691596" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2019</div><div></div><div class="summary"><b>03</b> top-tier · <b>01</b> journal</div></div>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IC11</div><div class="pvenue tier sec">Security '19</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC11</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">uXOM: Efficient eXecute-Only Memory on ARM Cortex-M</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Jangseop Shin, Giyeol Kim, Byoungyoung Lee, Yeongpil Cho, Yunheung Paek</div>
-      <div class="pmeta"><span>Usenix Security · Aug. 2019</span><span class="tag rank">BK21-IF:3, acceptance rate 18.9%</span></div>
+      <div class="pmeta"><span>Usenix Security · Aug. 2019</span></div>
     </div><div class="plinks"><a href="https://www.usenix.org/conference/usenixsecurity19/presentation/kwon" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC10</div><div class="pvenue tier sys">DATE '19</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC10</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
       <h3 class="ptitle">RiskiM: Toward Complete Kernel Protection with Hardware Support</h3>
       <div class="pauthors">Dongil Hwang, Myunghoon Yang, Seongil Jeon, Younghan Lee, <u class="corr">Donghyun Kwon*</u>, Yunheung Paek</div>
-      <div class="pmeta"><span>Design, Automation and Test in Europe · May. 2019</span><span class="tag rank">BK21-IF:2, acceptance rate 24%</span></div>
+      <div class="pmeta"><span>Design, Automation and Test in Europe (DATE) · May. 2019</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/abstract/document/8715277" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IC09</div><div class="pvenue tier sec">NDSS '19</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC09</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">CRCount: Pointer Invalidation with Reference Counting on Mitigate Use-After-Free in Legacy C/C++</h3>
       <div class="pauthors">Jangseop Shin, <u>Donghyun Kwon</u>, Jiwon Seo, Yeongpil Cho, Yunheung Paek</div>
-      <div class="pmeta"><span>Network and Distributed System Security Symposium · Feb. 2019</span><span class="tag rank">BK21-IF:2, acceptance rate 17.1%</span></div>
+      <div class="pmeta"><span>Network and Distributed System Security Symposium (NDSS) · Feb. 2019</span></div>
     </div><div class="plinks"><a href="https://www.ndss-symposium.org/wp-content/uploads/2019/02/ndss2019_05A-4_Shin_paper.pdf" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ05</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ05</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">Safe and Efficient Implementation of a Security System on ARM using Intra-Level Privilege Separation</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Hayoon Yi, Yeongpil Cho, Yunheung Paek</div>
-      <div class="pmeta"><span>ACM Transactions on Privacy and Security (TOPS) · Feb. 2019</span><span class="tag rank">IF 1.714</span></div>
+      <div class="pmeta"><span>ACM Transactions on Privacy and Security (TOPS) · Feb. 2019</span></div>
     </div><div class="plinks"><a href="https://dl.acm.org/doi/abs/10.1145/3309698" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2018</div><div></div><div class="summary"><b>02</b> conferences</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC07</div><div class="pvenue gen">ICCSA '18</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC07</div><div class="pbadges"><span class="pb tier4">CORE C</span></div><div>
       <h3 class="ptitle">VM-CFI: Control-Flow Integrity for Virtual Machine Kernel Using Intel PT</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Jiwon Seo, Sehyun Baek, Giyeol Kim, Sunwoo Ahn, Yunheung Paek</div>
-      <div class="pmeta"><span>Intl. Conf. on Computational Science and Its Applications · Jul. 2018</span><span class="tag">Conf</span></div>
+      <div class="pmeta"><span>Intl. Conf. on Computational Science and Its Applications (ICCSA) · Jul. 2018</span></div>
     </div><div class="plinks"></div></article>
 
-    <article class="pub selected" data-cat="intl"><div class="pid">IC06</div><div class="pvenue tier sys">DAC '18</div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC06</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">Hypernel: A Hardware-Assisted Framework for Kernel Protection without Nested Paging</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Kuenwhee Oh, Junmo Park, Seungyong Yang, Yeongpil Cho, Brent Byunghoon Kang, Yunheung Paek</div>
-      <div class="pmeta"><span>Design Automation Conference · Jun. 2018</span><span class="tag rank">BK21-IF:3, acceptance rate 24.3%</span></div>
+      <div class="pmeta"><span>Design Automation Conference (DAC) · Jun. 2018</span></div>
     </div><div class="plinks"><a href="https://dl.acm.org/doi/abs/10.1145/3195970.3196061" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2017</div><div></div><div class="summary"><b>02</b> top-tier conferences</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC05</div><div class="pvenue tier sys">DAC '17</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC05</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">Instruction-Level Data Isolation for the Kernel on ARM</h3>
       <div class="pauthors">Yeongpil Cho, <u>Donghyun Kwon</u>, Yunheung Paek</div>
-      <div class="pmeta"><span>Design Automation Conference · Jun. 2017</span><span class="tag rank">BK21-IF:3, acceptance rate 23.8%</span></div>
+      <div class="pmeta"><span>Design Automation Conference (DAC) · Jun. 2017</span></div>
     </div><div class="plinks"><a href="https://dl.acm.org/doi/abs/10.1145/3061639.3062267" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC04</div><div class="pvenue tier sec">NDSS '17</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC04</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">Dynamic Virtual Address Range Adjustment for Intra-Level Privilege Separation on ARM</h3>
       <div class="pauthors">Yeongpil Cho, <u>Donghyun Kwon</u>, Hayoon Yi, Yunheung Paek</div>
-      <div class="pmeta"><span>Network and Distributed System Security Symposium · Feb. 2017</span><span class="tag rank">BK21-IF:2, acceptance rate 16%</span></div>
+      <div class="pmeta"><span>Network and Distributed System Security Symposium (NDSS) · Feb. 2017</span></div>
     </div><div class="plinks"><a href="https://www.ndss-symposium.org/ndss2017/ndss-2017-programme/dynamic-virtual-address-range-adjustment-intra-level-privilege-separation-arm/" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2016</div><div></div><div class="summary"><b>01</b> conf · <b>02</b> journals</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ04</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ04</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">Optimization Techniques to Enable Execution Offloading for 3D Video Games</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Seungjun Yang, Yunheung Paek, Kwangman Ko</div>
-      <div class="pmeta"><span>Multimedia Tools and Applications (MTAP) · Jul. 2016</span><span class="tag">SCIE</span></div>
+      <div class="pmeta"><span>Multimedia Tools and Applications (MTAP) · Jul. 2016</span></div>
     </div><div class="plinks"><a href="https://link.springer.com/article/10.1007/s11042-016-3711-9" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC03</div><div class="pvenue tier sys">ATC '16</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC03</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier2">CORE A</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">Hardware-Assisted On-Demand Hypervisor Activation for Efficient Security Critical Code Execution on Mobile Devices</h3>
       <div class="pauthors">Yeongpil Cho, Jun-Bum Shin, <u>Donghyun Kwon</u>, MyungJoo Ham, Yuna Kim, Yunheung Paek</div>
-      <div class="pmeta"><span>USENIX Annual Technical Conference · Jun. 2016</span><span class="tag rank">BK21-IF:3, acceptance rate 19%</span></div>
+      <div class="pmeta"><span>USENIX Annual Technical Conference (ATC) · Jun. 2016</span></div>
     </div><div class="plinks"><a href="https://www.usenix.org/conference/atc16/technical-sessions/presentation/cho" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ03</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ03</div><div class="pbadges"><span class="pb tier2">JCR Q2</span></div><div>
       <h3 class="ptitle">Precise Execution Offloading for Applications with Dynamic Behavior in Mobile Cloud Computing</h3>
       <div class="pauthors">Yongin Kwon, Hayoon Yi, <u>Donghyun Kwon</u>, Seungjun Yang, Yeongpil Cho, Yunheung Paek</div>
-      <div class="pmeta"><span>Pervasive and Mobile Computing (PMC) · Apr. 2016</span><span class="tag rank">IF 2.349</span></div>
+      <div class="pmeta"><span>Pervasive and Mobile Computing (PMC) · Apr. 2016</span></div>
     </div><div class="plinks"><a href="https://www.sciencedirect.com/science/article/abs/pii/S1574119215001856" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2015</div><div></div><div class="summary"><b>01</b> journal</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ02</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ02</div><div class="pbadges"><span class="pb tier1">JCR Q1</span></div><div>
       <h3 class="ptitle">Mantis: Efficient Predictions of Execution Time, Energy Usage, Memory Usage and Network Usage on Smart Mobile Devices</h3>
       <div class="pauthors">Yongin Kwon, Sangmin Lee, Hayoon Yi, <u>Donghyun Kwon</u>, Seungjun Yang, Byung-gon Chun, Ling Huang, Petros Maniatis, Mayur Naik, Yunheung Paek</div>
-      <div class="pmeta"><span>IEEE Transactions on Mobile Computing (TMC) · Dec. 2015</span><span class="tag rank">IF 2.456</span></div>
+      <div class="pmeta"><span>IEEE Transactions on Mobile Computing (TMC) · Dec. 2015</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/abstract/document/6987328" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2014</div><div></div><div class="summary"><b>01</b> journal</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IJ01</div><div class="pvenue journal">SCIE</div><div>
+    <article class="pub" data-cat="intl" data-sub="journal"><div class="pid">IJ01</div><div class="pbadges"><span class="pb tier1">JCR Q1</span></div><div>
       <h3 class="ptitle">Techniques to Minimize State Transfer Costs for Dynamic Execution Offloading in Mobile Cloud Computing</h3>
       <div class="pauthors">Seungjun Yang, <u>Donghyun Kwon</u>, Hayoon Yi, Yeongpil Cho, Yongin Kwon, Yunheung Paek</div>
-      <div class="pmeta"><span>IEEE Transactions on Mobile Computing (TMC) · Feb. 2014</span><span class="tag rank">IF 2.543</span></div>
+      <div class="pmeta"><span>IEEE Transactions on Mobile Computing (TMC) · Feb. 2014</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/abstract/document/6746190" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2013</div><div></div><div class="summary"><b>02</b> top-tier conferences</div></div>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC02</div><div class="pvenue tier sys">ATC '13</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC02</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier2">CORE A</span><span class="pb tier1">CSRankings</span></div><div>
       <h3 class="ptitle">Mantis: Automatic Performance Prediction for Smartphone Applications</h3>
       <div class="pauthors">Yongin Kwon, Sangmin Lee, Hayoon Yi, <u>Donghyun Kwon</u>, Seungjun Yang, Byung-Gon Chun, Ling Huang, Petros Maniatis, Mayur Naik, Yunheung Paek</div>
-      <div class="pmeta"><span>USENIX Annual Technical Conference · Jun. 2013</span><span class="tag rank">BK21-IF:3, acceptance rate 14.2%</span></div>
+      <div class="pmeta"><span>USENIX Annual Technical Conference (ATC) · Jun. 2013</span></div>
     </div><div class="plinks"><a href="https://www.usenix.org/conference/atc13/technical-sessions/presentation/kwon" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl"><div class="pid">IC01</div><div class="pvenue tier sys">PerCom '13</div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC01</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier2">KIISE A</span><span class="pb tier1">CORE A*</span></div><div>
       <h3 class="ptitle">Fast Dynamic Execution Offloading for Efficient Mobile Cloud Computing</h3>
       <div class="pauthors">Seungjun Yang, Yongin Kwon, Yeongpil Cho, Hayoon Yi, <u>Donghyun Kwon</u>, Jonghee Youn, Yunheung Paek</div>
-      <div class="pmeta"><span>IEEE Intl. Conf. on Pervasive Computing and Communications · Jun. 2013</span><span class="tag rank">BK21-IF:3, acceptance rate 15.9%</span></div>
+      <div class="pmeta"><span>IEEE Intl. Conf. on Pervasive Computing and Communications (PerCom) · Jun. 2013</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/abstract/document/6526710" target="_blank" rel="noopener">PDF</a></div></article>
   </div>
 
@@ -439,90 +482,90 @@
 
   <div class="year-block">
     <div class="year-head"><div class="y">2026</div><div></div><div class="summary"><b>05</b> 학회</div></div>
-    <article class="pub" data-cat="dom"><div class="pid">DC55</div><div class="pvenue dom">CISC-S</div><div><h3 class="ptitle">HWASan의 Short Granule 기법에 대한 성능 및 오류 검출 효과 분석</h3><div class="pauthors"><u>김경환</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 · 2026.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC54</div><div class="pvenue dom">CISC-S</div><div><h3 class="ptitle">WebAssembly와 JavaScript 상호작용에서의 공격 표면 분석</h3><div class="pauthors"><u>홍지연</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 · 2026.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC53</div><div class="pvenue dom">CISC-S</div><div><h3 class="ptitle">WebAssembly Multi-memory 기반 AddressSanitizer 메타데이터 보호 기법 및 보안 분석</h3><div class="pauthors"><u>전동훈</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 · 2026.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC52</div><div class="pvenue dom">CISC-S</div><div><h3 class="ptitle">하드웨어 기반 eBPF 격리 기술 동향: 성능 최적화와 보안 신뢰성 확보 방안 연구</h3><div class="pauthors"><u>박정원</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 · 2026.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC51</div><div class="pvenue dom">CISC-S</div><div><h3 class="ptitle">RTOS의 성능 및 보안 특성 비교 분석</h3><div class="pauthors"><u>김지민</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 · 2026.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC55</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">HWASan의 Short Granule 기법에 대한 성능 및 오류 검출 효과 분석</h3><div class="pauthors"><u>김경환</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 (CISC-S) · 2026.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC54</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">WebAssembly와 JavaScript 상호작용에서의 공격 표면 분석</h3><div class="pauthors"><u>홍지연</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 (CISC-S) · 2026.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC53</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">WebAssembly Multi-memory 기반 AddressSanitizer 메타데이터 보호 기법 및 보안 분석</h3><div class="pauthors"><u>전동훈</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 (CISC-S) · 2026.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC52</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">하드웨어 기반 eBPF 격리 기술 동향: 성능 최적화와 보안 신뢰성 확보 방안 연구</h3><div class="pauthors"><u>박정원</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 (CISC-S) · 2026.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC51</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">RTOS의 성능 및 보안 특성 비교 분석</h3><div class="pauthors"><u>김지민</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 (CISC-S) · 2026.05</span></div></div><div class="plinks"></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2025</div><div></div><div class="summary"><b>11</b> 학회 · <b>03</b> 논문지</div></div>
-    <article class="pub" data-cat="dom"><div class="pid">DC50</div><div class="pvenue dom">ACK 학술대회</div><div><h3 class="ptitle">커널 내부 권한 분리 기술 연구 동향</h3><div class="pauthors"><u>신채원</u>, <u>강하영</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2025.11</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DJ09</div><div class="pvenue journal">논문지</div><div><h3 class="ptitle">Redzone 기반 sanitizer의 성능 및 보안 분석</h3><div class="pauthors"><u>강승민</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 논문지 · 2025.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC49</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">WebAssembly 하드웨어 보안 기술 동향과 향후 연구 방향</h3><div class="pauthors"><u>송수현</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2025.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC48</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">레드존 기반 메모리 에러 탐지기 경량화 기법 연구 동향</h3><div class="pauthors"><u>박재열</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2025.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC47</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">시간 메모리 안전성을 보장하기 위한 Lock-and-Key 연구 분석 및 체계화</h3><div class="pauthors"><u>강정환</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2025.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC46</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">ARM Pointer Authentication을 활용한 제어 흐름 무결성 연구 동향</h3><div class="pauthors"><u>구윤주</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2025.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC45</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">웹어셈블리에서 바이너리 코드 삽입 방식의 성능적 한계와 대체 방안</h3><div class="pauthors"><u>신채원</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2025.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC44</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">BPF 프로그램을 대상으로 한 격리 기술의 연구 동향</h3><div class="pauthors"><u>박성환</u>, <u>강하영</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2025.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC43</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">Off-chain TEE 기반 스마트 컨트랙트의 활용 방안 및 연구 동향</h3><div class="pauthors"><u>강하영</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2025.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC42</div><div class="pvenue dom">ASK 학술대회</div><div><h3 class="ptitle">임베디드 환경에서 웹어셈블리의 활용 가능성 및 한계</h3><div class="pauthors"><u>한고원</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2025.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC41</div><div class="pvenue dom">ASK 학술대회</div><div><h3 class="ptitle">Poison value 기반 sanitizer 기술 연구 동향 분석</h3><div class="pauthors"><u>강승민</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2025.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC40</div><div class="pvenue dom">ASK 학술대회</div><div><h3 class="ptitle">ROS 기반 신뢰성 및 이상 탐지 방법론의 micro-ROS 적용 방안에 대한 연구</h3><div class="pauthors"><u>김경환</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2025.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DJ08</div><div class="pvenue journal">논문지</div><div><h3 class="ptitle">웹어셈블리 환경에서 카나리 길이에 따른 성능 및 보안 분석</h3><div class="pauthors"><u>한고원</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 논문지 · 2025.04</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DJ07</div><div class="pvenue journal">학회지</div><div><h3 class="ptitle">임베디드 시스템의 메모리 보안 연구 동향</h3><div class="pauthors"><u>강정환</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 학회지 · 2025.03</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC50</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">커널 내부 권한 분리 기술 연구 동향</h3><div class="pauthors"><u>신채원</u>, <u>강하영</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ACK) · 2025.11</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="journal"><div class="pid">DJ09</div><div class="pbadges"><span class="pb d-journal">논문지</span></div><div><h3 class="ptitle">Redzone 기반 sanitizer의 성능 및 보안 분석</h3><div class="pauthors"><u>강승민</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 논문지 · 2025.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC49</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">WebAssembly 하드웨어 보안 기술 동향과 향후 연구 방향</h3><div class="pauthors"><u>송수현</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2025.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC48</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">레드존 기반 메모리 에러 탐지기 경량화 기법 연구 동향</h3><div class="pauthors"><u>박재열</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2025.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC47</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">시간 메모리 안전성을 보장하기 위한 Lock-and-Key 연구 분석 및 체계화</h3><div class="pauthors"><u>강정환</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2025.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC46</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">ARM Pointer Authentication을 활용한 제어 흐름 무결성 연구 동향</h3><div class="pauthors"><u>구윤주</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2025.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC45</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">웹어셈블리에서 바이너리 코드 삽입 방식의 성능적 한계와 대체 방안</h3><div class="pauthors"><u>신채원</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2025.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC44</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">BPF 프로그램을 대상으로 한 격리 기술의 연구 동향</h3><div class="pauthors"><u>박성환</u>, <u>강하영</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2025.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC43</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">Off-chain TEE 기반 스마트 컨트랙트의 활용 방안 및 연구 동향</h3><div class="pauthors"><u>강하영</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2025.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC42</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">임베디드 환경에서 웹어셈블리의 활용 가능성 및 한계</h3><div class="pauthors"><u>한고원</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ASK) · 2025.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC41</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">Poison value 기반 sanitizer 기술 연구 동향 분석</h3><div class="pauthors"><u>강승민</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ASK) · 2025.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC40</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">ROS 기반 신뢰성 및 이상 탐지 방법론의 micro-ROS 적용 방안에 대한 연구</h3><div class="pauthors"><u>김경환</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ASK) · 2025.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="journal"><div class="pid">DJ08</div><div class="pbadges"><span class="pb d-journal">논문지</span></div><div><h3 class="ptitle">웹어셈블리 환경에서 카나리 길이에 따른 성능 및 보안 분석</h3><div class="pauthors"><u>한고원</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 논문지 · 2025.04</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="mag"><div class="pid">DJ07</div><div class="pbadges"><span class="pb d-mag">학회지</span></div><div><h3 class="ptitle">임베디드 시스템의 메모리 보안 연구 동향</h3><div class="pauthors"><u>강정환</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 학회지 · 2025.03</span></div></div><div class="plinks"></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2024</div><div></div><div class="summary"><b>11</b> 학회 · <b>02</b> 논문지</div></div>
-    <article class="pub" data-cat="dom"><div class="pid">DC39</div><div class="pvenue dom">AIcomps</div><div><h3 class="ptitle">Performance Analysis of Sandbox Runtimes for Embedded Devices</h3><div class="pauthors"><u>박성환</u>, Mahboubeh Bagheri, <u class="corr">권동현*</u></div><div class="pmeta"><span>2024.12</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DJ06</div><div class="pvenue journal">논문지</div><div><h3 class="ptitle">무작위 메모리 보호 키 할당을 통한 웹어셈블리 JIT 컴파일된 코드 보호</h3><div class="pauthors"><u>신채원</u>, 정윤서, 배명진, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 논문지 · 2024.11</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC38</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">ARM Pointer Authentication을 활용한 메모리 오류 탐지 기법의 비교 분석</h3><div class="pauthors"><u>강정환</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2024.11</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC37</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">신뢰 실행 환경 구축을 위한 Intel SGX 및 ARM TrustZone 기반 연구 동향</h3><div class="pauthors"><u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2024.11</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC36</div><div class="pvenue dom">ACK 학술대회</div><div><h3 class="ptitle">내부 커널 격리를 이용한 커널 보안 강화에 대한 연구 동향</h3><div class="pauthors"><u>구윤주</u>, <u>강하영</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC35</div><div class="pvenue dom">ACK 학술대회</div><div><h3 class="ptitle">ARM MTE를 이용한 메모리 보호 기술 연구 동향 분석</h3><div class="pauthors"><u>김경환</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC34</div><div class="pvenue dom">ACK 학술대회</div><div><h3 class="ptitle">WebAssembly Binary 보안 기법 비교 분석 및 향후 연구</h3><div class="pauthors"><u>한고원</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC33</div><div class="pvenue dom">ACK 학술대회</div><div><h3 class="ptitle">솔라나 스마트 계약의 취약점 연구</h3><div class="pauthors">Mahboubeh Bagheri, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DJ05</div><div class="pvenue journal">논문지</div><div><h3 class="ptitle">RISC-V 아키텍처 상에서의 쉐도우 스택 성능 평가 및 고찰</h3><div class="pauthors"><u>강하영</u>, <u>한고원</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 논문지 · 2024.09</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC32</div><div class="pvenue dom">CISC-S</div><div><h3 class="ptitle">프로세스 내 메모리 격리 기술 연구 동향</h3><div class="pauthors"><u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 · 2024.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC31</div><div class="pvenue dom">ASK 학술대회</div><div><h3 class="ptitle">RISC-V 아키텍처에서의 쉐도우 스택 성능평가</h3><div class="pauthors"><u>강하영</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC30</div><div class="pvenue dom">ASK 학술대회</div><div><h3 class="ptitle">Cortex-M 프로세서에서 MPU를 사용한 보안 연구 조사</h3><div class="pauthors"><u>구윤주</u>, <u>강하영</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC29</div><div class="pvenue dom">ASK 학술대회</div><div><h3 class="ptitle">웹어셈블리 컴파일러 최적화 성능에 관한 연구</h3><div class="pauthors"><u>신채원</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC28</div><div class="pvenue dom">ASK 학술대회</div><div><h3 class="ptitle">TrustZone을 활용한 스택 카나리 보완 기법</h3><div class="pauthors"><u>박재열</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC27</div><div class="pvenue dom">ASK 학술대회</div><div><h3 class="ptitle">머신러닝 기법을 활용한 ROS 2 의 콜백 실행 시간 분석 및 이상 탐지</h3><div class="pauthors"><u>김경환</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 · 2024.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC26</div><div class="pvenue dom">KJCCS</div><div><h3 class="ptitle">Just In Time Compilation Code Protection in WebAssembly</h3><div class="pauthors"><u>송수현</u>, Kazuteru Namba, <u class="corr">권동현*</u></div><div class="pmeta"><span>2024.01</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC39</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">Performance Analysis of Sandbox Runtimes for Embedded Devices</h3><div class="pauthors"><u>박성환</u>, Mahboubeh Bagheri, <u class="corr">권동현*</u></div><div class="pmeta"><span>AIcomps · 2024.12</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="journal"><div class="pid">DJ06</div><div class="pbadges"><span class="pb d-journal">논문지</span></div><div><h3 class="ptitle">무작위 메모리 보호 키 할당을 통한 웹어셈블리 JIT 컴파일된 코드 보호</h3><div class="pauthors"><u>신채원</u>, 정윤서, 배명진, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 논문지 · 2024.11</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC38</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">ARM Pointer Authentication을 활용한 메모리 오류 탐지 기법의 비교 분석</h3><div class="pauthors"><u>강정환</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2024.11</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC37</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">신뢰 실행 환경 구축을 위한 Intel SGX 및 ARM TrustZone 기반 연구 동향</h3><div class="pauthors"><u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2024.11</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC36</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">내부 커널 격리를 이용한 커널 보안 강화에 대한 연구 동향</h3><div class="pauthors"><u>구윤주</u>, <u>강하영</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ACK) · 2024.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC35</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">ARM MTE를 이용한 메모리 보호 기술 연구 동향 분석</h3><div class="pauthors"><u>김경환</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ACK) · 2024.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC34</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">WebAssembly Binary 보안 기법 비교 분석 및 향후 연구</h3><div class="pauthors"><u>한고원</u>, <u>신채원</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ACK) · 2024.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC33</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">솔라나 스마트 계약의 취약점 연구</h3><div class="pauthors">Mahboubeh Bagheri, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ACK) · 2024.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="journal"><div class="pid">DJ05</div><div class="pbadges"><span class="pb d-journal">논문지</span></div><div><h3 class="ptitle">RISC-V 아키텍처 상에서의 쉐도우 스택 성능 평가 및 고찰</h3><div class="pauthors"><u>강하영</u>, <u>한고원</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 논문지 · 2024.09</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC32</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">프로세스 내 메모리 격리 기술 연구 동향</h3><div class="pauthors"><u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 (CISC-S) · 2024.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC31</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">RISC-V 아키텍처에서의 쉐도우 스택 성능평가</h3><div class="pauthors"><u>강하영</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ASK) · 2024.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC30</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">Cortex-M 프로세서에서 MPU를 사용한 보안 연구 조사</h3><div class="pauthors"><u>구윤주</u>, <u>강하영</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ASK) · 2024.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC29</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">웹어셈블리 컴파일러 최적화 성능에 관한 연구</h3><div class="pauthors"><u>신채원</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ASK) · 2024.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC28</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">TrustZone을 활용한 스택 카나리 보완 기법</h3><div class="pauthors"><u>박재열</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ASK) · 2024.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC27</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">머신러닝 기법을 활용한 ROS 2 의 콜백 실행 시간 분석 및 이상 탐지</h3><div class="pauthors"><u>김경환</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 (ASK) · 2024.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC26</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">Just In Time Compilation Code Protection in WebAssembly</h3><div class="pauthors"><u>송수현</u>, Kazuteru Namba, <u class="corr">권동현*</u></div><div class="pmeta"><span>KJCCS · 2024.01</span></div></div><div class="plinks"></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2023</div><div></div><div class="summary"><b>09</b> 학회</div></div>
-    <article class="pub" data-cat="dom"><div class="pid">DC25</div><div class="pvenue dom">정보보호 동계</div><div><h3 class="ptitle">블록체인 보안 향상을 위한 하드웨어 특징 사용 사례 분석</h3><div class="pauthors"><u>한상훈</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 동계 학술대회 · 2023.12</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC24</div><div class="pvenue dom">정보보호 동계</div><div><h3 class="ptitle">웹 어셈블리의 샌드박스 런타임 소개 및 연구 동향</h3><div class="pauthors"><u>강하영</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 동계 학술대회 · 2023.12</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC23</div><div class="pvenue dom">정보보호 동계</div><div><h3 class="ptitle">Volatility 프레임워크 출력 분석을 통한 메모리 포렌식 초기 작업의 자동화 방안</h3><div class="pauthors"><u>신채원</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 동계 학술대회 · 2023.12</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC22</div><div class="pvenue dom">정보처리 추계</div><div><h3 class="ptitle">컴파일러 퍼저에서 머신러닝의 적용에 대한 연구</h3><div class="pauthors"><u>박재열</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 추계 학술대회 · 2023.11</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC21</div><div class="pvenue dom">정보처리 추계</div><div><h3 class="ptitle">컴파일러 최적화 코드 분석 연구 조사</h3><div class="pauthors"><u>한상훈</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 추계 학술대회 · 2023.11</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC20</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">Low-Code 소개 및 향후 연구 방향</h3><div class="pauthors"><u>강하영</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2023.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC19</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">임베디드 시스템 보안을 위한 구획화 연구 동향</h3><div class="pauthors"><u>강정환</u>, <u>한상훈</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 · 2023.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC18</div><div class="pvenue dom">정보보호 하계</div><div><h3 class="ptitle">RISC-V를 이용한 메모리 보호 기술 연구 동향</h3><div class="pauthors"><u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2023.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC17</div><div class="pvenue dom">정보보호 하계</div><div><h3 class="ptitle">WebAssembly binary mutation 도구들에 대한 비교 및 향후 발전 방향에 대한 고찰</h3><div class="pauthors"><u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2023.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC16</div><div class="pvenue dom">정보처리 춘계</div><div><h3 class="ptitle">커버리지 기반 웹어셈블리 퍼저의 분류와 한계점</h3><div class="pauthors"><u>강하영</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2023.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC15</div><div class="pvenue dom">정보처리 춘계</div><div><h3 class="ptitle">임베디드 시스템에서 Address Sanitizer의 한계</h3><div class="pauthors"><u>박재열</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2023.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC14</div><div class="pvenue dom">정보처리 춘계</div><div><h3 class="ptitle">Libclang을 활용한 ROS 2의 스레드 안전성 분석</h3><div class="pauthors"><u>신채원</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2023.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC13</div><div class="pvenue dom">JKCCS</div><div><h3 class="ptitle">A Study on Design and Challenges of ros2-fuzz</h3><div class="pauthors"><u>강정환</u>, <u>박재열</u>, <u>서민성</u>, Kazuteru Namba, <u class="corr">권동현*</u></div><div class="pmeta"><span>2023.01</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC25</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">블록체인 보안 향상을 위한 하드웨어 특징 사용 사례 분석</h3><div class="pauthors"><u>한상훈</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 동계 학술대회 · 2023.12</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC24</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">웹 어셈블리의 샌드박스 런타임 소개 및 연구 동향</h3><div class="pauthors"><u>강하영</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 동계 학술대회 · 2023.12</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC23</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">Volatility 프레임워크 출력 분석을 통한 메모리 포렌식 초기 작업의 자동화 방안</h3><div class="pauthors"><u>신채원</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 동계 학술대회 · 2023.12</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC22</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">컴파일러 퍼저에서 머신러닝의 적용에 대한 연구</h3><div class="pauthors"><u>박재열</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 추계 학술대회 · 2023.11</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC21</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">컴파일러 최적화 코드 분석 연구 조사</h3><div class="pauthors"><u>한상훈</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 추계 학술대회 · 2023.11</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC20</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">Low-Code 소개 및 향후 연구 방향</h3><div class="pauthors"><u>강하영</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2023.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC19</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">임베디드 시스템 보안을 위한 구획화 연구 동향</h3><div class="pauthors"><u>강정환</u>, <u>한상훈</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 학술대회 (CISC-영남) · 2023.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC18</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">RISC-V를 이용한 메모리 보호 기술 연구 동향</h3><div class="pauthors"><u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2023.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC17</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">WebAssembly binary mutation 도구들에 대한 비교 및 향후 발전 방향에 대한 고찰</h3><div class="pauthors"><u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2023.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC16</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">커버리지 기반 웹어셈블리 퍼저의 분류와 한계점</h3><div class="pauthors"><u>강하영</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2023.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC15</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">임베디드 시스템에서 Address Sanitizer의 한계</h3><div class="pauthors"><u>박재열</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2023.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC14</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">Libclang을 활용한 ROS 2의 스레드 안전성 분석</h3><div class="pauthors"><u>신채원</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2023.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC13</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">A Study on Design and Challenges of ros2-fuzz</h3><div class="pauthors"><u>강정환</u>, <u>박재열</u>, <u>서민성</u>, Kazuteru Namba, <u class="corr">권동현*</u></div><div class="pmeta"><span>JKCCS · 2023.01</span></div></div><div class="plinks"></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2022</div><div></div><div class="summary"><b>06</b> 학회 · <b>03</b> 논문지</div></div>
-    <article class="pub" data-cat="dom"><div class="pid">DJ04</div><div class="pvenue journal">논문지</div><div><h3 class="ptitle">ROS 2의 이벤트 기반 런타임 모니터링을 활용한 실시간 공격 탐지 시스템</h3><div class="pauthors"><u>강정환</u>, <u>서민성</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 논문지 · 2022.12</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DJ03</div><div class="pvenue journal">논문지</div><div><h3 class="ptitle">TCST : 신뢰실행환경 내에서 스마트 컨트랙트의 제어 흐름 무결성 검증을 위한 기술</h3><div class="pauthors"><u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 논문지 · 2022.12</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC12</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">상태 저장 퍼저 구현에 대한 연구 동향</h3><div class="pauthors"><u>박재열</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 · 2022.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC11</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">웹어셈블리 메모리 취약점 분석 및 보안 메커니즘</h3><div class="pauthors"><u>홍진욱</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 · 2022.10</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DJ02</div><div class="pvenue journal">논문지</div><div><h3 class="ptitle">TPMP : ARM TrustZone을 활용한 DNN 추론 과정의 기밀성 보장 기술</h3><div class="pauthors"><u>송수현</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 논문지 · 2022.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC10</div><div class="pvenue dom">정보보호 하계</div><div><h3 class="ptitle">ROS 애플리케이션의 런타임 검증 연구 동향</h3><div class="pauthors"><u>강정환</u>, <u>박성환</u>, <u>서민성</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2022.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC09</div><div class="pvenue dom">정보보호 하계</div><div><h3 class="ptitle">신뢰실행환경을 활용한 블록체인 보안 기술에 대한 연구</h3><div class="pauthors"><u>박성환</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2022.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC08</div><div class="pvenue dom">정보보호 하계</div><div><h3 class="ptitle">합성곱 신경망(CNN)에 대한 멤버십 추론 공격과 방어 기법에 관한 연구</h3><div class="pauthors"><u>송수현</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2022.06</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC07</div><div class="pvenue dom">정보보호 하계</div><div><h3 class="ptitle">신뢰 실행 환경을 활용한 양방향 샌드박스 연구 동향</h3><div class="pauthors"><u>여기수</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2022.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="journal"><div class="pid">DJ04</div><div class="pbadges"><span class="pb d-journal">논문지</span></div><div><h3 class="ptitle">ROS 2의 이벤트 기반 런타임 모니터링을 활용한 실시간 공격 탐지 시스템</h3><div class="pauthors"><u>강정환</u>, <u>서민성</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 논문지 · 2022.12</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="journal"><div class="pid">DJ03</div><div class="pbadges"><span class="pb d-journal">논문지</span></div><div><h3 class="ptitle">TCST : 신뢰실행환경 내에서 스마트 컨트랙트의 제어 흐름 무결성 검증을 위한 기술</h3><div class="pauthors"><u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 논문지 · 2022.12</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC12</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">상태 저장 퍼저 구현에 대한 연구 동향</h3><div class="pauthors"><u>박재열</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 (CISC-영남) · 2022.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC11</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">웹어셈블리 메모리 취약점 분석 및 보안 메커니즘</h3><div class="pauthors"><u>홍진욱</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 (CISC-영남) · 2022.10</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="journal"><div class="pid">DJ02</div><div class="pbadges"><span class="pb d-journal">논문지</span></div><div><h3 class="ptitle">TPMP : ARM TrustZone을 활용한 DNN 추론 과정의 기밀성 보장 기술</h3><div class="pauthors"><u>송수현</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 논문지 · 2022.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC10</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">ROS 애플리케이션의 런타임 검증 연구 동향</h3><div class="pauthors"><u>강정환</u>, <u>박성환</u>, <u>서민성</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2022.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC09</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">신뢰실행환경을 활용한 블록체인 보안 기술에 대한 연구</h3><div class="pauthors"><u>박성환</u>, <u>송수현</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2022.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC08</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">합성곱 신경망(CNN)에 대한 멤버십 추론 공격과 방어 기법에 관한 연구</h3><div class="pauthors"><u>송수현</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2022.06</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC07</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">신뢰 실행 환경을 활용한 양방향 샌드박스 연구 동향</h3><div class="pauthors"><u>여기수</u>, <u>박재열</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 하계 학술대회 · 2022.06</span></div></div><div class="plinks"></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2021</div><div></div><div class="summary"><b>06</b> 학회 · <b>01</b> 논문지</div></div>
-    <article class="pub" data-cat="dom"><div class="pid">DC06</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">코드 재사용 공격 방어를 위한 제어 흐름 무결성 검증 기법 연구</h3><div class="pauthors"><u>여기수</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 · 2021.09</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC05</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">무인 이동체에 대한 물리 계층 공격에 관한 연구</h3><div class="pauthors"><u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 · 2021.09</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC04</div><div class="pvenue dom">CISC 영남</div><div><h3 class="ptitle">접근제어를 지원하는 Tagged Memory Extension 동향</h3><div class="pauthors"><u>이진재</u>, Derry Pratama, <u class="corr">권동현*</u>, 김호원</div><div class="pmeta"><span>한국정보보호학회 영남지부 · 2021.09</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DJ01</div><div class="pvenue journal">논문지</div><div><h3 class="ptitle">WACFI: 웹 어셈블리에서의 간접호출 명령어 보호를 위한 코드 계측 기술</h3><div class="pauthors"><u>장윤수</u>, <u>김영주</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 논문지 · 2021.08</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC03</div><div class="pvenue dom">정보처리 춘계</div><div><h3 class="ptitle">임베디드 기기용 프로세서의 아키텍처 보안 기능에 대한 연구</h3><div class="pauthors"><u>박성환</u>, <u>김영주</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2021.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC02</div><div class="pvenue dom">정보처리 춘계</div><div><h3 class="ptitle">블록체인을 적용한 VANET 의 위치 정보 보호에 대한 연구 동향</h3><div class="pauthors"><u>강정환</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2021.05</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="dom"><div class="pid">DC01</div><div class="pvenue dom">정보처리 춘계</div><div><h3 class="ptitle">신뢰할 수 있는 수행 환경을 활용한 DNN 보안에 관한 연구 동향</h3><div class="pauthors"><u>김영주</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2021.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC06</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">코드 재사용 공격 방어를 위한 제어 흐름 무결성 검증 기법 연구</h3><div class="pauthors"><u>여기수</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 (CISC-영남) · 2021.09</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC05</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">무인 이동체에 대한 물리 계층 공격에 관한 연구</h3><div class="pauthors"><u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 영남지부 (CISC-영남) · 2021.09</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC04</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">접근제어를 지원하는 Tagged Memory Extension 동향</h3><div class="pauthors"><u>이진재</u>, Derry Pratama, <u class="corr">권동현*</u>, 김호원</div><div class="pmeta"><span>한국정보보호학회 영남지부 (CISC-영남) · 2021.09</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="journal"><div class="pid">DJ01</div><div class="pbadges"><span class="pb d-journal">논문지</span></div><div><h3 class="ptitle">WACFI: 웹 어셈블리에서의 간접호출 명령어 보호를 위한 코드 계측 기술</h3><div class="pauthors"><u>장윤수</u>, <u>김영주</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보보호학회 논문지 · 2021.08</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC03</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">임베디드 기기용 프로세서의 아키텍처 보안 기능에 대한 연구</h3><div class="pauthors"><u>박성환</u>, <u>김영주</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2021.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC02</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">블록체인을 적용한 VANET 의 위치 정보 보호에 대한 연구 동향</h3><div class="pauthors"><u>강정환</u>, <u>박성환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2021.05</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="dom" data-sub="conf"><div class="pid">DC01</div><div class="pbadges"><span class="pb d-conf">학술대회</span></div><div><h3 class="ptitle">신뢰할 수 있는 수행 환경을 활용한 DNN 보안에 관한 연구 동향</h3><div class="pauthors"><u>김영주</u>, <u>강정환</u>, <u class="corr">권동현*</u></div><div class="pmeta"><span>한국정보처리학회 춘계 학술대회 · 2021.05</span></div></div><div class="plinks"></div></article>
   </div>
 
 </section>
@@ -532,62 +575,62 @@
 
   <div class="year-block">
     <div class="year-head"><div class="y">2025</div><div></div><div class="summary"><b>04</b> 출원</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">DP21</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">웹어셈블리 런타임의 메모리 오류 탐지 방법 및 이를 수행하는 장치</h3><div class="pauthors"><u>권동현</u>, <u>신채원</u>, <u>한고원</u></div><div class="pmeta"><span>출원 2025.11.25 · 10-2025-0180350</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP20</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">리스크 파이브 기반 명령어를 이용한 커널 민감 데이터 보호 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2025.10.28 · 10-2025-0157387</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP19</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">리스크 파이브 기반 신뢰 실행 환경을 활용한 블록체인 체인코드 및 상태 기밀성 보호 시스템 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2025.10.28 · 10-2025-0157387</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP18</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">스마트 팩토리 에지 디바이스의 트러스트존 기반 파이썬 런타임 제공 시스템 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>송수현</u>, <u>박재열</u>, <u>신채원</u></div><div class="pmeta"><span>출원 2025.10.14 · 10-2025-0147767</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP21</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">웹어셈블리 런타임의 메모리 오류 탐지 방법 및 이를 수행하는 장치</h3><div class="pauthors"><u>권동현</u>, <u>신채원</u>, <u>한고원</u></div><div class="pmeta"><span>출원 2025.11.25 · 10-2025-0180350</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP20</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">리스크 파이브 기반 명령어를 이용한 커널 민감 데이터 보호 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2025.10.28 · 10-2025-0157387</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP19</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">리스크 파이브 기반 신뢰 실행 환경을 활용한 블록체인 체인코드 및 상태 기밀성 보호 시스템 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2025.10.28 · 10-2025-0157387</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP18</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">스마트 팩토리 에지 디바이스의 트러스트존 기반 파이썬 런타임 제공 시스템 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>송수현</u>, <u>박재열</u>, <u>신채원</u></div><div class="pmeta"><span>출원 2025.10.14 · 10-2025-0147767</span></div></div><div class="plinks"></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2024</div><div></div><div class="summary"><b>05</b> 출원 (PCT 포함)</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">IP03</div><div class="pvenue patent">PCT 국제출원</div><div><h3 class="ptitle">임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>박재열</u></div><div class="pmeta"><span>출원 2024.12.06 · PCT/KR2024/019967</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230179337" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP17</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">스택 프레임 메모리 관리 방법 및 이를 수행하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박재열</u>, <u>구윤주</u></div><div class="pmeta"><span>출원 2024.12.13 · 10-2024-0185392</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP16</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">가상화 기법을 이용한 메모리 보호 방법 및 이를 수행하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2024.12.12 · 10-2024-0184505</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP15</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">도메인 권한 제어를 통한 코드 보호 방법, 이를 수행하는 컴퓨팅 장치 및 컴퓨터 프로그램</h3><div class="pauthors"><u>권동현</u>, <u>송수현</u>, <u>신채원</u></div><div class="pmeta"><span>출원 2024.10.21 · 10-2024-0143803</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP14</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">기계학습을 이용한 로봇 운영체제 2 환경의 이상 탐지 방법 및 장치</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>김경환</u></div><div class="pmeta"><span>출원 2024.10.14 · 10-2024-0139454</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP13</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">스마트 컨트랙트의 기밀성과 메모리 안전성을 보장하는 시스템 및 방법</h3><div class="pauthors">국내특허 출원</div><div class="pmeta"><span>출원 2024.08.13 · 10-2024-0108057</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="ifile"><div class="pid">IP03</div><div class="pbadges"><span class="pb p-ifile">국제출원 (PCT)</span></div><div><h3 class="ptitle">임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>박재열</u></div><div class="pmeta"><span>출원 2024.12.06 · PCT/KR2024/019967</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230179337" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP17</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">스택 프레임 메모리 관리 방법 및 이를 수행하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박재열</u>, <u>구윤주</u></div><div class="pmeta"><span>출원 2024.12.13 · 10-2024-0185392</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP16</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">가상화 기법을 이용한 메모리 보호 방법 및 이를 수행하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2024.12.12 · 10-2024-0184505</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP15</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">도메인 권한 제어를 통한 코드 보호 방법, 이를 수행하는 컴퓨팅 장치 및 컴퓨터 프로그램</h3><div class="pauthors"><u>권동현</u>, <u>송수현</u>, <u>신채원</u></div><div class="pmeta"><span>출원 2024.10.21 · 10-2024-0143803</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP14</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">기계학습을 이용한 로봇 운영체제 2 환경의 이상 탐지 방법 및 장치</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>김경환</u></div><div class="pmeta"><span>출원 2024.10.14 · 10-2024-0139454</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP13</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">스마트 컨트랙트의 기밀성과 메모리 안전성을 보장하는 시스템 및 방법</h3><div class="pauthors">국내특허 출원</div><div class="pmeta"><span>출원 2024.08.13 · 10-2024-0108057</span></div></div><div class="plinks"></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2023</div><div></div><div class="summary"><b>03</b> 출원 · <b>02</b> 등록</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">DP12</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2023.12.13 · 10-2023-0180923</span><span>등록 2026.03.30 · 10-2947567</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230180923" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP11</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">힙 메모리 내 메타데이터 변조 공격 탐지가 가능한 웹 어셈블리 코드를 실행하기 위한 가상 머신의 동작 방법 및 이를 포함하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>송수현</u></div><div class="pmeta"><span>출원 2023.12.21 · 10-2023-0188053</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230188053" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP10</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>박재열</u></div><div class="pmeta"><span>출원 2023.12.12 · 10-2023-0179337</span><span>등록 2025.12.17 · 10-2902870</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230179337" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP12</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2023.12.13 · 10-2023-0180923</span><span>등록 2026.03.30 · 10-2947567</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230180923" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP11</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">힙 메모리 내 메타데이터 변조 공격 탐지가 가능한 웹 어셈블리 코드를 실행하기 위한 가상 머신의 동작 방법 및 이를 포함하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>송수현</u></div><div class="pmeta"><span>출원 2023.12.21 · 10-2023-0188053</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230188053" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP10</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>박재열</u></div><div class="pmeta"><span>출원 2023.12.12 · 10-2023-0179337</span><span>등록 2025.12.17 · 10-2902870</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230179337" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2022</div><div></div><div class="summary"><b>03</b> 출원 · <b>02</b> 등록</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">IP02</div><div class="pvenue patent">PCT 국제출원</div><div><h3 class="ptitle">분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2022.11.23 · PCT/KR2022/018593</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220002304" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP09</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">임베디드 시스템의 무결성 보장 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>여기수</u>, <u>송수현</u>, <u>김예령</u></div><div class="pmeta"><span>출원 2022.11.16 · 10-2022-0153968</span><span>등록 2024.10.07 · 10-2715925</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220153968" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP08</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2022.01.06 · 10-20220002304</span><span>등록 2024.10.02 · 10-2714905</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220002304" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="ifile"><div class="pid">IP02</div><div class="pbadges"><span class="pb p-ifile">국제출원 (PCT)</span></div><div><h3 class="ptitle">분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2022.11.23 · PCT/KR2022/018593</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220002304" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP09</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">임베디드 시스템의 무결성 보장 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>여기수</u>, <u>송수현</u>, <u>김예령</u></div><div class="pmeta"><span>출원 2022.11.16 · 10-2022-0153968</span><span>등록 2024.10.07 · 10-2715925</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220153968" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP08</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2022.01.06 · 10-20220002304</span><span>등록 2024.10.02 · 10-2714905</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220002304" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2021</div><div></div><div class="summary"><b>01</b> 등록</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">DP07</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">웹 어셈블리에서의 간접호출 명령어 보호를 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>장윤수</u>, <u>김윤주</u></div><div class="pmeta"><span>출원 2021.11.01 · 10-2021-0148301</span><span>등록 2023.08.11 · 10-2567924</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020210148301" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP07</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">웹 어셈블리에서의 간접호출 명령어 보호를 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>장윤수</u>, <u>김윤주</u></div><div class="pmeta"><span>출원 2021.11.01 · 10-2021-0148301</span><span>등록 2023.08.11 · 10-2567924</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020210148301" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2019</div><div></div><div class="summary"><b>02</b> 등록</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">DP06</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">메모리 관리 방법 및 그 장치</h3><div class="pauthors">신장섭, <u>권동현</u>, 서지원, 조영필, 백윤흥</div><div class="pmeta"><span>출원 2019.01.25 · 10-2019-0010062</span><span>등록 2021.03.23 · 10-2233476</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020190010062" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP05</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">커널 무결성 검증 장치 및 그 방법</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일, 양명훈, 전성일</div><div class="pmeta"><span>출원 2019.04.01 · 10-2019-0037957</span><span>등록 2020.11.20 · 10-2183649</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020190037957" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP06</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">메모리 관리 방법 및 그 장치</h3><div class="pauthors">신장섭, <u>권동현</u>, 서지원, 조영필, 백윤흥</div><div class="pmeta"><span>출원 2019.01.25 · 10-2019-0010062</span><span>등록 2021.03.23 · 10-2233476</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020190010062" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP05</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">커널 무결성 검증 장치 및 그 방법</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일, 양명훈, 전성일</div><div class="pmeta"><span>출원 2019.04.01 · 10-2019-0037957</span><span>등록 2020.11.20 · 10-2183649</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020190037957" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2018</div><div></div><div class="summary"><b>03</b> 출원/등록</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">DP04</div><div class="pvenue patent">국내 출원</div><div><h3 class="ptitle">가상 머신 커널의 수행 흐름 무결성 검증 방법 및 그 장치</h3><div class="pauthors">백윤흥, <u>권동현</u>, 서지원, 백세현</div><div class="pmeta"><span>출원 2018.12.06 · 10-2018-0156279</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020180156279" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">IP01</div><div class="pvenue granted">싱가포르 등록</div><div><h3 class="ptitle">Apparatus for and Method of Detecting Code Reuse Attack (CRA)</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일</div><div class="pmeta"><span>출원 2017.03.02 · SG 10-2017-01665S</span><span>등록 2023.07.18</span></div></div><div class="plinks"><a href="https://patents.google.com/patent/SG10201701665SA/en" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent"><div class="pid">DP03</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">중첩 페이징 없이 커널을 보호하는 방법 및 그 장치</h3><div class="pauthors">백윤흥, <u>권동현</u></div><div class="pmeta"><span>출원 2018.11.30 · 10-2018-0153016</span><span>등록 2020.11.20 · 10-2183648</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020180153016" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP04</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">가상 머신 커널의 수행 흐름 무결성 검증 방법 및 그 장치</h3><div class="pauthors">백윤흥, <u>권동현</u>, 서지원, 백세현</div><div class="pmeta"><span>출원 2018.12.06 · 10-2018-0156279</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020180156279" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="igrant"><div class="pid">IP01</div><div class="pbadges"><span class="pb p-igrant">국제등록 (싱가포르)</span></div><div><h3 class="ptitle">Apparatus for and Method of Detecting Code Reuse Attack (CRA)</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일</div><div class="pmeta"><span>출원 2017.03.02 · SG 10-2017-01665S</span><span>등록 2023.07.18</span></div></div><div class="plinks"><a href="https://patents.google.com/patent/SG10201701665SA/en" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP03</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">중첩 페이징 없이 커널을 보호하는 방법 및 그 장치</h3><div class="pauthors">백윤흥, <u>권동현</u></div><div class="pmeta"><span>출원 2018.11.30 · 10-2018-0153016</span><span>등록 2020.11.20 · 10-2183648</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020180153016" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2017</div><div></div><div class="summary"><b>01</b> 등록</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">DP02</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">명령어 레벨 데이터 격리 방법 및 장치</h3><div class="pauthors">백윤흥, 조영필, <u>권동현</u></div><div class="pmeta"><span>출원 2017.11.24 · 10-2017-0157942</span><span>등록 2020.02.04 · 10-2075701</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020170157942" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP02</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">명령어 레벨 데이터 격리 방법 및 장치</h3><div class="pauthors">백윤흥, 조영필, <u>권동현</u></div><div class="pmeta"><span>출원 2017.11.24 · 10-2017-0157942</span><span>등록 2020.02.04 · 10-2075701</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020170157942" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2016</div><div></div><div class="summary"><b>01</b> 등록</div></div>
-    <article class="pub" data-cat="patent"><div class="pid">DP01</div><div class="pvenue granted">등록</div><div><h3 class="ptitle">코드 재사용 공격 탐지 장치 및 그 방법</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일</div><div class="pmeta"><span>출원 2016.10.11 · 10-2016-0131061</span><span>등록 2018.04.17 · 10-1851330</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020160131061" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP01</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">코드 재사용 공격 탐지 장치 및 그 방법</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일</div><div class="pmeta"><span>출원 2016.10.11 · 10-2016-0131061</span><span>등록 2018.04.17 · 10-1851330</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020160131061" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
 </section>
@@ -595,17 +638,66 @@
 <div id="site-footer"></div>
 <script src="assets/chrome.js"></script>
 <script>
-document.querySelectorAll('.maintab button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.maintab button').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    const target = btn.dataset.tab;
-    document.querySelectorAll('.tabsec').forEach(sec => {
-      sec.classList.toggle('hidden', sec.dataset.tab !== target);
+(function(){
+  var legend=document.querySelector('.legend');
+  var tally=document.getElementById('pubtally');
+  var GROUPS={
+    intl:[
+      ['Journal Q',[['JCR Q1','pb tier1'],['JCR Q2','pb tier2'],['JCR Q3','pb tier3'],['JCR Q4','pb tier4']]],
+      ['BK21 IF',[['BK21 IF4','pb tier1'],['BK21 IF3','pb tier2'],['BK21 IF2','pb tier3'],['BK21 IF1','pb tier4']]],
+      ['KIISE',[['KIISE S','pb tier1'],['KIISE A','pb tier2']]],
+      ['CORE',[['CORE A*','pb tier1'],['CORE A','pb tier2'],['CORE B','pb tier3'],['CORE C','pb tier4']]],
+      ['CSRankings',[['CSRankings','pb tier1']]]
+    ],
+    dom:[['Type',[['학술대회','pb d-conf'],['논문지','pb d-journal'],['학회지','pb d-mag']]]],
+    patent:[['Status',[['국내출원','pb p-dfile'],['국내등록','pb p-dgrant'],['국제출원 (PCT)','pb p-ifile'],['국제등록 (싱가포르)','pb p-igrant']]]]
+  };
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function renderTally(tab){
+    var counts={};
+    document.querySelectorAll('.tabsec[data-tab="'+tab+'"] .pbadges .pb').forEach(function(b){
+      var t=b.textContent.trim(); counts[t]=(counts[t]||0)+1;
     });
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    tally.innerHTML=GROUPS[tab].map(function(g){
+      var tiles=g[1].map(function(it){
+        var n=counts[it[0]]||0;
+        return '<span class="titem"><span class="'+it[1]+'">'+esc(it[0])+'</span><span class="c'+(n===0?' zero':'')+'">'+n+'</span></span>';
+      }).join('');
+      return '<div class="tgroup"><span class="glabel">'+g[0]+'</span>'+tiles+'</div>';
+    }).join('');
+  }
+  var current='intl';
+  // 탭별로 뱃지 폭을 그 탭에서 가장 긴 뱃지 폭으로 통일 (논문 목록 + 범례 + 통계표, 활성 탭만 측정 가능)
+  function equalizeBadges(tab){
+    var sec=document.querySelector('.tabsec[data-tab="'+tab+'"]');
+    var badges=[].concat(
+      [].slice.call(sec?sec.querySelectorAll('.pbadges .pb'):[]),
+      [].slice.call(document.querySelectorAll('.legend .lg-'+tab+' .pb')),
+      [].slice.call(tally?tally.querySelectorAll('.titem .pb'):[])
+    );
+    if(!badges.length) return;
+    badges.forEach(function(b){b.style.width='';});
+    var max=0;
+    badges.forEach(function(b){var w=b.getBoundingClientRect().width; if(w>max) max=w;});
+    if(max>0){var px=Math.ceil(max)+'px'; badges.forEach(function(b){b.style.width=px;});}
+  }
+  function setTab(tab){
+    current=tab;
+    document.querySelectorAll('.maintab button').forEach(function(b){b.classList.toggle('on',b.dataset.tab===tab);});
+    document.querySelectorAll('.tabsec').forEach(function(sec){sec.classList.toggle('hidden',sec.dataset.tab!==tab);});
+    if(legend) legend.setAttribute('data-tab',tab);
+    renderTally(tab);
+    equalizeBadges(tab);
+  }
+  document.querySelectorAll('.maintab button').forEach(function(btn){
+    btn.addEventListener('click',function(){setTab(btn.dataset.tab);window.scrollTo({top:0,behavior:'smooth'});});
+    var ct=btn.querySelector('.ct');
+    if(ct) ct.textContent=document.querySelectorAll('.pub[data-cat="'+btn.dataset.tab+'"]').length;
   });
-});
+  setTab('intl');
+  // 웹폰트 로드 이후 실제 폰트 기준으로 뱃지 폭 재측정
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){equalizeBadges(current);});}
+})();
 </script>
 </body>
 </html>
