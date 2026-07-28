@@ -82,10 +82,11 @@
 .pub .pvenue-abbr{font-family:var(--sans);font-weight:500;font-size:13px;color:var(--ink-3);letter-spacing:0;white-space:nowrap}
 .pub .pbadges{display:flex;flex-direction:column;gap:5px;align-items:flex-start;padding-top:3px}
 .pb{display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.06em;padding:3px 7px;border-radius:3px;white-space:nowrap;line-height:1.25;border:1px solid transparent;text-align:center}
-.pb.tier1{background:#1e7e3a;color:#fff}
-.pb.tier2{background:#1f4ea8;color:#fff}
-.pb.tier3{background:#b7791f;color:#fff}
-.pb.tier4{background:#6b7280;color:#fff}
+.pb.tier1{background:#c9a227;color:#23262b}
+.pb.tier2{background:#a2a8b0;color:#23262b}
+.pb.tier3{background:#bf7d3c;color:#23262b}
+.pb.tier4{background:transparent;color:#6b7280;border-color:#9aa0a8}
+:root[data-theme="dark"] .pb.tier4{color:#aeb4bd;border-color:#767c86}
 /* domestic venue-type badges (categorical) */
 .pb.d-conf{background:#475569;color:#fff}
 .pb.d-journal{background:#4338ca;color:#fff}
@@ -148,10 +149,10 @@
     <div class="item"><span>(*)</span><span>corresponding author</span></div>
     <div class="item"><u>underlined text</u><span>— our lab members</span></div>
     <div class="item lg lg-intl"><span class="pb tier1">JCR Q1</span><span class="pb tier2">JCR Q2</span><span class="pb tier3">JCR Q3</span><span class="pb tier4">JCR Q4</span><span>journal quartile (JCR, pub. year) — color = grade</span></div>
-    <div class="item lg lg-intl"><span class="pb tier1">BK21 IF4</span><span class="pb tier2">BK21 IF3</span><span class="pb tier3">BK21 IF2</span><span class="pb tier4">BK21 IF1</span><a href="https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206" target="_blank" rel="noopener">BK21+ recognized IF ↗</a></div>
-    <div class="item lg lg-intl"><span class="pb tier1">KIISE S</span><span class="pb tier2">KIISE A</span><a href="https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206" target="_blank" rel="noopener">KIISE 2024 rating ↗</a></div>
-    <div class="item lg lg-intl"><span class="pb tier1">CORE A*</span><span class="pb tier2">CORE A</span><span class="pb tier3">CORE B</span><span class="pb tier4">CORE C</span><a href="https://portal.core.edu.au/conf-ranks/" target="_blank" rel="noopener">CORE conference rank ↗</a></div>
     <div class="item lg lg-intl"><span class="pb tier1">CSRankings</span><a href="https://csrankings.org/#/index?all&amp;us" target="_blank" rel="noopener">CSRankings-listed venue ↗</a></div>
+    <div class="item lg lg-intl"><span class="pb tier1">CORE A*</span><span class="pb tier2">CORE A</span><span class="pb tier3">CORE B</span><span class="pb tier4">CORE C</span><a href="https://portal.core.edu.au/conf-ranks/" target="_blank" rel="noopener">CORE conference rank ↗</a></div>
+    <div class="item lg lg-intl"><span class="pb tier1">KIISE S</span><span class="pb tier2">KIISE A</span><a href="https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206" target="_blank" rel="noopener">KIISE 2024 rating ↗</a></div>
+    <div class="item lg lg-intl"><span class="pb tier1">BK21 IF4</span><span class="pb tier2">BK21 IF3</span><span class="pb tier3">BK21 IF2</span><span class="pb tier4">BK21 IF1</span><a href="https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206" target="_blank" rel="noopener">BK21+ recognized IF ↗</a></div>
     <div class="item lg lg-dom"><span class="pb d-conf">학술대회</span><span class="pb d-journal">논문지</span><span class="pb d-mag">학회지</span><span>domestic venue type — 학회 약어는 학회명 뒤 괄호</span></div>
     <div class="item lg lg-patent"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span><span class="pb p-ifile">국제출원 (국가)</span><span class="pb p-igrant">국제등록 (국가)</span><span>patent status</span></div>
   </div>
@@ -164,13 +165,13 @@
   <div class="year-block">
     <div class="year-head"><div class="y">2026</div><div></div><div class="summary"><b>02</b> top-tier conf · <b>04</b> journal papers</div></div>
     
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC20</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC20</div><div class="pbadges"><span class="pb tier2">CORE A</span><span class="pb tier2">KIISE A</span><span class="pb tier3">BK21 IF2</span></div><div>
       <h3 class="ptitle">Mind the Gap: In-Process Isolation for Safe Rust in WebAssembly</h3>
       <div class="pauthors"><u>Suhyeon Song</u>, <u>Chaewon Shin</u>, and <u class="corr">Donghyun Kwon*</u></div>
       <div class="pmeta"><span>European Symposium on Research in Computer Security (ESORICS) · Sep. 2026</span></div>
     </div><div class="plinks"></div></article>
 
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC19</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC19</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier1">CORE A*</span><span class="pb tier1">KIISE S</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">XCFI: Comprehensive Control-Flow Integrity for Arm TrustZone-M</h3>
       <div class="pauthors"><u>Yunju Gu</u>, <u>Jaeyeol Park</u>, and <u class="corr">Donghyun Kwon*</u></div>
       <div class="pmeta"><span>Usenix Security · Aug. 2026</span></div>
@@ -204,13 +205,13 @@
   <div class="year-block">
     <div class="year-head"><div class="y">2025</div><div></div><div class="summary"><b>02</b> top-tier conf · <b>02</b> journals</div></div>
 
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC18</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC18</div><div class="pbadges"><span class="pb tier2">CORE A</span><span class="pb tier2">KIISE A</span><span class="pb tier3">BK21 IF2</span></div><div>
       <h3 class="ptitle">SMORE: Practical Redzone-Based Stack Memory Error Detection Mechanism for Embedded Systems</h3>
       <div class="pauthors"><u>Jaeyeol Park</u>, <u>Yunju Gu</u>, and <u class="corr">Donghyun Kwon*</u></div>
       <div class="pmeta"><span>Annual Computer Security Applications Conference (ACSAC) · Dec. 2025</span></div>
     </div><div class="plinks"><a href="https://doi.org/10.1109/ACSAC67867.2025.00029" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC17</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC17</div><div class="pbadges"><span class="pb tier2">CORE A</span><span class="pb tier2">KIISE A</span><span class="pb tier3">BK21 IF2</span></div><div>
       <h3 class="ptitle">ELK: Effective Lock-and-Key Technique for Temporal Memory Safety on Embedded Devices in ARMv8-M</h3>
       <div class="pauthors"><u>Jeonghwan Kang</u>, <u>Kyounghwan Kim</u>, and <u class="corr">Donghyun Kwon*</u></div>
       <div class="pmeta"><span>Annual Computer Security Applications Conference (ACSAC) · Dec. 2025</span></div>
@@ -244,7 +245,7 @@
       <div class="pmeta"><span>IEICE Nonlinear Theory and Its Applications (NOLTA) · Oct. 2024</span></div>
     </div><div class="plinks"><a href="https://www.jstage.jst.go.jp/article/nolta/15/4/15_673/_article" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC16</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC16</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier1">CORE A*</span><span class="pb tier1">KIISE S</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">Look Before You Access: Efficient Heap Memory Safety for Embedded Systems on ARMv8-M</h3>
       <div class="pauthors"><u>Jeonghwan Kang</u>, <u>Jaeyeol Park</u>, Jiwon Seo, and <u class="corr">Donghyun Kwon*</u></div>
       <div class="pmeta"><span>Design Automation Conference (DAC) · Jun. 2024</span></div>
@@ -278,7 +279,7 @@
       <div class="pmeta"><span>IEEE Transactions on Information Forensics and Security (TIFS) · Jul. 2023</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/document/10196334" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC15</div><div class="pbadges"><span class="pb tier4">BK21 IF1</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC15</div><div class="pbadges"><span class="pb tier2">CORE A</span><span class="pb tier2">KIISE A</span><span class="pb tier4">BK21 IF1</span></div><div>
       <h3 class="ptitle">SFITAG: Efficient Software Fault Isolation with Memory Tagging for ARM Kernel Extensions</h3>
       <div class="pauthors">Jiwon Seo, Junseung You, Yungi Cho, Yeongpil Cho, <u class="corr">Donghyun Kwon*</u>, and Yunheung Paek*</div>
       <div class="pmeta"><span>ACM Asia Conf. on Computer and Communications Security (AsiaCCS) · Jul. 2023</span></div>
@@ -344,7 +345,7 @@
   <div class="year-block">
     <div class="year-head"><div class="y">2020</div><div></div><div class="summary"><b>01</b> top-tier · <b>01</b> journal</div></div>
 
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC12</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC12</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier2">CORE A</span><span class="pb tier2">KIISE A</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">RIMI: Instruction-level Memory Isolation for Embedded Systems on RISC-V</h3>
       <div class="pauthors">Haeyoung Kim, <u>Jinjae Lee</u>, Derry Pratama, Asep Muhamad Awaludin, Howon Kim, <u class="corr">Donghyun Kwon*</u></div>
       <div class="pmeta"><span>Intl. Conf. On Computer Aided Design (ICCAD) · Dec. 2020</span></div>
@@ -360,19 +361,19 @@
   <div class="year-block">
     <div class="year-head"><div class="y">2019</div><div></div><div class="summary"><b>03</b> top-tier · <b>01</b> journal</div></div>
 
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC11</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC11</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier1">CORE A*</span><span class="pb tier1">KIISE S</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">uXOM: Efficient eXecute-Only Memory on ARM Cortex-M</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Jangseop Shin, Giyeol Kim, Byoungyoung Lee, Yeongpil Cho, Yunheung Paek</div>
       <div class="pmeta"><span>Usenix Security · Aug. 2019</span></div>
     </div><div class="plinks"><a href="https://www.usenix.org/conference/usenixsecurity19/presentation/kwon" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC10</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier2">KIISE A</span><span class="pb tier2">CORE A</span></div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC10</div><div class="pbadges"><span class="pb tier2">CORE A</span><span class="pb tier2">KIISE A</span><span class="pb tier3">BK21 IF2</span></div><div>
       <h3 class="ptitle">RiskiM: Toward Complete Kernel Protection with Hardware Support</h3>
       <div class="pauthors">Dongil Hwang, Myunghoon Yang, Seongil Jeon, Younghan Lee, <u class="corr">Donghyun Kwon*</u>, Yunheung Paek</div>
       <div class="pmeta"><span>Design, Automation and Test in Europe (DATE) · May. 2019</span></div>
     </div><div class="plinks"><a href="https://ieeexplore.ieee.org/abstract/document/8715277" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC09</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC09</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier1">CORE A*</span><span class="pb tier1">KIISE S</span><span class="pb tier3">BK21 IF2</span></div><div>
       <h3 class="ptitle">CRCount: Pointer Invalidation with Reference Counting on Mitigate Use-After-Free in Legacy C/C++</h3>
       <div class="pauthors">Jangseop Shin, <u>Donghyun Kwon</u>, Jiwon Seo, Yeongpil Cho, Yunheung Paek</div>
       <div class="pmeta"><span>Network and Distributed System Security Symposium (NDSS) · Feb. 2019</span></div>
@@ -394,7 +395,7 @@
       <div class="pmeta"><span>Intl. Conf. on Computational Science and Its Applications (ICCSA) · Jul. 2018</span></div>
     </div><div class="plinks"></div></article>
 
-    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC06</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub selected" data-cat="intl" data-sub="conf"><div class="pid">IC06</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier1">CORE A*</span><span class="pb tier1">KIISE S</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">Hypernel: A Hardware-Assisted Framework for Kernel Protection without Nested Paging</h3>
       <div class="pauthors"><u>Donghyun Kwon</u>, Kuenwhee Oh, Junmo Park, Seungyong Yang, Yeongpil Cho, Brent Byunghoon Kang, Yunheung Paek</div>
       <div class="pmeta"><span>Design Automation Conference (DAC) · Jun. 2018</span></div>
@@ -404,13 +405,13 @@
   <div class="year-block">
     <div class="year-head"><div class="y">2017</div><div></div><div class="summary"><b>02</b> top-tier conferences</div></div>
 
-    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC05</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC05</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier1">CORE A*</span><span class="pb tier1">KIISE S</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">Instruction-Level Data Isolation for the Kernel on ARM</h3>
       <div class="pauthors">Yeongpil Cho, <u>Donghyun Kwon</u>, Yunheung Paek</div>
       <div class="pmeta"><span>Design Automation Conference (DAC) · Jun. 2017</span></div>
     </div><div class="plinks"><a href="https://dl.acm.org/doi/abs/10.1145/3061639.3062267" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC04</div><div class="pbadges"><span class="pb tier3">BK21 IF2</span><span class="pb tier1">KIISE S</span><span class="pb tier1">CORE A*</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC04</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier1">CORE A*</span><span class="pb tier1">KIISE S</span><span class="pb tier3">BK21 IF2</span></div><div>
       <h3 class="ptitle">Dynamic Virtual Address Range Adjustment for Intra-Level Privilege Separation on ARM</h3>
       <div class="pauthors">Yeongpil Cho, <u>Donghyun Kwon</u>, Hayoon Yi, Yunheung Paek</div>
       <div class="pmeta"><span>Network and Distributed System Security Symposium (NDSS) · Feb. 2017</span></div>
@@ -426,7 +427,7 @@
       <div class="pmeta"><span>Multimedia Tools and Applications (MTAP) · Jul. 2016</span></div>
     </div><div class="plinks"><a href="https://link.springer.com/article/10.1007/s11042-016-3711-9" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC03</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier2">CORE A</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC03</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier2">CORE A</span><span class="pb tier1">KIISE S</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">Hardware-Assisted On-Demand Hypervisor Activation for Efficient Security Critical Code Execution on Mobile Devices</h3>
       <div class="pauthors">Yeongpil Cho, Jun-Bum Shin, <u>Donghyun Kwon</u>, MyungJoo Ham, Yuna Kim, Yunheung Paek</div>
       <div class="pmeta"><span>USENIX Annual Technical Conference (ATC) · Jun. 2016</span></div>
@@ -462,13 +463,13 @@
   <div class="year-block">
     <div class="year-head"><div class="y">2013</div><div></div><div class="summary"><b>02</b> top-tier conferences</div></div>
 
-    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC02</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier1">KIISE S</span><span class="pb tier2">CORE A</span><span class="pb tier1">CSRankings</span></div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC02</div><div class="pbadges"><span class="pb tier1">CSRankings</span><span class="pb tier2">CORE A</span><span class="pb tier1">KIISE S</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">Mantis: Automatic Performance Prediction for Smartphone Applications</h3>
       <div class="pauthors">Yongin Kwon, Sangmin Lee, Hayoon Yi, <u>Donghyun Kwon</u>, Seungjun Yang, Byung-Gon Chun, Ling Huang, Petros Maniatis, Mayur Naik, Yunheung Paek</div>
       <div class="pmeta"><span>USENIX Annual Technical Conference (ATC) · Jun. 2013</span></div>
     </div><div class="plinks"><a href="https://www.usenix.org/conference/atc13/technical-sessions/presentation/kwon" target="_blank" rel="noopener">PDF</a></div></article>
 
-    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC01</div><div class="pbadges"><span class="pb tier2">BK21 IF3</span><span class="pb tier2">KIISE A</span><span class="pb tier1">CORE A*</span></div><div>
+    <article class="pub" data-cat="intl" data-sub="conf"><div class="pid">IC01</div><div class="pbadges"><span class="pb tier1">CORE A*</span><span class="pb tier2">KIISE A</span><span class="pb tier2">BK21 IF3</span></div><div>
       <h3 class="ptitle">Fast Dynamic Execution Offloading for Efficient Mobile Cloud Computing</h3>
       <div class="pauthors">Seungjun Yang, Yongin Kwon, Yeongpil Cho, Hayoon Yi, <u>Donghyun Kwon</u>, Jonghee Youn, Yunheung Paek</div>
       <div class="pmeta"><span>IEEE Intl. Conf. on Pervasive Computing and Communications (PerCom) · Jun. 2013</span></div>
@@ -644,10 +645,10 @@
   var GROUPS={
     intl:[
       ['Journal Q',[['JCR Q1','pb tier1'],['JCR Q2','pb tier2'],['JCR Q3','pb tier3'],['JCR Q4','pb tier4']]],
-      ['BK21 IF',[['BK21 IF4','pb tier1'],['BK21 IF3','pb tier2'],['BK21 IF2','pb tier3'],['BK21 IF1','pb tier4']]],
-      ['KIISE',[['KIISE S','pb tier1'],['KIISE A','pb tier2']]],
+      ['CSRankings',[['CSRankings','pb tier1']]],
       ['CORE',[['CORE A*','pb tier1'],['CORE A','pb tier2'],['CORE B','pb tier3'],['CORE C','pb tier4']]],
-      ['CSRankings',[['CSRankings','pb tier1']]]
+      ['KIISE',[['KIISE S','pb tier1'],['KIISE A','pb tier2']]],
+      ['BK21 IF',[['BK21 IF4','pb tier1'],['BK21 IF3','pb tier2'],['BK21 IF2','pb tier3'],['BK21 IF1','pb tier4']]]
     ],
     dom:[['Type',[['학술대회','pb d-conf'],['논문지','pb d-journal'],['학회지','pb d-mag']]]],
     patent:[['Status',[['국내출원','pb p-dfile'],['국내등록','pb p-dgrant'],['국제출원 (PCT)','pb p-ifile'],['국제등록 (싱가포르)','pb p-igrant']]]]
