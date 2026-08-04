@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>News · CSLab @ PNU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
+<link rel="stylesheet" href="assets/site.css"/>
+<style>
+  .news-toolbar{display:flex;justify-content:flex-end;align-items:center;gap:24px;padding-bottom:20px;margin-bottom:6px;border-bottom:1px solid var(--ink)}
+  .filter{display:flex;gap:6px;flex-wrap:wrap}
+  .filter button{font-family:var(--mono);font-size:11px;letter-spacing:.14em;padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink-2);cursor:pointer;text-transform:uppercase;transition:all .15s}
+  .filter button:hover{border-color:var(--ink)}
+  .filter button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .timeline{padding:8px 0 0}
+  .year-band{display:grid;grid-template-columns:120px 1fr;gap:36px;padding:36px 0;border-top:1px solid var(--line)}
+  .year-band .yr{font-family:var(--serif);font-style:italic;font-size:64px;line-height:1;color:var(--ink-3);position:sticky;top:96px;height:fit-content}
+  .year-band .yr small{display:block;font-family:var(--mono);font-style:normal;font-size:11px;color:var(--ink-3);letter-spacing:.16em;margin-top:8px}
+  .news-list{display:flex;flex-direction:column}
+  .news-row{display:grid;grid-template-columns:96px 116px 1fr auto;gap:24px;align-items:center;padding:20px 0;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);transition:padding .25s,color .2s}
+  .news-row:first-child{border-top:none}
+  .news-row:hover{padding-left:8px;color:var(--accent)}
+  .news-row .date{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em}
+  .news-row .badge{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:4px;justify-self:start;border:1px solid var(--line-strong);color:var(--ink-2);background:transparent}
+  .news-row .badge.notice{background:var(--accent-tint);color:var(--accent);border-color:rgba(20,60,172,.25)}
+  .news-row .badge.paper{background:#0A0A0A;color:#fff;border-color:#0A0A0A}
+  :root[data-theme="dark"] .news-row .badge.paper{background:#fff;color:#0A0A0A;border-color:#fff}
+  .news-row .badge.award{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .news-row .title{font-size:15.5px;line-height:1.45}
+  .news-row .arr{color:var(--ink-3);font-family:var(--mono);font-size:14px}
+  .news-row:hover .arr{color:var(--accent)}
+  .news-row.no-link{cursor:default}
+  .news-row.no-link:hover{padding-left:0;color:var(--ink)}
+  .news-row.no-link:hover .title{color:var(--ink)}
+  @media(max-width:900px){
+    .year-band{grid-template-columns:1fr;gap:12px}
+    .year-band .yr{position:static;font-size:44px}
+    .news-row{grid-template-columns:84px 1fr;gap:8px 14px}
+    .news-row .badge{grid-row:1;grid-column:2;justify-self:start}
+    .news-row .title{grid-column:1/-1}
+    .news-row .arr{display:none}
+  }
+</style>
+</head>
+<body id="top">
+<div id="site-header"></div>
+
+<header class="page-head" data-screen-label="News">
+  <div class="breadcrumb"><a href="index.html">CSLab</a><span class="sep">/</span><span>News</span></div>
+  <span class="eyebrow">— News &amp; Notices</span>
+  <h1 class="page-title">News.</h1>
+  <p class="page-lede">CSLab의 논문 · 수상 · 과제 · 공지사항을 시간 순으로 기록합니다. 최근 업데이트 2026.06.30.</p>
+</header>
+
+<section class="section" data-screen-label="News" style="padding-top:6px">
+  <div class="news-toolbar">
+    <div class="filter">
+      <button class="on" data-f="all">All</button>
+      <button data-f="paper">Paper</button>
+      <button data-f="award">Award</button>
+      <button data-f="notice">Notice</button>
+    </div>
+  </div>
+
+  <div class="timeline">
+<div class="year-band">
+      <div class="yr">2026<small>— 12 events</small></div>
+      <div class="news-list">
+        <div class="news-row no-link" data-tag="notice"><span class="date">2026.06.15</span><span class="badge notice">장학</span><span class="title">구윤주, 신채원 — 한국장학재단 석사우수장학금(이공계) 장학생 선발</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.06.14</span><span class="badge paper">ESORICS '26</span><span class="title">“Mind the Gap: In-Process Isolation for Safe Rust in WebAssembly” 채택 </span><span class="arr">→</span></a>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.05.14</span><span class="badge paper">Security '26</span><span class="title">“XCFI: Comprehensive Control-Flow Integrity for Arm TrustZone-M” 채택 </span><span class="arr">→</span></a>
+        <div class="news-row no-link" data-tag="award"><span class="date">2026.05.30</span><span class="badge award">수상</span><span class="title">김경환 — 한국정보보호학회 CISC-S 2026 학회우수논문상(학부생) 수상</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2026.03.30</span><span class="badge notice">특허</span><span class="title">“스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템” 국내 등록</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2026.03.01</span><span class="badge notice">과제</span><span class="title">한국연구재단 개인기초연구(우수신진연구) 과제 수주 — “온디바이스 피지컬 AI를 위한 신뢰실행환경 기반 시스템 보안 연구”</span></div>
+        <div class="news-row no-link" data-tag="award"><span class="date">2026.02.26</span><span class="badge award">수상</span><span class="title">신채원 — BK21 사업단 참여대학원생 우수연구상 우수상 수상</span></div>
+        <div class="news-row no-link" data-tag="award"><span class="date">2026.02.26</span><span class="badge award">수상</span><span class="title">강정환 — BK21 사업단 참여대학원생 우수연구상 최우수상 수상</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.01.27</span><span class="badge paper">SCIE</span><span class="title">“TzPy: Python Runtime for Edge Code Deployment on TrustZone” 저널 게재</span><span class="arr">→</span></a>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.01.23</span><span class="badge paper">SCIE</span><span class="title">“SERA: Secure Micro XRCE-DDS Establishment with Remote Attestation for micro-ROS” 저널 게재</span><span class="arr">→</span></a>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.01.14</span><span class="badge paper">SCIE</span><span class="title">“WARD: Efficient Memory Protection for WebAssembly on Tiny Embedded Systems” 저널 게재</span><span class="arr">→</span></a>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.01.08</span><span class="badge paper">SCIE</span><span class="title">“Beyond Address Spaces: In-process Memory Isolation for RISC-V” 저널 게재</span><span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="year-band">
+      <div class="yr">2025<small>— 11 events</small></div>
+      <div class="news-list">
+        <div class="news-row no-link" data-tag="notice"><span class="date">2025.12.22</span><span class="badge notice">장학</span><span class="title">박재열 — 한국장학재단 석사우수장학금(이공계) 장학생 선발</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2025.12.17</span><span class="badge notice">특허</span><span class="title">“임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템” 국내 등록</span></div>
+        <div class="news-row no-link" data-tag="award"><span class="date">2025.12.12</span><span class="badge award">수상</span><span class="title">김경환 — ACSAC 2025 Capture The Flag (CTF) 2nd Place 수상</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.10.03</span><span class="badge paper">ACSAC '25</span><span class="title">“SMORE: Practical Redzone-Based Stack Memory Error Detection Mechanism for Embedded Systems” 채택 </span><span class="arr">→</span></a>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.10.03</span><span class="badge paper">ACSAC '25</span><span class="title">“ELK: Effective Lock-and-Key Technique for Temporal Memory Safety on Embedded Devices in ARMv8-M” 채택</span><span class="arr">→</span></a>
+        <div class="news-row no-link" data-tag="award"><span class="date">2025.06.12</span><span class="badge award">수상</span><span class="title">신채원 — 2025 한국정보보호학회 영남지부 학술대회 정보보호학회장상 수상</span></div>
+        <div class="news-row no-link" data-tag="award"><span class="date">2025.05.30</span><span class="badge award">수상</span><span class="title">강승민 — 한국정보처리학회 ASK 2025 금상 수상</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.04.01</span><span class="badge paper">SCIE</span><span class="title">“Watch Your Callback: Offline Anomaly Detection using Machine Learning in ROS 2” 저널 게재</span><span class="arr">→</span></a>
+        <div class="news-row no-link" data-tag="award"><span class="date">2025.02.25</span><span class="badge award">수상</span><span class="title">강정환 — BK21 사업단 참여대학원생 우수연구상 우수상 수상</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.02.03</span><span class="badge paper">SCIE</span><span class="title">“WasDom: An Efficient Write Protection for Wasm JITed Code with ARM Domain” 저널 게재</span><span class="arr">→</span></a>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.01.10</span><span class="badge paper">SCIE</span><span class="title">“ROSec: Intra-Process Isolation for ROS Composition with Memory Protection Keys” 저널 게재</span><span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="year-band">
+      <div class="yr">2024<small>— 15 events</small></div>
+      <div class="news-list">
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.12.13</span><span class="badge notice">특허</span><span class="title">“스택 프레임 메모리 관리 방법 및 이를 수행하는 전자 장치” 국내 출원</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.12.12</span><span class="badge notice">특허</span><span class="title">“가상화 기법을 이용한 메모리 보호 방법 및 이를 수행하는 전자 장치” 국내 출원</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.12.06</span><span class="badge notice">특허</span><span class="title">“임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템” PCT 출원</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2024.11.30</span><span class="badge paper">KCI</span><span class="title">“무작위 메모리 보호 키 할당을 통한 웹어셈블리 JIT 컴파일된 코드 보호” 학진등재지 게재</span><span class="arr">→</span></a>
+        <div class="news-row no-link" data-tag="award"><span class="date">2024.10.31</span><span class="badge award">수상</span><span class="title">한고원 — 한국정보처리학회 ACK 2024 은상 수상</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.10.21</span><span class="badge notice">특허</span><span class="title">“도메인 권한 제어를 통한 코드 보호 방법, 이를 수행하는 컴퓨팅 장치 및 컴퓨터 프로그램” 국내 출원</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.10.14</span><span class="badge notice">특허</span><span class="title">“기계학습을 이용한 로봇 운영체제 2 환경의 이상 탐지 방법 및 장치” 국내 출원</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.10.07</span><span class="badge notice">특허</span><span class="title">“임베디드 시스템의 무결성 보장 장치 및 방법” 국내 등록</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.10.02</span><span class="badge notice">특허</span><span class="title">“분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법” 국내 등록</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2024.09.30</span><span class="badge paper">KCI</span><span class="title">“RISC-V 아키텍처 상에서의 쉐도우 스택 성능 평가 및 고찰” 학진등재지 게재</span><span class="arr">→</span></a>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.08.13</span><span class="badge notice">특허</span><span class="title">“스마트 컨트랙트의 기밀성과 메모리 안전성을 보장하는 시스템 및 방법” 국내 출원</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2024.06.01</span><span class="badge notice">과제</span><span class="title">정보보호핵심원천기술개발사업 과제 참여 — “익명화된 기밀실행을 이용한 전주기적 데이터 프라이버시 보호 기술 개발”</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2024.04.10</span><span class="badge paper">SCIE</span><span class="title">“MECAT: Memory-Safe Smart Contract in ARM TrustZone” 저널 게재</span><span class="arr">→</span></a>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2024.02.27</span><span class="badge paper">DAC '24</span><span class="title">“Look Before You Access: Efficient Heap Memory Safety for Embedded Systems on ARMv8-M” 채택 </span><span class="arr">→</span></a>
+        <div class="news-row no-link" data-tag="award"><span class="date">2024.02.21</span><span class="badge award">수상</span><span class="title">송수현 — BK21 사업단 참여대학원생 우수연구상 우수상 수상</span></div>
+      </div>
+    </div>
+
+
+    
+      
+      <div class="year-band">
+        <div class="yr">2023<small>— 9 events</small></div>
+        <div class="news-list">
+        <div class="news-row no-link" data-tag="notice"><span class="date">2023.12.21</span><span class="badge notice">특허</span><span class="title">“힙 메모리 내 메타데이터 변조 공격 탐지가 가능한 웹 어셈블리 코드를 실행하기 위한 가상 머신의 동작 방법 및 이를 포함하는 전자 장치” 국내 출원</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2023.12.13</span><span class="badge notice">특허</span><span class="title">“스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템” 국내 출원</span></div>
+        <div class="news-row no-link" data-tag="notice"><span class="date">2023.12.12</span><span class="badge notice">특허</span><span class="title">“임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템” 국내 출원</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2023.11.12</span><span class="badge paper">SCIE</span><span class="title">“metaSafer: A Technique to Detect Heap Metadata Corruption in WebAssembly” 저널 게재</span><span class="arr">→</span></a>
+        <div class="news-row no-link" data-tag="award"><span class="date">2023.10.25</span><span class="badge award">수상</span><span class="title">강정환 — 2023 한국정보보호학회 영남지부 학술대회 정보보호학회장상 수상</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2023.07.27</span><span class="badge paper">SCI</span><span class="title">“ZOMETAG: Zone-Based Memory Tagging for Fast, Deterministic Detection of Spatial Memory Violations on ARM” 저널 게재</span><span class="arr">→</span></a>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2023.07.10</span><span class="badge paper">ASIACCS '23</span><span class="title">“Sfitag: Efficient Software Fault Isolation with Memory Tagging for ARM Kernel Extensions” 발표 (BK21 우수국제학술대회)</span><span class="arr">→</span></a>
+        <div class="news-row no-link" data-tag="award"><span class="date">2023.05.19</span><span class="badge award">수상</span><span class="title">신채원 — 2023 한국정보처리학회 춘계 학술대회 은상 수상</span></div>
+        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2023.03.29</span><span class="badge paper">SCIE</span><span class="title">“DEMIX: Domain-Enforced Memory Isolation for Embedded System” 저널 게재</span><span class="arr">→</span></a>
+        </div>
+      </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/chrome.js"></script>
+<script>
+  document.querySelectorAll('.filter button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.filter button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      var f=b.dataset.f;
+      document.querySelectorAll('.news-row[data-tag]').forEach(function(r){
+        r.style.display=(f==='all'||r.dataset.tag===f)?'':'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>

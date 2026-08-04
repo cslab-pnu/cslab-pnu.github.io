@@ -103,11 +103,12 @@
   /* ---------- HERO ---------- */
   .hero{
     position:relative;z-index:2;
-    min-height:100vh;
-    padding:140px 36px 80px;
-    display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center;
+    min-height:auto;
+    padding:136px 36px 76px;
+    display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:start;
     max-width:1440px;margin:0 auto;
   }
+  .hero-text{min-width:0}
   .eyebrow{
     display:inline-flex;align-items:center;gap:10px;
     font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
@@ -117,7 +118,7 @@
   h1.title{
     font-family:var(--serif);font-weight:400;
     font-size:clamp(56px, 7.5vw, 120px);
-    line-height:.95;letter-spacing:-.02em;margin:22px 0 0;color:var(--ink);
+    line-height:1.12;letter-spacing:-.02em;margin:22px 0 0;color:var(--ink);
   }
   h1.title em{font-style:italic;color:var(--accent);text-decoration:none}
   .lede{
@@ -148,31 +149,52 @@
   .btn .arr{display:inline-block;transition:transform .2s}
   .btn:hover .arr{transform:translateX(3px)}
 
-  /* Hero video */
-  .hero-art{
-    position:relative;display:grid;place-items:center;
-    aspect-ratio:1/1;min-height:420px;
+  /* Hero — 우측 열: 성과 통계 패널 + Recent News 카드 */
+  .hero-side{display:flex;flex-direction:column;min-width:0}
+  .hero-kpi{
+    width:100%;max-width:520px;
+    margin-top:var(--kpi-offset,0px);min-height:var(--kpi-height,auto);
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+    gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;
   }
-  .hero-video{
-    position:relative;
-    width:100%;height:100%;
+  .hero-kpi{text-decoration:none;color:inherit;transition:border-color .2s}
+  .hero-kpi:hover{border-color:var(--line-strong)}
+  .hero-kpi .c{background:var(--bg);padding:18px 22px;display:flex;flex-direction:column;justify-content:center;text-decoration:none}
+  :root[data-theme="dark"] .hero-kpi .c{background:var(--bg-2)}
+  .hero-kpi .n{display:block;text-decoration:none;font-family:var(--serif);font-size:clamp(34px,3.2vw,46px);line-height:1;letter-spacing:-.02em;color:var(--ink);transition:color .2s}
+  .hero-kpi:hover .n{color:var(--accent)}
+  .hero-kpi .l{display:block;text-decoration:none}
+  .hero-kpi .n em{font-style:italic;color:var(--accent)}
+  .hero-kpi .l{margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);line-height:1.5}
+
+  /* Hero — Recent News card */
+  .hero-news{
+    display:flex;flex-direction:column;min-width:0;
+    width:100%;max-width:520px;
+    margin-top:var(--hn-offset,0px);
+    border:1px solid var(--line);border-radius:16px;background:var(--bg-2);
     overflow:hidden;
-    display:grid;place-items:center;
-    /* rectangular edge fade — fades all four sides */
-    -webkit-mask-image:
-      linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%),
-      linear-gradient(to bottom, transparent 0, #000 5%, #000 95%, transparent 100%);
-    -webkit-mask-composite: source-in;
-            mask-image:
-      linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%),
-      linear-gradient(to bottom, transparent 0, #000 5%, #000 95%, transparent 100%);
-            mask-composite: intersect;
   }
-  .hero-video video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
-  .hero-video .v-light{display:block}
-  .hero-video .v-dark{display:none}
-  :root[data-theme="dark"] .hero-video .v-light{display:none}
-  :root[data-theme="dark"] .hero-video .v-dark{display:block}
+  .hero-news .hn-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:22px 26px 16px;border-bottom:1px solid var(--line)}
+  .hero-news .hn-head .t{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+  .hero-news .hn-head a{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:color .2s}
+  .hero-news .hn-head a:hover{color:var(--accent)}
+  .hero-news .hn-head a .arr{transition:transform .2s}
+  .hero-news .hn-head a:hover .arr{transform:translateX(3px)}
+  .hero-news .hn-list{display:flex;flex-direction:column;flex:1;overflow:auto}
+  .hero-news .hn-row{display:block;padding:12px 26px;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);transition:background .15s}
+  .hero-news .hn-row:first-child{border-top:none}
+  .hero-news a.hn-row:hover{background:var(--accent-tint)}
+  .hero-news .hn-title{display:block;font-size:13px;line-height:1.45;color:var(--ink);transition:color .2s;text-wrap:pretty}
+  .hero-news a.hn-row:hover .hn-title{color:var(--accent)}
+  .hero-news .hn-meta{margin-top:7px;display:flex;align-items:center;gap:9px}
+  .hero-news .hn-date{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.05em;white-space:nowrap}
+  .hero-news .hn-dot{width:3px;height:3px;border-radius:50%;background:var(--line-strong);flex:none}
+  .hero-news .hn-cat{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);padding:2px 7px;border-radius:3px;border:1px solid var(--line-strong);white-space:nowrap}
+  .hero-news .hn-cat.notice{color:var(--accent);border-color:rgba(20,60,172,.3);background:var(--accent-tint)}
+  .hero-news .hn-cat.paper{color:#fff;background:#0A0A0A;border-color:#0A0A0A}
+  :root[data-theme="dark"] .hero-news .hn-cat.paper{color:#0A0A0A;background:#fff;border-color:#fff}
+  .hero-news .hn-cat.award{color:var(--ink);border-color:var(--ink)}
   .corner{position:absolute;font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.2em;text-transform:uppercase;z-index:3}
     width:100%;max-width:440px;
     justify-self:end;margin-left:auto;
@@ -217,6 +239,7 @@
   /* Section frame */
   .section{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:120px 36px;}
   .sec-head{display:grid;grid-template-columns:160px 1fr auto;gap:32px;align-items:end;margin-bottom:56px}
+  .sec-head.no-num{grid-template-columns:1fr auto}
   .sec-num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.2em}
   .sec-title{
     font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,72px);
@@ -379,6 +402,8 @@
   footer .row{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em}
   footer .row a{color:var(--ink-2);text-decoration:none}
   footer .row a:hover{color:var(--accent)}
+  footer .foot-addr{margin-top:14px}
+  footer .foot-addr .fk{color:var(--ink-3);letter-spacing:.18em;text-transform:uppercase;margin-right:12px}
 
   /* Recruiting banner */
   .recruit{
@@ -435,27 +460,32 @@
   .photo-cell::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg, transparent 0 18px, rgba(0,0,0,.025) 18px 19px)}
 
   /* Explore cards (subpage CTAs) */
-  .explore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  .explore-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
   .ex-card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:340px;padding:28px;border-radius:8px;overflow:hidden;text-decoration:none;color:#fff;background:var(--cover) center/cover no-repeat,#0A0A0A;isolation:isolate;transition:transform .25s}
   .ex-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.7) 100%);z-index:-1}
   .ex-card:hover{transform:translateY(-3px)}
   .ex-card .ex-num{position:absolute;top:18px;left:24px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.7)}
-  .ex-card h3{font-family:var(--serif);font-weight:400;font-size:44px;line-height:1;letter-spacing:-.02em;margin:0 0 12px;color:#fff}
+  .ex-card h3{font-family:var(--serif);font-weight:400;font-size:clamp(30px,2.6vw,40px);line-height:1.05;letter-spacing:-.02em;margin:0 0 18px;color:#fff}
   .ex-card p{font-size:14px;color:rgba(255,255,255,.78);margin:0 0 18px;line-height:1.5;max-width:32ch}
   .ex-card .ex-go{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:#fff;display:inline-flex;gap:8px;align-items:center;border-top:1px solid rgba(255,255,255,.25);padding-top:14px}
   .ex-card .ex-go b{font-weight:500;transition:transform .2s}
   .ex-card:hover .ex-go b{transform:translateX(4px)}
+  @media(max-width:1200px){.explore-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:900px){.explore-grid{grid-template-columns:1fr}}
 
   /* Responsive */
   @media (max-width:1024px){
-    .hero{grid-template-columns:1fr;gap:40px;padding-top:120px}
-    .hero-art{order:-1;min-height:320px}
+    .hero{grid-template-columns:1fr;gap:40px;padding-top:120px;min-height:auto}
+    .hero-side{gap:18px}
+    .hero-kpi{max-width:none;min-height:0}
+    .hero-news{max-height:none;max-width:none}
     .about{grid-template-columns:1fr}
     .news-block,.contact-block{grid-template-columns:1fr;gap:40px}
     .research .rcard{grid-column:span 12!important}
     .nav{display:none}
     .sec-head{grid-template-columns:1fr;gap:12px}
+    .sec-head.no-num{grid-template-columns:1fr}
+    .sec-head .btn-more{min-width:0;width:100%;align-items:flex-start}
     .sec-aside{text-align:left;max-width:none}
   }
   @media (max-width:600px){
@@ -597,11 +627,28 @@
       <div class="cell"><span class="k">Email</span><span class="v"><span class="js-email" data-u="CSLAB" data-d="pnucslab.com"></span></span></div>
     </div>
   </div>
-  <div class="hero-art" aria-hidden="true" style="width:100%;aspect-ratio:1/1;height:auto">
-    <div class="hero-video">
-      <video class="v-light" src="assets/hero-video-light.mp4" autoplay muted loop playsinline preload="auto"></video>
-      <video class="v-dark" src="assets/hero-video-dark.mp4" autoplay muted loop playsinline preload="auto"></video>
+
+  <div class="hero-side">
+  <a class="hero-kpi" href="publications.html" aria-label="연구 성과 통계">
+    <span class="c"><span class="n">43</span><span class="l">International<br/>publications</span></span>
+    <span class="c"><span class="n">64</span><span class="l">Domestic<br/>publications</span></span>
+    <span class="c"><span class="n">24</span><span class="l">Patents<br/>filed / granted</span></span>
+    <span class="c"><span class="n"><em>06</em></span><span class="l">Years of<br/>operation</span></span>
+  </a>
+
+  <aside class="hero-news" aria-label="Recent News">
+    <div class="hn-head">
+      <span class="t">Recent News</span>
+      <a href="news.html">전체 보기 <span class="arr">→</span></a>
     </div>
+    <div class="hn-list">
+      <div class="hn-row"><span class="hn-title">구윤주 · 신채원 — 한국장학재단 석사우수장학금(이공계) 선발</span><span class="hn-meta"><span class="hn-date">2026.06.15</span><span class="hn-dot"></span><span class="hn-cat notice">장학</span></span></div>
+      <a class="hn-row" href="publications.html" target="_blank" rel="noopener"><span class="hn-title">“Mind the Gap: In-Process Isolation for Safe Rust in WebAssembly” 채택</span><span class="hn-meta"><span class="hn-date">2026.06.14</span><span class="hn-dot"></span><span class="hn-cat paper">ESORICS '26</span></span></a>
+      <a class="hn-row" href="publications.html" target="_blank" rel="noopener"><span class="hn-title">“XCFI: Comprehensive Control-Flow Integrity for Arm TrustZone-M” 채택</span><span class="hn-meta"><span class="hn-date">2026.05.14</span><span class="hn-dot"></span><span class="hn-cat paper">Security '26</span></span></a>
+      <div class="hn-row"><span class="hn-title">김경환 — CISC-S 2026 학회우수논문상(학부생) 수상</span><span class="hn-meta"><span class="hn-date">2026.05.30</span><span class="hn-dot"></span><span class="hn-cat award">수상</span></span></div>
+      <div class="hn-row"><span class="hn-title">한국연구재단 개인기초연구(우수신진연구) 과제 수주</span><span class="hn-meta"><span class="hn-date">2026.03.01</span><span class="hn-dot"></span><span class="hn-cat notice">과제</span></span></div>
+    </div>
+  </aside>
   </div>
 </section>
 
@@ -689,37 +736,14 @@
   </div>
 </div>
 
-<!-- ABOUT -->
-<section class="section" id="about" data-screen-label="02 About">
-  <div class="sec-head">
-    <span class="sec-num">— 01 / About</span>
-    <h2 class="sec-title"><em>About CSLAB</em></h2>
-    <p class="sec-aside">
-</p>
-  </div>
-
-  <div class="about">
-    <div class="label">Mission</div>
-    <div class="body">
-      <p>CSLab은 신뢰할 수 있는 컴퓨팅의 기반을 연구합니다. 임베디드 시스템과 RISC-V·ARM 아키텍처 위에서 메모리 안전성, 신뢰 실행 환경(TEE), 그리고 WebAssembly·ROS 2·블록체인 등 응용 도메인의 보안을 다룹니다. 컴퓨터 아키텍처·컴파일러·운영체제 지식을 결합해 실제 시스템의 취약점을 막는 방어 기술을 설계합니다.</p>
-      <p>주요 성과로는 USENIX Security · NDSS · DAC · ICCAD · ACSAC · AsiaCCS 등 BK21 우수 국제학술대회와 IEEE TIFS · T-ASE · TMC · Computers &amp; Security 등 SCIE 저널의 실적등 총 40건 이상의 국제 논문 실적이 있으며, 20건 이상의 국내외 특허를 출원 · 등록하고 있습니다.</p>
-    </div>
-    <div class="stats">
-      <div class="stat"><span class="num">44</span><span class="lab">International<br/>publications</span></div>
-      <div class="stat"><span class="num">64</span><span class="lab">Domestic<br/>publications</span></div>
-      <div class="stat"><span class="num">24</span><span class="lab">Patents<br/>filed / granted</span></div>
-      <div class="stat"><span class="num">06</span><span class="lab">Years of<br/>operation</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- RESEARCH (teaser; full page → research.html) -->
-<section class="section" id="research" data-screen-label="03 Research">
-  <div class="sec-head">
-    <span class="sec-num">— 02 / Research</span>
+<section class="section" id="research" data-screen-label="02 Research">
+  <div class="sec-head no-num">
     <h2 class="sec-title"><em>Research Topics.</em></h2>
-    <p class="sec-aside">
-</p>
+    <a href="research.html" class="btn-more">
+      <span class="k">— 3가지 연구 주제의 상세 설명</span>
+      <span class="l">Read more about these topics<span class="arr">→</span></span>
+    </a>
   </div>
 
   <div class="research">
@@ -758,123 +782,11 @@
     </article>
 
   </div>
-
-  <div class="research-more">
-    <a href="research.html" class="btn-more">
-      <span class="k">— 전체 연구 주제 상세 보기</span>
-      <span class="l">View all research topics<span class="arr">→</span></span>
-    </a>
-  </div>
 </section>
-
-<!-- NEWS TIMELINE -->
-<section class="section" id="news" data-screen-label="04 News">
-  <div class="sec-head">
-    <span class="sec-num">— 03 / News</span>
-    <h2 class="sec-title"><em>Recent</em> News.</h2>
-    <p class="sec-aside">논문 · 수상 · 과제 · 공지사항을 시간 순으로 기록합니다. 최근 업데이트 2026.06.30.</p>
-  </div>
-
-  <div class="news-toolbar">
-    <h2>
-</h2>
-    <div class="filter">
-      <button class="on" data-f="all">All</button>
-      <button data-f="paper">Paper</button>
-      <button data-f="award">Award</button>
-      <button data-f="notice">Notice</button>
-    </div>
-  </div>
-
-  <div class="timeline">
-
-    <div class="year-band">
-      <div class="yr">2026<small>— 12 events</small></div>
-      <div class="news-list">
-        <div class="news-row no-link" data-tag="notice"><span class="date">2026.06.15</span><span class="badge notice">장학</span><span class="title">구윤주, 신채원 — 한국장학재단 석사우수장학금(이공계) 장학생 선발</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.06.14</span><span class="badge paper">ESORICS '26</span><span class="title">“Mind the Gap: In-Process Isolation for Safe Rust in WebAssembly” 채택 </span><span class="arr">→</span></a>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.05.14</span><span class="badge paper">Security '26</span><span class="title">“XCFI: Comprehensive Control-Flow Integrity for Arm TrustZone-M” 채택 </span><span class="arr">→</span></a>
-        <div class="news-row no-link" data-tag="award"><span class="date">2026.05.30</span><span class="badge award">수상</span><span class="title">김경환 — 한국정보보호학회 CISC-S 2026 학회우수논문상(학부생) 수상</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2026.03.30</span><span class="badge notice">특허</span><span class="title">“스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템” 국내 등록</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2026.03.01</span><span class="badge notice">과제</span><span class="title">한국연구재단 개인기초연구(우수신진연구) 과제 수주 — “온디바이스 피지컬 AI를 위한 신뢰실행환경 기반 시스템 보안 연구”</span></div>
-        <div class="news-row no-link" data-tag="award"><span class="date">2026.02.26</span><span class="badge award">수상</span><span class="title">신채원 — BK21 사업단 참여대학원생 우수연구상 우수상 수상</span></div>
-        <div class="news-row no-link" data-tag="award"><span class="date">2026.02.26</span><span class="badge award">수상</span><span class="title">강정환 — BK21 사업단 참여대학원생 우수연구상 최우수상 수상</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.01.27</span><span class="badge paper">SCIE</span><span class="title">“TzPy: Python Runtime for Edge Code Deployment on TrustZone” 저널 게재</span><span class="arr">→</span></a>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.01.23</span><span class="badge paper">SCIE</span><span class="title">“SERA: Secure Micro XRCE-DDS Establishment with Remote Attestation for micro-ROS” 저널 게재</span><span class="arr">→</span></a>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.01.14</span><span class="badge paper">SCIE</span><span class="title">“WARD: Efficient Memory Protection for WebAssembly on Tiny Embedded Systems” 저널 게재</span><span class="arr">→</span></a>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2026.01.08</span><span class="badge paper">SCIE</span><span class="title">“Beyond Address Spaces: In-process Memory Isolation for RISC-V” 저널 게재</span><span class="arr">→</span></a>
-      </div>
-    </div>
-
-    <div class="year-band">
-      <div class="yr">2025<small>— 11 events</small></div>
-      <div class="news-list">
-        <div class="news-row no-link" data-tag="notice"><span class="date">2025.12.22</span><span class="badge notice">장학</span><span class="title">박재열 — 한국장학재단 석사우수장학금(이공계) 장학생 선발</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2025.12.17</span><span class="badge notice">특허</span><span class="title">“임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템” 국내 등록</span></div>
-        <div class="news-row no-link" data-tag="award"><span class="date">2025.12.12</span><span class="badge award">수상</span><span class="title">김경환 — ACSAC 2025 Capture The Flag (CTF) 2nd Place 수상</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.10.03</span><span class="badge paper">ACSAC '25</span><span class="title">“SMORE: Practical Redzone-Based Stack Memory Error Detection Mechanism for Embedded Systems” 채택 </span><span class="arr">→</span></a>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.10.03</span><span class="badge paper">ACSAC '25</span><span class="title">“ELK: Effective Lock-and-Key Technique for Temporal Memory Safety on Embedded Devices in ARMv8-M” 채택</span><span class="arr">→</span></a>
-        <div class="news-row no-link" data-tag="award"><span class="date">2025.06.12</span><span class="badge award">수상</span><span class="title">신채원 — 2025 한국정보보호학회 영남지부 학술대회 정보보호학회장상 수상</span></div>
-        <div class="news-row no-link" data-tag="award"><span class="date">2025.05.30</span><span class="badge award">수상</span><span class="title">강승민 — 한국정보처리학회 ASK 2025 금상 수상</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.04.01</span><span class="badge paper">SCIE</span><span class="title">“Watch Your Callback: Offline Anomaly Detection using Machine Learning in ROS 2” 저널 게재</span><span class="arr">→</span></a>
-        <div class="news-row no-link" data-tag="award"><span class="date">2025.02.25</span><span class="badge award">수상</span><span class="title">강정환 — BK21 사업단 참여대학원생 우수연구상 우수상 수상</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.02.03</span><span class="badge paper">SCIE</span><span class="title">“WasDom: An Efficient Write Protection for Wasm JITed Code with ARM Domain” 저널 게재</span><span class="arr">→</span></a>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2025.01.10</span><span class="badge paper">SCIE</span><span class="title">“ROSec: Intra-Process Isolation for ROS Composition with Memory Protection Keys” 저널 게재</span><span class="arr">→</span></a>
-      </div>
-    </div>
-
-    <div class="year-band">
-      <div class="yr">2024<small>— 15 events</small></div>
-      <div class="news-list">
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.12.13</span><span class="badge notice">특허</span><span class="title">“스택 프레임 메모리 관리 방법 및 이를 수행하는 전자 장치” 국내 출원</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.12.12</span><span class="badge notice">특허</span><span class="title">“가상화 기법을 이용한 메모리 보호 방법 및 이를 수행하는 전자 장치” 국내 출원</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.12.06</span><span class="badge notice">특허</span><span class="title">“임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템” PCT 출원</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2024.11.30</span><span class="badge paper">KCI</span><span class="title">“무작위 메모리 보호 키 할당을 통한 웹어셈블리 JIT 컴파일된 코드 보호” 학진등재지 게재</span><span class="arr">→</span></a>
-        <div class="news-row no-link" data-tag="award"><span class="date">2024.10.31</span><span class="badge award">수상</span><span class="title">한고원 — 한국정보처리학회 ACK 2024 은상 수상</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.10.21</span><span class="badge notice">특허</span><span class="title">“도메인 권한 제어를 통한 코드 보호 방법, 이를 수행하는 컴퓨팅 장치 및 컴퓨터 프로그램” 국내 출원</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.10.14</span><span class="badge notice">특허</span><span class="title">“기계학습을 이용한 로봇 운영체제 2 환경의 이상 탐지 방법 및 장치” 국내 출원</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.10.07</span><span class="badge notice">특허</span><span class="title">“임베디드 시스템의 무결성 보장 장치 및 방법” 국내 등록</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.10.02</span><span class="badge notice">특허</span><span class="title">“분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법” 국내 등록</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2024.09.30</span><span class="badge paper">KCI</span><span class="title">“RISC-V 아키텍처 상에서의 쉐도우 스택 성능 평가 및 고찰” 학진등재지 게재</span><span class="arr">→</span></a>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.08.13</span><span class="badge notice">특허</span><span class="title">“스마트 컨트랙트의 기밀성과 메모리 안전성을 보장하는 시스템 및 방법” 국내 출원</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2024.06.01</span><span class="badge notice">과제</span><span class="title">정보보호핵심원천기술개발사업 과제 참여 — “익명화된 기밀실행을 이용한 전주기적 데이터 프라이버시 보호 기술 개발”</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2024.04.10</span><span class="badge paper">SCIE</span><span class="title">“MECAT: Memory-Safe Smart Contract in ARM TrustZone” 저널 게재</span><span class="arr">→</span></a>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2024.02.27</span><span class="badge paper">DAC '24</span><span class="title">“Look Before You Access: Efficient Heap Memory Safety for Embedded Systems on ARMv8-M” 채택 </span><span class="arr">→</span></a>
-        <div class="news-row no-link" data-tag="award"><span class="date">2024.02.21</span><span class="badge award">수상</span><span class="title">송수현 — BK21 사업단 참여대학원생 우수연구상 우수상 수상</span></div>
-      </div>
-    </div>
-
-
-    <details class="prev-news">
-      <summary>
-        <span class="lbl">Previous News</span>
-        <span class="hint">2023 — 9 events</span>
-        <span class="chev">+</span>
-      </summary>
-      <div class="year-band" style="border-top:0;padding-top:18px">
-        <div class="yr">2023<small>— 9 events</small></div>
-        <div class="news-list">
-        <div class="news-row no-link" data-tag="notice"><span class="date">2023.12.21</span><span class="badge notice">특허</span><span class="title">“힙 메모리 내 메타데이터 변조 공격 탐지가 가능한 웹 어셈블리 코드를 실행하기 위한 가상 머신의 동작 방법 및 이를 포함하는 전자 장치” 국내 출원</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2023.12.13</span><span class="badge notice">특허</span><span class="title">“스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템” 국내 출원</span></div>
-        <div class="news-row no-link" data-tag="notice"><span class="date">2023.12.12</span><span class="badge notice">특허</span><span class="title">“임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템” 국내 출원</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2023.11.12</span><span class="badge paper">SCIE</span><span class="title">“metaSafer: A Technique to Detect Heap Metadata Corruption in WebAssembly” 저널 게재</span><span class="arr">→</span></a>
-        <div class="news-row no-link" data-tag="award"><span class="date">2023.10.25</span><span class="badge award">수상</span><span class="title">강정환 — 2023 한국정보보호학회 영남지부 학술대회 정보보호학회장상 수상</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2023.07.27</span><span class="badge paper">SCI</span><span class="title">“ZOMETAG: Zone-Based Memory Tagging for Fast, Deterministic Detection of Spatial Memory Violations on ARM” 저널 게재</span><span class="arr">→</span></a>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2023.07.10</span><span class="badge paper">ASIACCS '23</span><span class="title">“Sfitag: Efficient Software Fault Isolation with Memory Tagging for ARM Kernel Extensions” 발표 (BK21 우수국제학술대회)</span><span class="arr">→</span></a>
-        <div class="news-row no-link" data-tag="award"><span class="date">2023.05.19</span><span class="badge award">수상</span><span class="title">신채원 — 2023 한국정보처리학회 춘계 학술대회 은상 수상</span></div>
-        <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper"><span class="date">2023.03.29</span><span class="badge paper">SCIE</span><span class="title">“DEMIX: Domain-Enforced Memory Isolation for Embedded System” 저널 게재</span><span class="arr">→</span></a>
-        </div>
-      </div>
-    </details>
-
-  </div>
-</section>
-
 
 <!-- EXPLORE THE LAB · cards linking to subpages -->
-<section class="section" data-screen-label="Explore" style="padding-top:0">
-  <div class="sec-head">
-    <span class="sec-num">— 05 / Explore</span>
+<section class="section" data-screen-label="03 Explore" style="padding-top:0">
+  <div class="sec-head no-num">
     <h2 class="sec-title">Inside the <em>lab</em>.</h2>
     <p class="sec-aside">멤버, 출판물, 사진. 각 페이지로 이동합니다.</p>
   </div>
@@ -883,19 +795,21 @@
     <a class="ex-card" href="members.html" data-cover="assets/draft/members-hero.jpg">
       <span class="ex-num">→ 02</span>
       <h3>Members.</h3>
-      <p>박사 4명· 석사 2명 · 학부연구생 3명</p>
       <span class="ex-go">전체 보기 <b>→</b></span>
+    </a>
+    <a class="ex-card" href="projects.html" data-cover="assets/draft/projects-1.jpg">
+      <span class="ex-num">→ 04</span>
+      <h3>Projects.</h3>
+      <span class="ex-go">과제 보기 <b>→</b></span>
     </a>
     <a class="ex-card" href="publications.html" data-cover="assets/draft/publications-1.jpg">
       <span class="ex-num">→ 05</span>
       <h3>Publications.</h3>
-      <p>USENIX · NDSS · DAC · ACSAC · TIFS · T-ASE — 42편+.</p>
       <span class="ex-go">전체 목록 <b>→</b></span>
     </a>
     <a class="ex-card" href="photos.html" data-cover="assets/draft/photo-1.jpg">
       <span class="ex-num">→ 06</span>
       <h3>Photos.</h3>
-      <p>학회 출장 · MT · 졸업식.</p>
       <span class="ex-go">앨범 보기 <b>→</b></span>
     </a>
   </div>
@@ -955,24 +869,14 @@
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section" id="contact" data-screen-label="07 Contact">
-  <div class="contact-block">
-    <h2 class="big-q">Computer Security Lab,<br/><em><span class="big-q-sub">@ Pusan National University.</span></em></h2>
-    <div class="contact-info">
-      <div class="row"><span class="k">Tel</span>051-510-2874</div>
-      <div class="row"><span class="k">Email</span><a class="js-email" data-u="CSLAB" data-d="pnucslab.com"></a></div>
-      <div class="row"><span class="k">Office</span>IT관(102동) 703호<br/>부산광역시 금정구 부산대학로63번길 2</div>
-      <div class="row" style="grid-template-columns:80px 1fr;align-items:start"><span class="k">Inquiry</span><span>학부연구생 및 대학원 지원, 인턴 문의는 <a class="js-email" data-u="CSLAB" data-d="pnucslab.com"></a>으로 연락 바랍니다.</span></div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="row">
     <span>© 2026 Computer Security Lab, Pusan National University</span>
     <span>TEL 051-510-2874 · <a class="js-email" data-u="CSLAB" data-d="pnucslab.com" style="color:inherit;text-decoration:none"></a></span>
     <span><a href="#top">맨 위로 ↑</a></span>
+  </div>
+  <div class="row foot-addr">
+    <span><span class="fk">Office</span> IT관(102동) 703호 · 부산광역시 금정구 부산대학로63번길 2</span>
   </div>
 </footer>
 
@@ -1066,6 +970,44 @@
       show();
       history.replaceState(null, '', location.pathname + location.search);
     }
+  })();
+
+  // 히어로 우측 열 정렬: 통계 패널은 제목 상단에 맞추고 아래로 늘려 Recent News 카드와의 여백을 최소화,
+  // Recent News 카드 상단은 좌측 소개 문구(.lede)에 맞춤
+  (function(){
+    const title = document.querySelector('.hero-text .title');
+    const lede  = document.querySelector('.hero-text .lede');
+    const kpi   = document.querySelector('.hero-kpi');
+    const card  = document.querySelector('.hero-news');
+    if(!lede || !card) return;
+    const GAP = 18; // 통계 패널 ↔ 뉴스 카드 사이 여백
+    const align = () => {
+      const stacked = window.matchMedia('(max-width:1024px)').matches;
+      if(kpi){ kpi.style.setProperty('--kpi-offset','0px'); kpi.style.removeProperty('--kpi-height'); }
+      card.style.setProperty('--hn-offset','0px');
+      if(stacked) return;
+      const ledeTop = lede.getBoundingClientRect().top;
+      if(kpi && title){
+        const MAXH = 300; // 셀이 과하게 늘어나지 않도록 상한
+        const titleTop = title.getBoundingClientRect().top;
+        const kpiTop0  = kpi.getBoundingClientRect().top;
+        const baseOff  = Math.max(0, Math.round(titleTop - kpiTop0));
+        const avail    = Math.round(ledeTop - GAP - (kpiTop0 + baseOff));
+        if(avail > 120){
+          const h = Math.min(avail, MAXH);
+          // 남는 높이는 위쪽에 두어 패널 하단이 뉴스 카드 바로 위에 오도록 배치
+          kpi.style.setProperty('--kpi-offset', (baseOff + (avail - h)) + 'px');
+          kpi.style.setProperty('--kpi-height', h + 'px');
+        } else {
+          kpi.style.setProperty('--kpi-offset', baseOff + 'px');
+        }
+      }
+      const off2 = ledeTop - card.getBoundingClientRect().top;
+      card.style.setProperty('--hn-offset', Math.max(0, Math.round(off2)) + 'px');
+    };
+    align();
+    window.addEventListener('resize', align);
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(align);
   })();
 </script>
 </body>
