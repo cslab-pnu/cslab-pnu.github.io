@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"/>
 <link rel="stylesheet" href="assets/site.css"/>
 <style>
-.prof{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start;padding:40px 0 80px;border-bottom:1px solid var(--line)}
-.prof .portrait{position:relative;aspect-ratio:4/5;background:var(--panel);overflow:hidden;border-radius:6px;max-width:68%}
+.prof{display:grid;grid-template-columns:330px minmax(0,1fr);gap:0 44px;align-items:start;padding:40px 0 80px;border-bottom:1px solid var(--line)}
+.prof .prof-head{grid-column:1/-1;margin-bottom:30px}
+.prof .prof-left{min-width:0}
+.prof .portrait{position:relative;aspect-ratio:4/5;background:var(--panel);overflow:hidden;border-radius:6px;max-width:100%}
 .prof .portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block;filter:grayscale(.08) contrast(1.02)}
 .prof .portrait .badge{position:absolute;top:14px;left:14px;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.18em;padding:6px 10px;border-radius:4px}
 :root[data-theme="dark"] .prof .portrait .badge{background:var(--panel);color:var(--ink)}
@@ -59,12 +61,11 @@
 .alumni-list .who{font-family:var(--serif);font-size:20px}
 .alumni-list .deg{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
 .alumni-list .now{color:var(--ink-2);font-size:13px}
-@media(max-width:1024px){.prof{grid-template-columns:1fr}.member-grid{grid-template-columns:repeat(4,1fr)}.alumni-list{grid-template-columns:1fr}}
+@media(max-width:1024px){.prof{grid-template-columns:1fr;gap:36px}.prof .prof-head{margin-bottom:0}.prof .portrait{max-width:330px}.member-grid{grid-template-columns:repeat(4,1fr)}.alumni-list{grid-template-columns:1fr}}
 @media(max-width:640px){
   .prof{gap:28px;padding:24px 0 40px}
-  .prof-left{width:100% !important}
   .prof>div{min-width:0}
-  .prof .portrait{max-width:66%}
+  .prof .portrait{max-width:74%}
   .prof .cv-row{grid-template-columns:92px 1fr;gap:14px}
   .member-grid{grid-template-columns:repeat(2,1fr)}
 }
@@ -88,9 +89,11 @@
   </div>
 
   <div class="prof">
-    <div class="prof-left" style="width:500px;max-width:100%">
+    <div class="prof-head">
       <div class="title-en">Associate Professor</div>
       <h2><em>DONGHYUN &nbsp;KWON</em></h2>
+    </div>
+    <div class="prof-left">
       <div class="portrait">
         <span class="badge">PI · 2020 — present</span>
         <img src="assets/researchers/권동현.jpg" alt="Donghyun Kwon, Director of CSLab"/>
