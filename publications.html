@@ -30,22 +30,23 @@
 .stats .n{font-family:var(--serif);font-size:48px;line-height:1;letter-spacing:-.02em;color:var(--ink)}
 .stats .n em{font-style:italic;color:var(--accent)}
 .stats .l{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.04em;margin-top:8px}
-/* per-tab badge tally table */
-.tally{border-top:1px solid var(--ink);margin:30px 0 0;padding:20px 0 24px;display:grid;grid-template-columns:110px repeat(4,max-content);gap:14px 32px;align-items:center;justify-content:start}
-.tally .tgroup{display:contents}
-.tally .glabel{grid-column:1;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+/* per-tab badge tally table (with per-group source link + description) */
+.tally{border-top:1px solid var(--ink);margin:30px 0 0;padding:6px 0 8px}
+.tally .tgroup{padding:16px 0;border-top:1px solid var(--line)}
+.tally .tgroup:first-child{border-top:none}
+.tally .ghead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.tally .glabel{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.tally a.glabel{text-decoration:none;border-bottom:1px solid rgba(20,60,172,.3);transition:color .2s,border-color .2s}
+.tally a.glabel:hover{color:var(--accent);border-bottom-color:var(--accent)}
+:root[data-theme="dark"] .tally a.glabel{border-bottom-color:rgba(123,160,255,.35)}
+.tally .gdesc{font-family:var(--sans);font-size:12.5px;color:var(--ink-3);letter-spacing:0}
+.tally .gitems{display:flex;flex-wrap:wrap;gap:11px 22px}
 .tally .titem{display:inline-flex;align-items:center;gap:8px}
-.tally .titem .c{font-family:var(--serif);font-size:22px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+.tally .titem .c{font-family:var(--serif);font-size:20px;line-height:1;color:var(--ink);letter-spacing:-.01em}
 .tally .titem .c.zero{color:var(--ink-3);opacity:.45}
 @media(max-width:760px){
   .legend{gap:11px 16px;margin:14px 0 24px}
-  .legend .lg{flex-wrap:wrap;row-gap:6px;align-items:center}
-  .legend .lg>span:last-child,.legend .lg>a:last-child{flex-basis:100%;margin-top:1px}
-  .tally{display:block;margin-top:24px;padding:16px 0 20px}
-  .tally .tgroup{display:grid;grid-template-columns:1fr 1fr;column-gap:18px;row-gap:8px;margin-bottom:16px}
-  .tally .tgroup:last-child{margin-bottom:0}
-  .tally .glabel{grid-column:1/-1;margin-bottom:2px}
-  .tally .titem{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .tally .gitems{gap:9px 18px}
   .tally .titem .c{font-size:17px}
 }
 
@@ -100,8 +101,6 @@
 :root[data-theme="dark"] .pb.p-dfile{color:#cbd5e1;border-color:#64748b}
 :root[data-theme="dark"] .pb.p-ifile{color:#67e8f9;border-color:#22a5be}
 /* per-tab legend groups */
-.legend .lg{display:none}
-.legend[data-tab="intl"] .lg-intl,.legend[data-tab="dom"] .lg-dom,.legend[data-tab="patent"] .lg-patent{display:flex}
 .pub .ptitle{font-family:"Source Serif Pro","Source Serif 4","Charter","Iowan Old Style","Georgia","Times New Roman",serif;font-size:19px;line-height:1.32;letter-spacing:-.005em;color:var(--ink);margin:0;text-wrap:pretty;transition:color .2s;font-weight:600}
 .pub .pauthors{font-size:12px;color:var(--ink-2);margin-top:8px;font-family:var(--sans);letter-spacing:0;line-height:1.55}
 .pub .pauthors u{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;color:var(--ink)}
@@ -141,20 +140,13 @@
 
 <section class="section" data-screen-label="Stats" style="padding-top:10px;padding-bottom:0">
   <div class="maintab" role="tablist">
-    <button class="on" data-tab="intl">International<span class="ct">44</span></button>
+    <button class="on" data-tab="intl">International<span class="ct">43</span></button>
     <button data-tab="dom">Domestic<span class="ct">64</span></button>
     <button data-tab="patent">Patents<span class="ct">24</span></button>
   </div>
   <div class="legend" data-tab="intl">
     <div class="item"><span>(*)</span><span>corresponding author</span></div>
     <div class="item"><u>underlined text</u><span>— our lab members</span></div>
-    <div class="item lg lg-intl"><span class="pb tier1">JCR Q1</span><span class="pb tier2">JCR Q2</span><span class="pb tier3">JCR Q3</span><span class="pb tier4">JCR Q4</span><span>journal quartile (JCR, pub. year) — color = grade</span></div>
-    <div class="item lg lg-intl"><span class="pb tier1">CSRankings</span><a href="https://csrankings.org/#/index?all&amp;us" target="_blank" rel="noopener">CSRankings-listed venue ↗</a></div>
-    <div class="item lg lg-intl"><span class="pb tier1">CORE A*</span><span class="pb tier2">CORE A</span><span class="pb tier3">CORE B</span><span class="pb tier4">CORE C</span><a href="https://portal.core.edu.au/conf-ranks/" target="_blank" rel="noopener">CORE conference rank ↗</a></div>
-    <div class="item lg lg-intl"><span class="pb tier1">KIISE S</span><span class="pb tier2">KIISE A</span><a href="https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206" target="_blank" rel="noopener">KIISE 2024 rating ↗</a></div>
-    <div class="item lg lg-intl"><span class="pb tier1">BK21 IF4</span><span class="pb tier2">BK21 IF3</span><span class="pb tier3">BK21 IF2</span><span class="pb tier4">BK21 IF1</span><a href="https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206" target="_blank" rel="noopener">BK21+ recognized IF ↗</a></div>
-    <div class="item lg lg-dom"><span class="pb d-conf">학술대회</span><span class="pb d-journal">논문지</span><span class="pb d-mag">학회지</span><span>domestic venue type — 학회 약어는 학회명 뒤 괄호</span></div>
-    <div class="item lg lg-patent"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span><span class="pb p-ifile">국제출원 (국가)</span><span class="pb p-igrant">국제등록 (국가)</span><span>patent status</span></div>
   </div>
   <div class="tally" id="pubtally"></div>
 </section>
@@ -577,61 +569,61 @@
   <div class="year-block">
     <div class="year-head"><div class="y">2025</div><div></div><div class="summary"><b>04</b> 출원</div></div>
     <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP21</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">웹어셈블리 런타임의 메모리 오류 탐지 방법 및 이를 수행하는 장치</h3><div class="pauthors"><u>권동현</u>, <u>신채원</u>, <u>한고원</u></div><div class="pmeta"><span>출원 2025.11.25 · 10-2025-0180350</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP20</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">리스크 파이브 기반 명령어를 이용한 커널 민감 데이터 보호 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2025.10.28 · 10-2025-0157387</span></div></div><div class="plinks"></div></article>
     <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP19</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">리스크 파이브 기반 신뢰 실행 환경을 활용한 블록체인 체인코드 및 상태 기밀성 보호 시스템 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2025.10.28 · 10-2025-0157387</span></div></div><div class="plinks"></div></article>
     <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP18</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">스마트 팩토리 에지 디바이스의 트러스트존 기반 파이썬 런타임 제공 시스템 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>송수현</u>, <u>박재열</u>, <u>신채원</u></div><div class="pmeta"><span>출원 2025.10.14 · 10-2025-0147767</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP20</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">리스크 파이브 기반 명령어를 이용한 커널 민감 데이터 보호 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2025.09.26 · 10-2025-0139579</span></div></div><div class="plinks"></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2024</div><div></div><div class="summary"><b>05</b> 출원 (PCT 포함)</div></div>
     <article class="pub" data-cat="patent" data-sub="ifile"><div class="pid">IP03</div><div class="pbadges"><span class="pb p-ifile">국제출원 (PCT)</span></div><div><h3 class="ptitle">임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>박재열</u></div><div class="pmeta"><span>출원 2024.12.06 · PCT/KR2024/019967</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230179337" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP17</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">스택 프레임 메모리 관리 방법 및 이를 수행하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박재열</u>, <u>구윤주</u></div><div class="pmeta"><span>출원 2024.12.13 · 10-2024-0185392</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP16</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">가상화 기법을 이용한 메모리 보호 방법 및 이를 수행하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2024.12.12 · 10-2024-0184505</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP15</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">도메인 권한 제어를 통한 코드 보호 방법, 이를 수행하는 컴퓨팅 장치 및 컴퓨터 프로그램</h3><div class="pauthors"><u>권동현</u>, <u>송수현</u>, <u>신채원</u></div><div class="pmeta"><span>출원 2024.10.21 · 10-2024-0143803</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP14</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">기계학습을 이용한 로봇 운영체제 2 환경의 이상 탐지 방법 및 장치</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>김경환</u></div><div class="pmeta"><span>출원 2024.10.14 · 10-2024-0139454</span></div></div><div class="plinks"></div></article>
-    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP13</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">스마트 컨트랙트의 기밀성과 메모리 안전성을 보장하는 시스템 및 방법</h3><div class="pauthors">국내특허 출원</div><div class="pmeta"><span>출원 2024.08.13 · 10-2024-0108057</span></div></div><div class="plinks"></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP17</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">스택 프레임 메모리 관리 방법 및 이를 수행하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박재열</u>, <u>구윤주</u></div><div class="pmeta"><span>출원 2024.12.13 · 10-2024-0185392</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020240185392" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP16</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">가상화 기법을 이용한 메모리 보호 방법 및 이를 수행하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2024.12.12 · 10-2024-0184505</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020240184505" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP15</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">도메인 권한 제어를 통한 코드 보호 방법, 이를 수행하는 컴퓨팅 장치 및 컴퓨터 프로그램</h3><div class="pauthors"><u>권동현</u>, <u>송수현</u>, <u>신채원</u></div><div class="pmeta"><span>출원 2024.10.21 · 10-2024-0143803</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020240143803" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP14</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">기계학습을 이용한 로봇 운영체제 2 환경의 이상 탐지 방법 및 장치</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>김경환</u></div><div class="pmeta"><span>출원 2024.10.14 · 10-2024-0139454</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020240139454" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP13</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">스마트 컨트랙트의 기밀성과 메모리 안전성을 보장하는 시스템 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>강하영</u></div><div class="pmeta"><span>출원 2024.08.13 · 10-2024-0108057</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020240108057" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2023</div><div></div><div class="summary"><b>03</b> 출원 · <b>02</b> 등록</div></div>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP12</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2023.12.13 · 10-2023-0180923</span><span>등록 2026.03.30 · 10-2947567</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230180923" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP12</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">스마트 컨트랙트 제어 흐름 무결성 보장 방법 및 이를 수행하는 컴퓨팅 시스템</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2023.12.13 · 10-2023-0180923</span><span>등록 2026.03.30 · 10-2947567</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230180923" target="_blank" rel="noopener">Link</a></div></article>
     <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP11</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">힙 메모리 내 메타데이터 변조 공격 탐지가 가능한 웹 어셈블리 코드를 실행하기 위한 가상 머신의 동작 방법 및 이를 포함하는 전자 장치</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u>, <u>송수현</u></div><div class="pmeta"><span>출원 2023.12.21 · 10-2023-0188053</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230188053" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP10</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>박재열</u></div><div class="pmeta"><span>출원 2023.12.12 · 10-2023-0179337</span><span>등록 2025.12.17 · 10-2902870</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230179337" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP10</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">임베디드 시스템의 힙 메모리 공간 안전성을 보장하기 위한 방법 및 이를 이용하는 임베디드 시스템</h3><div class="pauthors"><u>권동현</u>, <u>강정환</u>, <u>박재열</u></div><div class="pmeta"><span>출원 2023.12.12 · 10-2023-0179337</span><span>등록 2025.12.17 · 10-2902870</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020230179337" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2022</div><div></div><div class="summary"><b>03</b> 출원 · <b>02</b> 등록</div></div>
     <article class="pub" data-cat="patent" data-sub="ifile"><div class="pid">IP02</div><div class="pbadges"><span class="pb p-ifile">국제출원 (PCT)</span></div><div><h3 class="ptitle">분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2022.11.23 · PCT/KR2022/018593</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220002304" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP09</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">임베디드 시스템의 무결성 보장 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>여기수</u>, <u>송수현</u>, <u>김예령</u></div><div class="pmeta"><span>출원 2022.11.16 · 10-2022-0153968</span><span>등록 2024.10.07 · 10-2715925</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220153968" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP08</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2022.01.06 · 10-20220002304</span><span>등록 2024.10.02 · 10-2714905</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220002304" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP09</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">임베디드 시스템의 무결성 보장 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>여기수</u>, <u>송수현</u>, <u>김예령</u></div><div class="pmeta"><span>출원 2022.11.16 · 10-2022-0153968</span><span>등록 2024.10.07 · 10-2715925</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220153968" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP08</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">분기 태그 지정 확장을 위한 리스크 파이브 아키텍처 명령어 확장을 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>박성환</u></div><div class="pmeta"><span>출원 2022.01.06 · 10-2022-0002304</span><span>등록 2024.10.02 · 10-2714905</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020220002304" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2021</div><div></div><div class="summary"><b>01</b> 등록</div></div>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP07</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">웹 어셈블리에서의 간접호출 명령어 보호를 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>장윤수</u>, <u>김윤주</u></div><div class="pmeta"><span>출원 2021.11.01 · 10-2021-0148301</span><span>등록 2023.08.11 · 10-2567924</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020210148301" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP07</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">웹 어셈블리에서의 간접호출 명령어 보호를 위한 장치 및 방법</h3><div class="pauthors"><u>권동현</u>, <u>장윤수</u>, <u>김윤주</u></div><div class="pmeta"><span>출원 2021.11.01 · 10-2021-0148301</span><span>등록 2023.08.11 · 10-2567924</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020210148301" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2019</div><div></div><div class="summary"><b>02</b> 등록</div></div>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP06</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">메모리 관리 방법 및 그 장치</h3><div class="pauthors">신장섭, <u>권동현</u>, 서지원, 조영필, 백윤흥</div><div class="pmeta"><span>출원 2019.01.25 · 10-2019-0010062</span><span>등록 2021.03.23 · 10-2233476</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020190010062" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP05</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">커널 무결성 검증 장치 및 그 방법</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일, 양명훈, 전성일</div><div class="pmeta"><span>출원 2019.04.01 · 10-2019-0037957</span><span>등록 2020.11.20 · 10-2183649</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020190037957" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP06</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">메모리 관리 방법 및 그 장치</h3><div class="pauthors">신장섭, <u>권동현</u>, 서지원, 조영필, 백윤흥</div><div class="pmeta"><span>출원 2019.01.25 · 10-2019-0010062</span><span>등록 2021.03.23 · 10-2233476</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020190010062" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP05</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">커널 무결성 검증 장치 및 그 방법</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일, 양명훈, 전성일</div><div class="pmeta"><span>출원 2019.04.01 · 10-2019-0037957</span><span>등록 2020.11.20 · 10-2183649</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020190037957" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
-    <div class="year-head"><div class="y">2018</div><div></div><div class="summary"><b>03</b> 출원/등록</div></div>
+    <div class="year-head"><div class="y">2018</div><div></div><div class="summary"><b>02</b> 출원 · <b>01</b> 등록</div></div>
     <article class="pub" data-cat="patent" data-sub="dfile"><div class="pid">DP04</div><div class="pbadges"><span class="pb p-dfile">국내출원</span></div><div><h3 class="ptitle">가상 머신 커널의 수행 흐름 무결성 검증 방법 및 그 장치</h3><div class="pauthors">백윤흥, <u>권동현</u>, 서지원, 백세현</div><div class="pmeta"><span>출원 2018.12.06 · 10-2018-0156279</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020180156279" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent" data-sub="igrant"><div class="pid">IP01</div><div class="pbadges"><span class="pb p-igrant">국제등록 (싱가포르)</span></div><div><h3 class="ptitle">Apparatus for and Method of Detecting Code Reuse Attack (CRA)</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일</div><div class="pmeta"><span>출원 2017.03.02 · SG 10-2017-01665S</span><span>등록 2023.07.18</span></div></div><div class="plinks"><a href="https://patents.google.com/patent/SG10201701665SA/en" target="_blank" rel="noopener">Link</a></div></article>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP03</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">중첩 페이징 없이 커널을 보호하는 방법 및 그 장치</h3><div class="pauthors">백윤흥, <u>권동현</u></div><div class="pmeta"><span>출원 2018.11.30 · 10-2018-0153016</span><span>등록 2020.11.20 · 10-2183648</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020180153016" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP03</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">중첩 페이징 없이 커널을 보호하는 방법 및 그 장치</h3><div class="pauthors">백윤흥, <u>권동현</u></div><div class="pmeta"><span>출원 2018.11.30 · 10-2018-0153016</span><span>등록 2020.11.20 · 10-2183648</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020180153016" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
-    <div class="year-head"><div class="y">2017</div><div></div><div class="summary"><b>01</b> 등록</div></div>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP02</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">명령어 레벨 데이터 격리 방법 및 장치</h3><div class="pauthors">백윤흥, 조영필, <u>권동현</u></div><div class="pmeta"><span>출원 2017.11.24 · 10-2017-0157942</span><span>등록 2020.02.04 · 10-2075701</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020170157942" target="_blank" rel="noopener">Link</a></div></article>
+    <div class="year-head"><div class="y">2017</div><div></div><div class="summary"><b>02</b> 출원 · <b>02</b> 등록</div></div>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP02</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">명령어 레벨 데이터 격리 방법 및 장치</h3><div class="pauthors">백윤흥, 조영필, <u>권동현</u></div><div class="pmeta"><span>출원 2017.11.24 · 10-2017-0157942</span><span>등록 2020.02.04 · 10-2075701</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020170157942" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="igrant"><div class="pid">IP01</div><div class="pbadges"><span class="pb p-ifile">국제출원 (싱가포르)</span><span class="pb p-igrant">국제등록 (싱가포르)</span></div><div><h3 class="ptitle">Apparatus for and Method of Detecting Code Reuse Attack (CRA)</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일</div><div class="pmeta"><span>출원 2017.03.02 · SG 10201701665S</span><span>등록 2023.07.18</span></div></div><div class="plinks"><a href="https://patents.google.com/patent/SG10201701665SA/en" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
   <div class="year-block">
     <div class="year-head"><div class="y">2016</div><div></div><div class="summary"><b>01</b> 등록</div></div>
-    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP01</div><div class="pbadges"><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">코드 재사용 공격 탐지 장치 및 그 방법</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일</div><div class="pmeta"><span>출원 2016.10.11 · 10-2016-0131061</span><span>등록 2018.04.17 · 10-1851330</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020160131061" target="_blank" rel="noopener">Link</a></div></article>
+    <article class="pub" data-cat="patent" data-sub="dgrant"><div class="pid">DP01</div><div class="pbadges"><span class="pb p-dfile">국내출원</span><span class="pb p-dgrant">국내등록</span></div><div><h3 class="ptitle">코드 재사용 공격 탐지 장치 및 그 방법</h3><div class="pauthors">백윤흥, <u>권동현</u>, 황동일</div><div class="pmeta"><span>출원 2016.10.11 · 10-2016-0131061</span><span>등록 2018.04.17 · 10-1851330</span></div></div><div class="plinks"><a href="https://doi.org/10.8080/1020160131061" target="_blank" rel="noopener">Link</a></div></article>
   </div>
 
 </section>
@@ -644,14 +636,14 @@
   var tally=document.getElementById('pubtally');
   var GROUPS={
     intl:[
-      ['Journal Q',[['JCR Q1','pb tier1'],['JCR Q2','pb tier2'],['JCR Q3','pb tier3'],['JCR Q4','pb tier4']]],
-      ['CSRankings',[['CSRankings','pb tier1']]],
-      ['CORE',[['CORE A*','pb tier1'],['CORE A','pb tier2'],['CORE B','pb tier3'],['CORE C','pb tier4']]],
-      ['KIISE',[['KIISE S','pb tier1'],['KIISE A','pb tier2']]],
-      ['BK21 IF',[['BK21 IF4','pb tier1'],['BK21 IF3','pb tier2'],['BK21 IF2','pb tier3'],['BK21 IF1','pb tier4']]]
+      ['Journal Q',[['JCR Q1','pb tier1'],['JCR Q2','pb tier2'],['JCR Q3','pb tier3'],['JCR Q4','pb tier4']],{d:'저널 게재연도 기준 JCR 분위 (색상 = 등급)'}],
+      ['CSRankings',[['CSRankings','pb tier1']],{d:'CSRankings 집계에 포함되는 학회', u:'https://csrankings.org/#/index?all&us'}],
+      ['CORE',[['CORE A*','pb tier1'],['CORE A','pb tier2'],['CORE B','pb tier3'],['CORE C','pb tier4']],{d:'CORE 학회 등급', u:'https://portal.core.edu.au/conf-ranks/'}],
+      ['KIISE',[['KIISE S','pb tier1'],['KIISE A','pb tier2']],{d:'한국정보과학회 2024 학회 등급 (S=최우수, A=우수)', u:'https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206'}],
+      ['BK21 IF',[['BK21 IF4','pb tier1'],['BK21 IF3','pb tier2'],['BK21 IF2','pb tier3'],['BK21 IF1','pb tier4']],{d:'BK21플러스 인정 학회 IF 등급', u:'https://gist.github.com/Pusnow/6eb933355b5cb8d31ef1abcb3c3e1206'}]
     ],
-    dom:[['Type',[['학술대회','pb d-conf'],['논문지','pb d-journal'],['학회지','pb d-mag']]]],
-    patent:[['Status',[['국내출원','pb p-dfile'],['국내등록','pb p-dgrant'],['국제출원 (PCT)','pb p-ifile'],['국제등록 (싱가포르)','pb p-igrant']]]]
+    dom:[['',[['학술대회','pb d-conf'],['논문지','pb d-journal'],['학회지','pb d-mag']]]],
+    patent:[['',[['국내출원','pb p-dfile'],['국내등록','pb p-dgrant'],['국제출원 (PCT)','pb p-ifile'],['국제출원 (싱가포르)','pb p-ifile'],['국제등록 (싱가포르)','pb p-igrant']]]]
   };
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
   function renderTally(tab){
@@ -664,7 +656,15 @@
         var n=counts[it[0]]||0;
         return '<span class="titem"><span class="'+it[1]+'">'+esc(it[0])+'</span><span class="c'+(n===0?' zero':'')+'">'+n+'</span></span>';
       }).join('');
-      return '<div class="tgroup"><span class="glabel">'+g[0]+'</span>'+tiles+'</div>';
+      var name=g[0]||'', meta=g[2]||{}, head='';
+      if(name||meta.d||meta.u){
+        var label=meta.u
+          ? '<a class="glabel" href="'+esc(meta.u)+'" target="_blank" rel="noopener">'+esc(name)+' ↗</a>'
+          : (name?'<span class="glabel">'+esc(name)+'</span>':'');
+        var desc=meta.d ? '<span class="gdesc">'+esc(meta.d)+'</span>' : '';
+        head='<div class="ghead">'+label+desc+'</div>';
+      }
+      return '<div class="tgroup">'+head+'<div class="gitems">'+tiles+'</div></div>';
     }).join('');
   }
   var current='intl';
@@ -673,7 +673,6 @@
     var sec=document.querySelector('.tabsec[data-tab="'+tab+'"]');
     var badges=[].concat(
       [].slice.call(sec?sec.querySelectorAll('.pbadges .pb'):[]),
-      [].slice.call(document.querySelectorAll('.legend .lg-'+tab+' .pb')),
       [].slice.call(tally?tally.querySelectorAll('.titem .pb'):[])
     );
     if(!badges.length) return;
