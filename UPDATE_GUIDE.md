@@ -73,7 +73,10 @@
       <span class="tag rank">BK21-IF:3, acceptance rate 20%</span>
     </div>
   </div>
-  <div class="plinks"><a href="DOI/URL" target="_blank" rel="noopener">PDF</a></div>
+  <div class="plinks">
+    <a href="DOI/URL" target="_blank" rel="noopener">PDF</a>
+    <a href="https://github.com/cslab-pnu/REPO" target="_blank" rel="noopener">CODE</a>
+  </div>
 </article>
 ```
 
@@ -97,6 +100,11 @@
 - 저자 중 **CSLab 소속 → `<u>...</u>`** 로 밑줄 처리
 - **교신저자** → `<u class="corr">권동현*</u>` (별표 포함)
 - 강조하고 싶은 논문 → `<article class="pub selected">` (현재 색 강조용)
+- `.plinks` 버튼은 **PDF**(원문·출판사 페이지)와 **CODE**(구현 공개 저장소) 두 종류다.
+  구현을 [`cslab-pnu`](https://github.com/cslab-pnu) 조직에 **public으로 공개한 논문에만** CODE를
+  붙인다 (현재 XCFI, SMORE, ELK). 링크가 없으면 `<div class="plinks"></div>`로 비워 둔다.
+  같은 버튼을 개인 홈페이지([`donghyun-kwon.github.io`](https://donghyun-kwon.github.io/))에도
+  달아 두었으니, 저장소를 새로 공개하면 **양쪽 모두** 갱신할 것.
 - 연도 블록이 없으면 새로 만들기. 템플릿:
   ```html
   <div class="year-block">
