@@ -16,8 +16,8 @@
 .year-num{font-family:var(--serif);font-size:76px;line-height:.85;font-weight:300;letter-spacing:-.035em;color:var(--ink);font-style:italic}
 .year-label{font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.18em;text-transform:uppercase;padding-bottom:14px}
 .year-count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.16em;text-transform:uppercase;padding-bottom:14px}
-.year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 26px}
-.photo-card{display:flex;flex-direction:column}
+.year-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 26px}
+.photo-card{display:flex;flex-direction:column;min-width:0;margin:0}
 .photo-card figure{margin:0;display:flex;flex-direction:column;height:100%}
 .photo-card .img{overflow:hidden;background:var(--panel);border-radius:2px}
 .photo-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
@@ -29,10 +29,14 @@
 .col-7{grid-column:span 1}.col-7 .img{aspect-ratio:4/3}
 .col-5{grid-column:span 1}.col-5 .img{aspect-ratio:4/3}
 @media(max-width:900px){
-  .year-grid{grid-template-columns:repeat(2,1fr);gap:22px}
+  .year-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
   .col-12,.col-7,.col-5{grid-column:span 1}
   .col-12 .img,.col-7 .img,.col-5 .img{aspect-ratio:4/3}
   .year-num{font-size:48px}
+}
+@media(max-width:600px){
+  .year-grid{grid-template-columns:minmax(0,1fr)}
+  .year-header{flex-wrap:wrap;gap:16px}
 }
 </style>
 </head>
