@@ -1,386 +1,171 @@
 # CSLab 홈페이지 업데이트 가이드
 
-이 문서는 CSLab @ PNU 홈페이지의 콘텐츠를 갱신할 때, **어떤 시나리오에서 어떤 파일·어떤 위치를 수정해야 하는지** 정리한 종합 가이드입니다. 다른 작업자나 AI 에이전트가 별도의 코드 분석 없이도 즉시 작업할 수 있도록, 각 파일의 역할·DOM 구조·갱신 순서를 명시했습니다.
+현재 HTML 구현을 기준으로 콘텐츠 위치, 입력 형식, 검증 순서를 정리합니다. 순수 정적 사이트이며 빌드 도구·패키지 매니저는 없습니다. 줄 번호 대신 아래 선택자와 클래스 이름으로 위치를 찾습니다.
 
----
+## 0. 페이지와 데이터 출처
 
-## 0. 사이트 전체 구조
-
-### 0.1 페이지 구성
-
-| 파일 | 역할 | 비고 |
-|---|---|---|
-| `index.html` | 메인 페이지 (Hero / Ticker / About / Research / News / Photos / Recruit) | **다크 테마 기본**. 사이트 진입점 |
-| `members.html` | 교수·박사·석사·학부연구생·Alumni 전체 목록 | |
-| `publications.html` | 국제 학술지/학회 · 국내 학회/논문지 · 특허 전체 목록 | 데이터의 마스터 (단일 진실 공급원) |
-| `research.html` | 연구 주제 상세 페이지 | 본 가이드 범위 외 |
-| `projects.html` | 연구 과제 페이지 | 본 가이드 범위 외 |
-| `photos.html` | 사진 갤러리 | 본 가이드 범위 외 |
-| `CSLAB Webpage.html`, `CSLAB Webpage (Light).html`, `CSLab-PNU.html`, `cslab-standalone.html` | 오프라인용 standalone 번들 (자원 인라인됨) | 평소엔 손대지 않음. 큰 변경 후 재생성 |
-
-### 0.2 자원 폴더
-
-| 경로 | 내용 |
+| 파일 | 역할 |
 |---|---|
-| `assets/researchers/<이름>.jpg` | 멤버 프로필 사진. **파일명 = 한글 이름** |
-| `assets/draft/` | Hero / 페이지 헤더용 사진. `home-*.jpg`, `members-hero.jpg`, `r01.jpg` 등 |
-| `assets/research/` | 연구 주제 카드용 이미지 (apps, pemi, uxom) |
-| `assets/cslab-mark.png`, `cslab-landscape.png` | 로고 |
-| `assets/hero-video*.mp4` | 메인 페이지 Hero 비디오 |
-| `assets/recruit-2026.png` | 모집 포스터 |
-| `assets/site.css` | 공통 스타일 (대부분 페이지가 link) |
-| `assets/chrome.js` | 헤더/푸터 등 공통 chrome 주입 |
+| `index.html` | Hero, 성과 통계, Recent News 요약, Ticker, 연구 소개, 하위 페이지 링크, 모집 안내 |
+| `publications.html` | 논문·특허 기준 목록. 국제/국내/특허 탭과 배지 집계 |
+| `members.html` | 교수 소개, 연구원 카드, Alumni 기준 목록 |
+| `news.html` | 연도별 전체 뉴스 기록과 Paper/Award/Notice 필터 |
+| `research.html` | 연구 주제와 대표 논문 링크 |
+| `projects.html` | 수행 중·완료 과제, 기관 역할과 기간 |
+| `photos.html` | 연도별 사진 갤러리 |
 
-### 0.3 "통계" 숫자가 박혀 있는 위치 (자주 잊는 부분)
+- `index.html`은 자체 스타일·헤더·푸터·스크립트를 사용합니다. 나머지 페이지는 `assets/site.css`와 `assets/chrome.js`를 사용하고, 공통 헤더·푸터를 `#site-header`, `#site-footer`에 주입합니다.
+- 기본 테마는 라이트입니다. 저장된 `localStorage['cslab-theme']`이 `dark`이면 다크 테마를 사용합니다.
+- 네비게이션이나 모집 pill 변경 시 `index.html`과 `assets/chrome.js`를 함께 확인합니다.
+- `index.html`의 숨겨진 이전 섹션은 현재 표시되는 목록이 아닙니다.
+- `index_light.html`은 연결되지 않은 레거시 변형입니다. 30MB급 standalone HTML 4개는 오프라인 스냅샷으로 일상적인 갱신 대상이 아닙니다. 전체 파일을 무분별하게 읽거나 검색하지 않습니다.
 
-**같은 숫자가 여러 곳에 중복으로 박혀 있습니다.** 통계가 바뀌면 아래를 **모두** 동기화해야 합니다.
+### 자원 위치
 
-- `index.html` → About 섹션 `.stats` 박스 4개 (International / Domestic / Patents / Years)
-- `publications.html` → 상단 `.stats` 박스 4개 (국제 학술지 / 국제 학술대회 / 국내 학술대회·학술지 / Patents)
-- `publications.html` → `.maintab` 탭 버튼의 `.ct` 카운트 3개 (International / Domestic / Patents)
-- `index.html` → Photos 위 explore-grid의 "박사 N명 · 석사 N명 · 학부연구생 N명" 문구 (line 866 부근)
-- `index.html` → 숨겨진 #members 섹션의 `.sec-aside` 문구 (line 889 부근)
+- 멤버 사진: `assets/researchers/<한글이름>.jpg`
+- 연구 이미지: `assets/research/`
+- 갤러리·페이지 이미지: `assets/draft/`
+- 로고: `assets/cslab-mark.png`, `assets/cslab-landscape.png`
+- 모집 포스터: `assets/recruit-2026.png` 등 실제 참조 경로
+- 교수 CV: `assets/cv/kwon-cv.pdf` (`members.html`에서 연결)
+- `uploads/`는 원본 소스 모음입니다. 화면이 실제 참조하는 자원을 확인합니다.
 
----
+## 1. 논문·특허 추가
 
-## 1. 시나리오: 새 논문 게재/채택 (실적 추가)
+### 1.1 위치와 ID
 
-### 1.1 추가 위치 — `publications.html`
+해당 `.tabsec[data-tab]`의 `.year-block`에 넣습니다. 같은 연도에서는 확인된 날짜 기준 최신순을 유지합니다. 온라인 출판연도와 권·호 발행연도가 다르면 둘 다 명시하고 기존 연도 분류 기준을 유지합니다.
 
-논문은 카테고리별로 다른 섹션에 들어갑니다. 카테고리에 맞는 `<section class="tabsec" data-tab="...">`를 찾고, 해당 연도의 `<div class="year-block">`에 새 `<article class="pub">`를 **연도 내 최신순(맨 위)** 으로 삽입.
+| 종류 | data-cat | data-sub | ID | 배지 |
+|---|---|---|---|---|
+| 국제 학술대회 | intl | conf | ICnn | 확인된 CSRankings/CORE/KIISE/BK21 등급 |
+| 국제 학술지 | intl | journal | IJnn | 확인된 JCR 분위 |
+| 국내 학술대회 | dom | conf | DCnn | pb d-conf |
+| 국내 논문지 | dom | journal | DJnn | pb d-journal |
+| 국내 학회지 | dom | mag | DJnn | pb d-mag |
+| 국내 특허 | patent | dfile / dgrant | DPnn | pb p-dfile / pb p-dgrant |
+| 국제 특허 | patent | ifile / igrant | IPnn | pb p-ifile / pb p-igrant |
 
-| 카테고리 | 섹션 | 자동 부여 ID 규칙 | 가능한 `pvenue` 클래스 |
-|---|---|---|---|
-| 국제 학술대회 | `data-tab="intl"` | `ICnn` (현재 최대 IC18) | `tier sec` (Sec), `tier sys` (Sys), `tier` (그 외 top-tier), `gen` (일반) |
-| 국제 학술지 | `data-tab="intl"` | `IJnn` (현재 최대 IJ24) | `journal` |
-| 국내 학회 | `data-tab="dom"` | `DCnn` (현재 최대 DC55) | `dom` |
-| 국내 논문지/학회지 | `data-tab="dom"` | `DJnn` (현재 최대 DJ09) | `journal` |
-| 특허 | `data-tab="patent"` | 국내: `DPnn`, 국제: `IPnn` | `patent` (출원), `granted` (등록) |
+ID는 자동 생성되지 않습니다. 접두사별 실제 최대 번호를 확인한 뒤 새 번호를 부여합니다. 빈 번호를 이유로 논문을 추가하거나 기존 항목을 재번호화하지 않습니다. 등록 특허는 출원·등록 배지를 함께 표시할 수 있지만 한 article로 유지합니다.
 
-#### `<article>` 템플릿 — 국제 학술대회 (Top-tier)
+### 1.2 현재 템플릿
 
-```html
-<article class="pub selected" data-cat="intl">
-  <div class="pid">IC19</div>
-  <div class="pvenue tier sec">ACSAC '26</div>
-  <div>
-    <h3 class="ptitle">논문 제목</h3>
-    <div class="pauthors">
-      <u>저자1</u>, <u>저자2</u>, and <u class="corr">Donghyun Kwon*</u>
-    </div>
-    <div class="pmeta">
-      <span>학회명 · 2026.10</span>
-      <span class="tag rank">BK21-IF:3, acceptance rate 20%</span>
-    </div>
-  </div>
-  <div class="plinks">
-    <a href="DOI/URL" target="_blank" rel="noopener">PDF</a>
-    <a href="https://github.com/cslab-pnu/REPO" target="_blank" rel="noopener">CODE</a>
-  </div>
-</article>
-```
-
-#### `<article>` 템플릿 — 국내 학회
+등급이 확인되지 않은 논문은 `.pbadges`를 비워 둡니다. 예전 `.pvenue` 템플릿을 복사하지 않습니다.
 
 ```html
-<article class="pub" data-cat="dom">
-  <div class="pid">DC56</div>
-  <div class="pvenue dom">ASK 학술대회</div>
+<article class="pub" data-cat="intl" data-sub="conf">
+  <div class="pid">ICnn</div>
+  <div class="pbadges"></div>
   <div>
-    <h3 class="ptitle">논문 제목</h3>
-    <div class="pauthors"><u>저자1</u>, <u>저자2</u>, <u class="corr">권동현*</u></div>
-    <div class="pmeta"><span>한국정보처리학회 · 2026.05</span></div>
+    <h3 class="ptitle">출판사에서 확인한 정확한 논문 제목</h3>
+    <div class="pauthors">Author One, Author Two, and Author Three</div>
+    <div class="pmeta"><span>Full Conference Name (ACRONYM) · Sep. 2026</span></div>
   </div>
   <div class="plinks"></div>
 </article>
 ```
 
-#### 규칙
+국내 논문도 같은 구조에 `data-cat="dom"`, 해당 `data-sub`, 종류 배지와 한글 저자 목록을 사용합니다.
 
-- 저자 중 **CSLab 소속 → `<u>...</u>`** 로 밑줄 처리
-- **교신저자** → `<u class="corr">권동현*</u>` (별표 포함)
-- 강조하고 싶은 논문 → `<article class="pub selected">` (현재 색 강조용)
-- `.plinks` 버튼은 **PDF**(원문·출판사 페이지)와 **CODE**(구현 공개 저장소) 두 종류다.
-  구현을 [`cslab-pnu`](https://github.com/cslab-pnu) 조직에 **public으로 공개한 논문에만** CODE를
-  붙인다 (현재 XCFI, SMORE, ELK). 링크가 없으면 `<div class="plinks"></div>`로 비워 둔다.
-  같은 버튼을 개인 홈페이지([`donghyun-kwon.github.io`](https://donghyun-kwon.github.io/))에도
-  달아 두었으니, 저장소를 새로 공개하면 **양쪽 모두** 갱신할 것.
-- 연도 블록이 없으면 새로 만들기. 템플릿:
-  ```html
-  <div class="year-block">
-    <div class="year-head">
-      <div class="y">2027</div>
-      <div></div>
-      <div class="summary"><b>01</b> top-tier conf · <b>02</b> journals</div>
-    </div>
-    <!-- article들 -->
-  </div>
-  ```
+```html
+<div class="pbadges"><span class="pb d-conf">학술대회</span></div>
+<div class="pauthors"><u>저자1</u>, <u>저자2</u>, <u class="corr">권동현*</u></div>
+<div class="pmeta"><span>학술대회명 (약칭) · 2026.11.05 · pp. 19–21</span></div>
+```
 
-### 1.2 `publications.html` — 통계 갱신
+위 날짜·페이지·저자 역할은 구조 예시입니다. 실제 항목에는 확인된 값만 넣습니다.
 
-상단 `.stats` 박스 + `.maintab .ct` 카운트를 새 숫자로 업데이트.
+### 1.3 서지 형식과 사실 보존
 
-- 국제 학술지 (IJ 개수)
-- 국제 학술대회 (IC 개수)
-- 국내 학술대회·학술지 (DC+DJ 개수, "55+"처럼 둥근 표기)
-- Patents (DP+IP 개수)
-- maintab International = IJ + IC
-- maintab Domestic = DC + DJ
-- maintab Patents = DP + IP
+- 제목은 출판사 페이지·출판본 또는 출판사가 등록한 DOI 메타데이터와 대조합니다. 대소문자·복수형·기술명·하이픈을 일괄 변환하지 않습니다.
+- 저자 이름·순서·공동 제1저자·교신저자는 논문별 원문을 보존합니다. 다른 논문이나 프로필의 철자만 보고 자동으로 바꾸지 않습니다.
+- 영어 다인 저자 목록은 `A, B, and C`, 한글 목록은 쉼표 구분을 사용합니다.
+- 확인된 연구실 저자는 `<u>...</u>`로 표시합니다. 교신저자 `*`, 공동 제1저자 `**`는 근거가 있을 때만 표시합니다. 연구실 교신저자는 `<u class="corr">...</u>`를 사용합니다.
+- 국제 논문의 학회·저널은 가능한 한 전체 이름과 괄호 속 약칭으로 씁니다. 날짜는 `Sep. 2026`, `May 2026`처럼 기존 영문 형식을 사용합니다. 국내 항목은 `YYYY.MM` 또는 확인된 `YYYY.MM.DD`를 사용합니다.
+- 채택일과 출판일을 구분합니다: `<span>학회명 (약칭)</span><span>Accepted: Sep. 2026</span>`. 연도만 확인되면 `Accepted: 2026`으로 두고 월·일을 추측하지 않습니다.
+- 연도만 알려진 논문에는 연도만 표시합니다. 확인된 일자·권·호·페이지·Article 번호·DOI는 단순한 항목에 맞추려고 삭제하지 않습니다.
+- JCR/학회 등급은 확인된 기준만 반영합니다. `publications.html`의 `GROUPS`가 집계 라벨·설명을 정의하고 `.pbadges .pb`를 집계합니다.
 
-또한 해당 연도 블록의 `<div class="summary">` 텍스트도 새 개수에 맞춰 수정.
+### 1.4 링크
 
-### 1.3 `index.html` — News 타임라인에 행 추가
+- 원문·출판사·DOI 링크는 **LINK**, 공개 구현은 **CODE** 버튼입니다. 출판사 안내 페이지에 PDF라고 표시하지 않습니다.
+- 새 창 링크에는 `target="_blank" rel="noopener"`를 함께 사용합니다.
+- CODE는 공개가 확인된 해당 논문의 구현 저장소에만 연결합니다. 링크가 없으면 `.plinks`를 비워 둡니다.
+- `research.html`의 대표 논문도 링크가 확인되면 함께 갱신합니다. 짧은 제목의 대소문자도 원 논문의 기술명을 따릅니다.
+- 개인 홈페이지 등 다른 저장소의 변경은 그 작업에 허용된 범위에서 별도로 진행합니다.
 
-`#news` 섹션 → 해당 연도의 `<div class="year-band">` → `<div class="news-list">` 안에 행 추가. 같은 연도의 행들은 **최신순(맨 위)** 으로 배치.
+### 1.5 통계
+
+- 국제 = intl article 수, 국내 = dom article 수, 특허 = patent article 수입니다. 출원·등록 배지가 여러 개여도 특허를 중복 합산하지 않습니다.
+- `publications.html`의 `.maintab button .ct`는 초기 HTML에도 맞는 수를 쓰고, 스크립트가 실제 article 수로 다시 계산합니다.
+- `#pubtally`는 배지 기준 자동 집계입니다. 배지가 없는 논문도 탭 전체 건수에는 포함됩니다.
+- `index.html`의 `.hero-kpi .n`은 정적 값입니다. International/Domestic/Patents 수를 직접 동기화합니다. 네 번째 값은 운영연수입니다.
+- 예전 상단 `.stats` 박스나 About 통계는 현재 화면의 통계 위치가 아닙니다. 남은 CSS만 보고 새 박스를 만들지 않습니다.
+- `.year-head .summary`는 현재 숨겨져 있습니다. 갱신한다면 실제 항목 수를 사용하되 화면 집계의 근거로 삼지 않습니다.
+
+## 2. 뉴스·수상·장학·과제 소식
+
+전체 기록은 **news.html**의 `.timeline` → 해당 `.year-band` → `.news-list`에 최신순으로 추가합니다. 메인 페이지에 예전 타임라인을 다시 만들지 않습니다.
 
 ```html
 <a class="news-row" href="publications.html" target="_blank" rel="noopener" data-tag="paper">
-  <span class="date">2026.10.03</span>
-  <span class="badge paper">ACSAC '26</span>
-  <span class="title">"논문 제목" 채택</span>
+  <span class="date">2026.09.19</span>
+  <span class="badge paper">ATC '26</span>
+  <span class="title">“검증된 정확한 논문 제목” 채택</span>
   <span class="arr">→</span>
 </a>
 ```
 
-- `data-tag` 값으로 필터링됨: `paper` / `award` / `notice`
-- 연도 헤더 `<div class="yr">2026<small>— N events</small></div>`의 `N`을 1 올림
-- 새 연도면 `<div class="year-band">`를 통째로 추가
+- data-tag와 배지 종류는 paper / award / notice입니다. 특허·과제·장학 등은 notice입니다.
+- 링크가 없으면 `<div class="news-row no-link" data-tag="...">`를 사용하고 이동 화살표를 넣지 않습니다.
+- 연도 헤더의 `N events`를 실제 행 수와 맞춥니다.
+- 날짜는 사건 발생일입니다. 채택일·출판일·발표일을 혼동하지 않습니다.
+- `#latest-news-date`는 “최근 소식” 날짜입니다. 정적 텍스트와 datetime을 최신 뉴스에 맞추고, 스크립트도 전체 행의 가장 최근 날짜를 계산합니다. 사이트 편집일로 덮어쓰지 않습니다.
+- 메인 노출 소식은 `index.html`의 `.hero-news .hn-list`에 별도 요약합니다. 전체 기록과 제목·날짜가 일치해야 합니다.
+- Ticker에 추가하면 `.ticker .lane`의 **앞·뒤 두 절반**에 같은 내용을 넣습니다. 무한 스크롤용 반복을 제거하지 않습니다.
 
-### 1.4 `index.html` — About 통계 동기화
+## 3. 멤버 합류·진학·졸업
 
-`#about .stats` 박스 4개 중 International / Domestic 숫자 갱신.
-
-### 1.5 `index.html` — Ticker (상단 움직이는 배너) 갱신 (선택)
-
-큰 임팩트 있는 실적(BK21 우수 학회 채택, SCIE Q1 게재 등)이면 ticker에 추가.
-
-```html
-<div class="ticker"> <div class="lane">
-  <!-- 양쪽 lane에 동일하게 추가해야 무한 스크롤이 자연스러움 -->
-  <span><b>USENIX '26</b> 논문 채택</span>
-  <span class="star">★</span>
-  ...
-</div> </div>
-```
-
-> ⚠️ **ticker의 lane은 내용이 2번 반복됩니다.** 새 항목을 추가하면 **양쪽 절반에 똑같이** 넣어야 합니다 (CSS `animation: scroll` + `translateX(-50%)`로 무한 루프 구현).
-
----
-
-## 2. 시나리오: 수상 / 장학금 / 과제 수주 등 뉴스 추가
-
-### 2.1 `index.html` — News 타임라인 행 추가
-
-`data-tag` 를 상황에 맞게 선택:
-- `award` → 수상 (badge: `<span class="badge award">수상</span>`)
-- `notice` → 특허·과제·장학 등 알림 (badge: `<span class="badge notice">특허</span>`, `과제`, `장학` 등)
-- `paper` → 논문 (위 1.3 참고)
+1. `members.html`의 해당 `.role-band` 다음 `.member-grid`에 `.mcard`를 추가하거나 이동합니다.
+2. `M / NN`이 중복되지 않도록 실제 사용 번호를 확인하고, `.role-band .cnt`를 실제 카드 수와 맞춥니다.
+3. 프로필 사진·이름·링크를 확인합니다. 공식 프로필 또는 본인이 확인한 철자가 없으면 영문 이름을 임의 수정하지 않습니다.
+4. `.focus`는 확인된 연구 키워드를 담습니다. 모르는 관심 분야를 추측하지 않습니다.
+5. 졸업생은 `.alumni-list`에 최신순으로 추가합니다. 학위 표기는 Ph.D. / M.S. / B.S.입니다. 졸업일·소속은 확인된 정보만 표시합니다.
+6. `index.html`의 숨겨진 `#members`를 유지한다면 요약도 확인합니다. 현재 `.explore-grid` 카드에는 멤버 수 문구가 없습니다.
 
 ```html
-<div class="news-row no-link" data-tag="award">
-  <span class="date">2026.05.30</span>
-  <span class="badge award">수상</span>
-  <span class="title">홍길동 — 한국정보처리학회 ASK 2026 학회우수논문상 수상</span>
+<div class="row">
+  <span class="yr">2027.02</span><span class="who">홍길동</span>
+  <span class="deg">M.S.</span><span class="now">확인된 현재 소속</span>
 </div>
 ```
 
-> 링크가 없는 뉴스는 `<div class="news-row no-link">`, 링크가 있는 뉴스는 `<a class="news-row" href="...">`.
+## 4. 모집·프로젝트·사진·CV
 
-연도 헤더의 `— N events` 숫자도 함께 1 올림.
+- 모집: `index.html`의 `#recruit-pill`, `#recruit`, `#recruit-modal`과 `assets/chrome.js`의 모집 pill을 함께 확인합니다. 포스터 파일 경로도 갱신합니다.
+- 과제: `projects.html`에서 현재/완료 상태, 기간, 집계 수를 맞춥니다. 지원부처·전문기관·발주기관·지원기관은 서로 다른 역할이므로 한 라벨로 통일하지 않습니다.
+- 사진: `photos.html` 해당 연도에 추가하고 `.year-count`를 맞춥니다. 사진 설명·날짜는 확인된 정보로 작성합니다.
+- CV: 재생성한 PDF의 페이지 나눔과 링크를 확인한 뒤 `assets/cv/kwon-cv.pdf`를 갱신합니다. HTML 서지 형식만 수정하는 작업에서 PDF를 덮어쓰지 않습니다.
 
-### 2.2 `index.html` — Ticker 갱신
+## 5. 검증과 배포
 
-큰 수상은 ticker에도 추가. 양쪽 lane에 똑같이.
-
-```html
-<span><b>ASK '26</b> 김경환 학회우수논문상(학부생) 수상</span>
-<span class="star">★</span>
+```bash
+python3 -m http.server 8000
+# http://localhost:8000 에서 확인
 ```
 
+- [ ] 기존 항목·ID·저자 순서·역할·날짜 정밀도가 의도 없이 바뀌지 않았는가?
+- [ ] 논문 제목 변경을 출판사 근거와 대조했는가?
+- [ ] 논문 총계·탭 숫자·메인 hero-kpi가 일치하는가?
+- [ ] News 행 수·날짜·필터·“최근 소식” 표시가 일치하는가?
+- [ ] 메인 Recent News와 Research의 중복 제목·링크가 일치하는가?
+- [ ] Ticker 두 절반이 같은가?
+- [ ] 멤버 그룹 수·ID·이미지·외부 링크가 맞는가?
+- [ ] 데스크톱/모바일, 라이트/다크에서 줄바꿈과 가로 넘침을 확인했는가?
+- [ ] 논문 탭 반복 전환, News 필터, 모바일 메뉴 열기/닫기와 Escape가 동작하는가?
+- [ ] 콘솔 오류와 깨진 내부 링크를 확인했는가?
+- [ ] 배포가 허용된 작업이면 변경 파일 검토·커밋 후 main에 반영했는가?
+- [ ] GitHub Pages 배포 결과와 실제 서비스 파일을 확인했는가?
 
----
+기존 작성일: 2026.05.19 · 구현 대조 갱신: 2026.11.11
 
-## 3. 시나리오: 새 멤버(연구원) 합류
-
-### 3.1 자원 추가
-
-- `assets/researchers/<이름>.jpg` 추가 (정사각형, 동일 비율 권장)
-
-### 3.2 `members.html` — 카드 추가
-
-해당 신분(박사/석사/학부연구생)의 `<div class="member-grid">` 안에 카드 한 장 추가.
-
-```html
-<a class="mcard" href="#">
-  <div class="ph">
-    <span class="num">M / 14</span>
-    <img src="assets/researchers/홍길동.jpg" alt="홍길동"/>
-  </div>
-  <div class="info">
-    <div class="nm">홍길동<span class="en">GIL-DONG &nbsp;HONG</span></div>
-    <div class="focus">연구 키워드 (예: 임베디드 메모리 보안)</div>
-  </div>
-</a>
-```
-
-#### 규칙
-
-- `M / NN` 번호는 멤버 전체에서 고유. 기존 최대값 +1 (현재 M / 13까지 사용)
-- 위 신분 그룹별 `<div class="role-band">` 의 카운트도 갱신:
-  ```html
-  <div class="role-band">
-    <span class="lbl">Undergraduate Researchers</span>
-    <span class="cnt">— 08 RESEARCHERS</span> <!-- 7→8 -->
-  </div>
-  ```
-
-### 3.3 `index.html` — 멤버 수 표기 동기화
-
-다음 2곳을 모두 수정:
-1. **Photos 위 explore-grid** (라인 866 부근):
-   ```html
-   <p>박사 4명· 석사 2명 · 학부연구생 7명</p>
-   ```
-2. **숨겨진 #members 섹션 .sec-aside** (라인 889 부근):
-   ```html
-   <p class="sec-aside">박사과정 4명 · 석사과정 2명 · 학부연구생 7명 · Alumni.</p>
-   ```
-
-### 3.4 (옵션) `index.html` 뉴스에 합류 알림
-
-원할 경우 `notice` 태그로 합류 소식 한 줄 추가 가능.
-
----
-
-## 4. 시나리오: 멤버 졸업 / 신분 변경 / Alumni 이동
-
-### 4.1 `members.html` — Researchers 그룹에서 제거
-
-해당 카드를 박사/석사/학부연구생 `member-grid`에서 **삭제**하고, 그 그룹 `role-band`의 카운트를 1 감소.
-
-### 4.2 `members.html` — Alumni 리스트에 행 추가
-
-```html
-<div class="alumni-list">
-  <div class="row">
-    <span class="yr">2027.02</span>
-    <span class="who">홍길동</span>
-    <span class="deg">Ph.D.</span> <!-- 또는 M.S. / B.S. -->
-    <span class="now">현재 소속 (예: 삼성전자 종합기술원)</span>
-  </div>
-  <!-- 기존 행들 -->
-</div>
-```
-
-학위 표기: `Ph.D.` / `M.S.` / `B.S.`. 최신순(맨 위) 정렬.
-
-### 4.3 신분 변경 (예: 학부생 → 석사 진학)
-
-1. `members.html`: 학부연구생 그룹에서 카드를 잘라내 석사 그룹에 붙여넣기
-2. 양쪽 그룹의 `role-band .cnt` 카운트 모두 갱신
-3. 카드 안의 영문 보조 텍스트나 focus 키워드도 필요 시 업데이트
-4. `index.html`의 멤버 수 표기 동기화 (위 3.3)
-
-### 4.4 `index.html` — 멤버 수 표기 동기화
-
-3.3와 동일. 두 곳 모두 갱신.
-
-### 4.5 `index.html` (옵션) — 졸업 뉴스
-
-```html
-<div class="news-row no-link" data-tag="notice">
-  <span class="date">2027.02.28</span>
-  <span class="badge notice">졸업</span>
-  <span class="title">홍길동 — 박사 학위 취득 / 삼성전자 종합기술원 입사</span>
-</div>
-```
-
----
-
-## 5. 시나리오: 모집 공고 갱신
-
-### 5.1 `index.html`
-
-- 상단 헤더 우측 pill: `<a id="recruit-pill">2026 연구원 모집 중</a>` (line 539)
-- 모집 모달의 텍스트 (라인 597~ `.recruit`, h5/sub/혜택 ol 등)
-- 모집 포스터 이미지: `assets/recruit-2026.png` 교체 (혹은 새 파일 추가 후 `<img src=...>` 경로 갱신)
-
-### 5.2 모집 종료
-
-`recruit-pill`을 숨기거나 텍스트를 "모집 마감"으로 바꾸고 모달 차단.
-
----
-
-## 6. 시나리오: About 본문 / 연구 소개 등 카피 변경
-
-| 위치 | 파일 |
-|---|---|
-| About 본문 (Mission / 주요 성과) | `index.html` (line 678 부근) |
-| Research 카드 3종 (HW-assisted / Architectural / Applications) | `index.html` (#research), `research.html` (상세) |
-| News 섹션 헤더 카피 ("최근 업데이트 YYYY.MM.DD") | `index.html` (line 750 부근) — 업데이트 날짜를 새로 고침 |
-
----
-
-## 7. 작업 후 체크리스트
-
-큰 변경 후 다음을 반드시 확인:
-
-- [ ] `publications.html`의 4개 통계 박스 + 3개 maintab 카운트가 모두 새 수치인가?
-- [ ] `index.html` About 통계 4개 + Photos 위 멤버 수 + 숨겨진 #members 멤버 수가 일치하는가?
-- [ ] News의 연도 헤더 `— N events`가 그 연도 안의 행 수와 일치하는가?
-- [ ] Ticker에 추가했다면 **양쪽 lane**에 똑같이 들어갔는가?
-- [ ] `members.html`의 `role-band .cnt`가 실제 카드 수와 일치하는가?
-- [ ] `M / NN` 번호가 중복 없이 유일한가?
-- [ ] 새 멤버라면 `assets/researchers/<이름>.jpg`가 존재하는가?
-- [ ] 추가한 article의 `<u>...</u>` (랩 멤버) 표기가 옳은가?
-- [ ] 교신저자에 `<u class="corr">...*</u>` 표기가 있는가?
-
----
-
-## 8. 표준 작업 흐름 (Workflow)
-
-```
-1) publications.html에 신규 article 추가
-   ├─ pid 부여 (IC/IJ/DC/DJ/DP/IP)
-   ├─ year-block summary 카운트 갱신
-   └─ 상단 stats + maintab .ct 모두 갱신
-
-2) index.html News 타임라인에 1줄 추가
-   ├─ year-band의 'N events' +1
-   └─ 큰 임팩트면 ticker(양쪽 lane) 동기화
-
-3) index.html About 통계 .stats 4개 갱신
-   ├─ International / Domestic / Patents 숫자 일치
-   └─ Photos 위 멤버 수 문구도 확인
-
-4) (멤버 변경 시) members.html
-   ├─ member-grid에 카드 추가/이동/삭제
-   ├─ role-band의 N RESEARCHERS 카운트 갱신
-   └─ alumni-list에 졸업생 행 추가
-
-5) Git: status → add → commit → push origin main
-```
-
----
-
-## 9. 자주 하는 실수
-
-1. **Ticker 한쪽만 수정** — 무한 스크롤이 끊겨 보임. 반드시 양쪽 lane에 똑같이.
-2. **maintab 카운트 깜빡** — 탭 버튼 옆 `<span class="ct">42</span>` 도 함께 갱신.
-3. **연도 블록의 summary 깜빡** — `<div class="summary"><b>01</b> top-tier conf · <b>04</b> journal papers</div>` 도 카운트.
-4. **standalone HTML 재생성 안 함** — 큰 변경 후엔 `CSLAB Webpage*.html`, `cslab-standalone.html` 도 재생성하거나 무시. 평소 트래픽은 `index.html`로 가므로 보통 무시 OK.
-5. **role-band 카운트 깜빡** — `<span class="cnt">— 04 RESEARCHERS</span>`. 멤버 수 변경 시 함께 수정.
-6. **M / NN 번호 충돌** — 새 멤버 추가할 때 기존 최대값 확인 후 +1. (현재 M/01 ~ M/13 사용, M/08 비어있음 — 비어있는 번호 채워도 OK)
-
----
-
-## 10. 데이터 출처 우선순위
-
-- 논문 정보의 **마스터** = `publications.html`. News는 보조 표시.
-- 멤버 정보의 **마스터** = `members.html`. `index.html`의 #members 섹션은 현재 `display:none` 처리되어 보이지 않으므로 동기화 가능하면 좋고, 시간 없으면 생략 가능.
-
----
-
-작성일: 2026.05.19
