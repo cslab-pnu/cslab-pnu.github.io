@@ -59,7 +59,7 @@ ID는 자동 생성되지 않습니다. 접두사별 실제 최대 번호를 확
   <div>
     <h3 class="ptitle">출판사에서 확인한 정확한 논문 제목</h3>
     <div class="pauthors">Author One, Author Two, and Author Three</div>
-    <div class="pmeta"><span>Full Conference Name (ACRONYM) · Sep. 2026</span></div>
+    <div class="pmeta"><span>Full Conference Name (ACRONYM) · 2026 · pp. 19–21</span></div>
   </div>
   <div class="plinks"></div>
 </article>
@@ -79,16 +79,16 @@ ID는 자동 생성되지 않습니다. 접두사별 실제 최대 번호를 확
 
 - 제목은 출판사 페이지·출판본 또는 출판사가 등록한 DOI 메타데이터와 대조합니다. 대소문자·복수형·기술명·하이픈을 일괄 변환하지 않습니다.
 - 저자 이름·순서·공동 제1저자·교신저자는 논문별 원문을 보존합니다. 다른 논문이나 프로필의 철자만 보고 자동으로 바꾸지 않습니다.
-- 영어 다인 저자 목록은 `A, B, and C`, 한글 목록은 쉼표 구분을 사용합니다.
-- 확인된 연구실 저자는 `<u>...</u>`로 표시합니다. 교신저자 `*`, 공동 제1저자 `**`는 근거가 있을 때만 표시합니다. 연구실 교신저자는 `<u class="corr">...</u>`를 사용합니다.
-- 국제 논문의 학회·저널은 가능한 한 전체 이름과 괄호 속 약칭으로 씁니다. 날짜는 `Sep. 2026`, `May 2026`처럼 기존 영문 형식을 사용합니다. 국내 항목은 `YYYY.MM` 또는 확인된 `YYYY.MM.DD`를 사용합니다.
-- 채택일과 출판일을 구분합니다: `<span>학회명 (약칭)</span><span>Accepted: Sep. 2026</span>`. 연도만 확인되면 `Accepted: 2026`으로 두고 월·일을 추측하지 않습니다.
-- 연도만 알려진 논문에는 연도만 표시합니다. 확인된 일자·권·호·페이지·Article 번호·DOI는 단순한 항목에 맞추려고 삭제하지 않습니다.
-- JCR/학회 등급은 확인된 기준만 반영합니다. `publications.html`의 `GROUPS`가 집계 라벨·설명을 정의하고 `.pbadges .pb`를 집계합니다.
+- 영어 다인 저자 목록은 `A, B, and C`, 한글 목록은 쉼표로 구분합니다. 확인된 연구실 저자는 `<u>...</u>`, 확인된 교신저자·공동 제1저자는 각각 `*`·`**`를 표시합니다. 연구실 교신저자는 `<u class="corr">...</u>`를 사용합니다.
+- **국제 학술대회:** `공식 학회 전체명 (약칭) · 개최연도 · pp. 범위 또는 Article 번호`. 채택 단계는 `2027 (Accepted, regular paper)`처럼 표시하며, 논문 유형이 확인되지 않으면 생략합니다. 채택일은 별도 `<span>Accepted: Nov. 2026</span>`으로 표시할 수 있습니다. 출판 전에는 쪽수·DOI를 추측하지 않습니다.
+- **국제 저널:** `공식 저널명 (약칭, 있는 경우) · 발행연월 또는 연도 · Vol. n, No. n, pp. 범위 또는 Article 번호`. 예: `Computers &amp; Security · Jan. 2027 · Vol. 172, Article 105174`. 온라인 선공개와 정식 발행 연도가 다르면 `<span>Online publication: 2026</span>`처럼 구분합니다. DOI의 숫자에서 날짜를 추정하지 않습니다.
+- **국내 학술대회:** `공식 행사명 (약칭, 있는 경우) · YYYY[.MM[.DD]] · pp. 범위 또는 논문번호`. 공식 프로그램으로 개별 발표일을 확인할 수 없으면 기존 연월을 유지합니다. 단일 확인 쪽은 `p.`, 범위는 `pp.`를 쓰고, 프로그램 번호를 수록 쪽수로 오인하지 않습니다.
+- **국내 논문지·학회지:** 각각 분류를 유지하고 `공식 간행물명 · 발행연월 · 권(호) · pp. 범위 또는 논문번호`를 씁니다. 확인하지 못한 필드는 생략합니다. 발행기관을 간행물명으로 대신하지 않습니다.
+- JCR/학회 등급은 확인된 기준만 반영합니다. `publications.html`의 `GROUPS`가 집계 라벨·설명을 정의하고 `.pbadges .pb`를 집계합니다. DATE 2027 기준은 [ICORE 2026 A](https://portal.core.edu.au/conf-ranks/421/), [KIISE A (2024-A-035)](https://academic.hallym.ac.kr/bbs/hallym/151/235363/download.do), [BK21 IF2 (BKCSA088)](https://www.inu.ac.kr/bbs/professor/1404/368396/download.do)입니다. [CSRankings](https://csrankings.org/)의 Design Automation 대상은 DAC와 ICCAD이므로 DATE에는 이 배지를 붙이지 않습니다. 다른 논문의 과거 등급을 일괄 재평가하지 않습니다.
 
 ### 1.4 링크
 
-- 원문·출판사·DOI 링크는 **LINK**, 공개 구현은 **CODE** 버튼입니다. 출판사 안내 페이지에 PDF라고 표시하지 않습니다.
+- 연구실 목록과 CV에서 같은 논문은 같은 공식 링크를 우선 사용합니다. 논문의 출판사 랜딩 페이지 또는 학회 공식 개별 논문 페이지를 먼저 쓰고, 공식 페이지를 확인하기 어렵다면 검증된 DOI를 씁니다. 학회 일반 홈페이지를 개별 논문 링크 대신 사용하지 않습니다. 연구실은 원문을 **LINK**, 공개 구현을 **CODE**로 표시하고 CV는 논문 제목에 공식 원문 링크를 적용합니다.
 - 새 창 링크에는 `target="_blank" rel="noopener"`를 함께 사용합니다.
 - CODE는 공개가 확인된 해당 논문의 구현 저장소에만 연결합니다. 링크가 없으면 `.plinks`를 비워 둡니다.
 - `research.html`의 대표 논문도 링크가 확인되면 함께 갱신합니다. 짧은 제목의 대소문자도 원 논문의 기술명을 따릅니다.
